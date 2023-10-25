@@ -1,6 +1,5 @@
-function multiplat(num){
-    let result = num * 2;
-    console.log(result);
-    }
+function solve(name, age, avgGrade){
+    console.log(`Name: ${name}`, `Age: ${age}`, `Avr. Grade: ${avgGrade}`);
+}
 
-multiplat(15);
+solve("Ivan", 39, 5.0);
