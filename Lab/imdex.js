@@ -1,5 +1,5 @@
-function solve(name, age, avgGrade){
-    console.log(`Name: ${name}`, `Age: ${age}`, `Avr. Grade: ${avgGrade}`);
+function printStudent(name, age, averageGrade) {
+  console.log("Name: ${name}, Age: ${age}, Avg. Grade: ${averageGrade}");
 }
 
-solve("Ivan", 39, 5.0);
+printStudent("ivan", 39, 4.7654);
