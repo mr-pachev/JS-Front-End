@@ -1,5 +1,6 @@
 function multiplat(num){
-    console.log(num*2);
-}
+    let result = num * 2;
+    console.log(result);
+    }
 
 multiplat(15);
