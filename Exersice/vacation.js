@@ -46,5 +46,7 @@ function solve(countPeople, type, day){
             }
             break;
     }
-    console.log`Total price: ${tottalPrice}`;
+    console.log(`Total price: ${tottalPrice.toFixed(2)}`);
 }
+
+solve(30,"Students","Sunday");
