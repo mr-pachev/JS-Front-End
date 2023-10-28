@@ -11,8 +11,17 @@ function solve(countPeople, type, day){
             }else if (day === "Sunday"){
                 tottalPrice = countPeople * 10.46;
             }
+
+            if (countPeople >= 30){
+                discountPrice = tottalPrice * 0.15;
+                tottalPrice -= discountPrice;
+            }
             break;
         case "Business":
+            if (countPeople >= 100){
+                countPeople -= 10;
+            }
+
             if (day === "Friday"){
                 tottalPrice = countPeople * 10.90;
             }else if (day === "Saturday"){
@@ -20,6 +29,7 @@ function solve(countPeople, type, day){
             }else if (day === "Sunday"){
                 tottalPrice = countPeople * 16;
             }
+
             break;
         case "Regular":
             if (day === "Friday"){
@@ -29,8 +39,12 @@ function solve(countPeople, type, day){
             }else if (day === "Sunday"){
                 tottalPrice = countPeople * 22.50;
             }
-            break;
 
-        
+            if (countPeople >= 10 && countPeople <= 20){
+                discountPrice = tottalPrice * 0.05;
+                tottalPrice -= discountPrice;
+            }
+            break;
     }
+    console.log`Total price: ${tottalPrice}`;
 }
