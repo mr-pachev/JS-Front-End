@@ -4,16 +4,15 @@ function solve(input){
     let isTrue = true;
 
     for(let i = 0; i < num.length; i++){
-        sum += num[i];
+        sum += Number(num[i]);
 
         if (num[num.length-1] != num[i]){
             isTrue = false;
         }
     }
 
-    if (isTrue){
-
-    }else {
-        
-    }
+    console.log(`${isTrue}`);
+    console.log(`${sum}`);
 }
+
+solve(1234);
