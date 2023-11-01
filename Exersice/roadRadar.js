@@ -53,7 +53,7 @@ function solve(speed,area){
             }
             break;
     
-        case "motorwayl":
+        case "motorway":
             if(speed === 130){
                 console.log(`Driving ${speed} km/h in a 130 zone`);
             }else {
@@ -71,4 +71,4 @@ function solve(speed,area){
             break;
     }
 }
-    solve (200, "motorwayl");
+    solve (200, "motorway");
