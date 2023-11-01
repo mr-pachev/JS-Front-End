@@ -1,9 +1,15 @@
 function solve(num, oper1, oper2, oper3, oper4, oper5){
     let number = Number(num);
 
-    let arr = [oper1, oper2, oper3, oper4, oper5];
+    let arr = [];
+    arr.push(oper1);
+    arr.push(oper2);
+    arr.push(oper3);
+    arr.push(oper4);
+    arr.push(oper5);
 
     for (let i = 0; i < arr.length; i++){
+
         switch(arr[i]){
             case "chop":
                 number = number / 2;
@@ -18,7 +24,7 @@ function solve(num, oper1, oper2, oper3, oper4, oper5){
                 number = number * 3;
                 break;
             case "fillet":
-                number = number - (number * 0,2);
+                number = number - (number * 0.2);
                 break;
         }
 
