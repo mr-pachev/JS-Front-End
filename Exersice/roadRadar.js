@@ -3,7 +3,7 @@ function solve(speed,area){
 
     switch(area){
         case "residential":
-            if(speed === 20){
+            if(speed <= 20){
                 console.log(`Driving ${speed} km/h in a 20 zone`);
             }else {
                 let diff = speed - 20;
@@ -20,8 +20,8 @@ function solve(speed,area){
             break;
     
         case "city":
-            if(speed === 50){
-                console.log(`Driving ${speed} km/h in a 20 zone`);
+            if(speed <= 50){
+                console.log(`Driving ${speed} km/h in a 50 zone`);
             }else {
                 let diff = speed - 50;
 
@@ -37,8 +37,8 @@ function solve(speed,area){
             break;
     
         case "interstate":
-            if(speed === 90){
-                console.log(`Driving ${speed} km/h in a 20 zone`);
+            if(speed <= 90){
+                console.log(`Driving ${speed} km/h in a 90 zone`);
             }else {
                 let diff = speed - 90;
 
@@ -55,7 +55,7 @@ function solve(speed,area){
     
         case "motorwayl":
             if(speed === 130){
-                console.log(`Driving ${speed} km/h in a 20 zone`);
+                console.log(`Driving ${speed} km/h in a 130 zone`);
             }else {
                 let diff = speed - 130;
 
@@ -71,4 +71,4 @@ function solve(speed,area){
             break;
     }
 }
-    solve(120, 'interstate');
+    solve(40, "city");
