@@ -71,4 +71,4 @@ function solve(speed,area){
             break;
     }
 }
-    solve(40, "city");
+    solve (200, "motorwayl");
