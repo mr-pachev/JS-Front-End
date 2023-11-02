@@ -1,5 +1,5 @@
 function solve(argumen, startIndex, endIndex) {
-  let sliceText = argumen.slice(startIndex, endIndex + 1);
+  let sliceText = argumen.slice(startIndex, startIndex + endIndex);
 
   console.log(sliceText);
 }
