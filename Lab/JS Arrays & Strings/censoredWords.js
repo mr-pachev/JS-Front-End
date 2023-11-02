@@ -1,4 +1,4 @@
-function solve(text, word){;
+function solve(text, word){
     text = text.replaceAll(word, '*'.repeat(word.length));
     console.log(text);
 }
