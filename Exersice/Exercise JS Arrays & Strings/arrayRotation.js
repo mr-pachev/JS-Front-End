@@ -1,8 +1,12 @@
 function solve(arr, num){
-   let currentEl = arr.shift();
-    arr.push(currentEl);
+   
+    for (let i = 0; i < num; i++){
+        let currentEl = arr.shift();
+        arr.push(currentEl);
+        arr.reverse;
+    }
 
-    console.log(arr);
+    console.log(arr.join(' '));
 }
 
 solve([51, 47, 32, 61, 21], 2);
