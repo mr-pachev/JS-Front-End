@@ -1,11 +1,18 @@
 function solve(arr, n){
-    console.log(arr.slice(0, n + 1));
+    let newArr = [];
+
+    for (let i = 0; i < arr.length; (i +=Number(`${n}`))){
+        let curren = arr[i];
+        // newArr.push(arr[i]);
+        console.log(curren);
+    }
+    
 }
 
-solve(['5', 
-'20', 
-'31', 
-'4', 
-'20'], 
+solve(['dsa',
+'asd', 
+'test', 
+'tset'], 
 2
+
 );
