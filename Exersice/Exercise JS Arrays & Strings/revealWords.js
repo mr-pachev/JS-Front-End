@@ -25,7 +25,7 @@ function solve (words, text){
         }
           
     }
-     console.log(textArr);
+     console.log(textArr.join(' '));
 }
 
 solve('great',
