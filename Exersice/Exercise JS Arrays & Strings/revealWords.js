@@ -9,8 +9,6 @@ function solve (words, text){
         }
     }
 
-    let arr = String(textArr);
-
     for (let j = 0; j < hiddenWordsArr.length; j++){     //въртим цикъл според скритите думи
         
         for (let k = 0; k < wordsArr.length; k++){
@@ -21,7 +19,7 @@ function solve (words, text){
             
 
             if (hiddent.length === currentWord.length){
-                arr.replace(hiddent, currentWord);
+               textArr[hiddenWordsArr[j]] = currentWord;
             }
 
         }
@@ -30,6 +28,6 @@ function solve (words, text){
      console.log(textArr);
 }
 
-solve('great, learning',
-'softuni is ***** place for ******** new programming languages'
+solve('great',
+'softuni is ***** place for learning new programming languages'
 );
