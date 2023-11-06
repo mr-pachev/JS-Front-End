@@ -6,10 +6,10 @@ function solve(numsArr){
         let firstNum = numsArr.shift();
         let secondNum = numsArr.pop();
 
-        resultArr.pop(firstNum);
-        resultArr.pop(secondNum);
+        resultArr.push(firstNum);
+        resultArr.push(secondNum);
     }
-    console.log(resultArr);
+    return resultArr;
 }
 
 solve([1, 65, 3, 52, 48, 63, 31, -3, 18, 56]);
