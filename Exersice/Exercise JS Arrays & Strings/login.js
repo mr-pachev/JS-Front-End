@@ -2,12 +2,13 @@ function solve(input){
     let username = input[0].split('');
     let usernamePass = String(username.reverse().join(''));
     username = input[0];
-    let atteptCount = 1;
+    let atteptCount = 0;
 
     for (const attempt of input) {
 
-        if (attempt === usernamePass && atteptCount < 4){
+        if (attempt === usernamePass && atteptCount <= 4){
             console.log(`User ${username} logged in.`);
+            break;
         }else if (atteptCount < 4){
             console.log('Incorrect password. Try again.');
         }else {
@@ -19,4 +20,4 @@ function solve(input){
     }
 }
 
-solve(['Acer','login','go','let me in','recA']);F
+solve(['sunny','rainy','cloudy','sunny','not sunny']);
