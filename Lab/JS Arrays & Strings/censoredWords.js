@@ -6,8 +6,7 @@ function solve(text, word) {
   // }
   // console.log(text);
 
-
-  let regExp = new RegExp(`${word}`, 'g');
+  let regExp = new RegExp(`${word}`, "g");
   let replacement = "*".repeat(word.length);
   console.log(text.replace(regExp, replacement));
 }
