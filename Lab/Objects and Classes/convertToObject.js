@@ -1,9 +1,8 @@
 function solve(jsonStr) {
   let person = JSON.parse(jsonStr);
-  let entries = Object.entries(person);
 
-  for (const [key, value] of entries) {
-    console.log(`${key}: ${value}`);
+  for (const key in person) {
+    console.log(`${key}: ${person[key]}`);
   }
 }
 
