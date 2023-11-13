@@ -1,16 +1,8 @@
-function solve(name, area, population, country, postcode) {
-  let cityInfo = {
-    name,
-    area,
-    population,
-    country,
-    postcode,
-  };
+function solve(cityInfo) {
+  const city = Object.entries(cityInfo);
 
-  const city = Object.keys(cityInfo);
-
-  for (const key of city) {
-    console.log(`${key} -> ${cityInfo[key]}`);
+  for (const [key, value] of city) {
+    console.log(`${key} -> ${value}`);
   }
 }
 
