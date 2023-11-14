@@ -9,7 +9,7 @@ function solve(input) {
   }
 
   for (const key in phoneBook) {
-    console.log(`${key} -> ${phoneBook[key]}`)
+    console.log(`${key} -> ${phoneBook[key]}`);
   }
 }
 
