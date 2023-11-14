@@ -6,8 +6,10 @@ function solve(input) {
     let number = iterator.split(" ")[1];
 
     phoneBook[name] = number;
+  }
 
-    console.log(name);
+  for (const key in phoneBook) {
+    console.log(`${key} -> ${phoneBook[key]}`)
   }
 }
 
