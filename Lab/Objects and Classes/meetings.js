@@ -5,16 +5,14 @@ function solve(input) {
     let day = line.split(" ")[0];
     let name = line.split(" ")[1];
 
-    meetings[day] = name;
-  }
-
-  for (const key in meetings) {
-    if (meetings.hasOwnProperty(key)) {
-      console.log(`Conflict on ${key}!`);
+    if (!meetings.hasOwnProperty(day)) {
+      meetings[day] = name;
+      console.log(`Scheduled for ${day}`);
     } else {
-      console.log(`Scheduled for ${key}`);
+      console.log(`Conflict on ${day}!`);
     }
   }
+
   for (const key in meetings) {
     console.log(`${key} -> ${meetings[key]}`);
   }
