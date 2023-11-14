@@ -1,11 +1,11 @@
 function solve(input) {
-  let meetings = {};
+  let meetings = {};                        //празен обект
 
-  for (const line of input) {
-    let day = line.split(" ")[0];
-    let name = line.split(" ")[1];
+  for (const line of input) {               //обхожда се масива
+    let day = line.split(" ")[0];           //взима се ключ
+    let name = line.split(" ")[1];          //Взима се стойност
 
-    if (!meetings.hasOwnProperty(day)) {
+    if (!meetings.hasOwnProperty(day)) {    //проверка дали ключа съществува в обекта
       meetings[day] = name;
       console.log(`Scheduled for ${day}`);
     } else {
@@ -13,7 +13,7 @@ function solve(input) {
     }
   }
 
-  for (const key in meetings) {
+  for (const key in meetings) {             //принтиране на обекта
     console.log(`${key} -> ${meetings[key]}`);
   }
 }
