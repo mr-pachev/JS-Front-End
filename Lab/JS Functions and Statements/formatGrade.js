@@ -1,5 +1,4 @@
 function formatGrade(grade) {
-  
   if (grade < 3.0) {
     console.log(`Fail (${grade})`);
   } else if (grade < 3.5) {
@@ -13,4 +12,4 @@ function formatGrade(grade) {
   }
 }
 
-formatGrade(2.00);
+formatGrade(2.0);
