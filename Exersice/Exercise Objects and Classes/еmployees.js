@@ -1,6 +1,6 @@
 function solve(input) {
   for (const current of input) {
-    console.log(`Name: ${current} -- Personal Number: ${current}`);
+    console.log(`Name: ${current} -- Personal Number: ${current.length}`);
   }
 }
 
