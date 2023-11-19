@@ -27,17 +27,18 @@ function solve(input) {
     }
   }
 
-  let jsonStr = JSON.stringify(moviesInfo);
-  console.log(jsonStr);
+  for (const movie of moviesInfo) {             //обхождаме масива с обектите
+    if (movie.date && movie.director) {         //проверка дали дадения обект има date и director
+      console.log(JSON.stringify(movie));       //печатаме в JSON-формат
+    }
+  }
 }
 
 solve([
-  "addMovie Fast and Furious",
-  "addMovie Godfather",
-  "Inception directedBy Christopher Nolan",
-  "Godfather directedBy Francis Ford Coppola",
-  "Godfather onDate 29.07.2018",
-  "Fast and Furious onDate 30.07.2018",
-  "Batman onDate 01.08.2018",
-  "Fast and Furious directedBy Rob Cohen",
+  "addMovie The Avengers",
+  "addMovie Superman",
+  "The Avengers directedBy Anthony Russo",
+  "The Avengers onDate 30.07.2010",
+  "Captain America onDate 30.07.2010",
+  "Captain America directedBy Joe Russo",
 ]);
