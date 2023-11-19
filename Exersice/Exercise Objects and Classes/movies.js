@@ -1,13 +1,34 @@
 function solve(input) {
-  let moviesInfo = {};
+  let moviesInfo = [];
 
   for (const row of input) {
-    let arrRow = row.split(" ");
+    let arrRow = row.split(" "); //превръщаме реда в масив
+
     if (arrRow.includes("addMovie")) {
       let name = arrRow.slice(1, arrRow.length).join(" ");
-      moviesInfo[name] = name;
+      moviesInfo.push({ name: name });
+    } else if (arrRow.includes("directedBy")) {
+      let name = row.split(" directedBy ")[0];
+      let director = row.split(" directedBy ")[1];
+
+      let search = moviesInfo.find((el) => el.name === name);
+
+      if (search) {
+        search["director"] = director;
+      }
+    } else if (arrRow.includes("onDate")) {
+      let name = row.split(" onDate ")[0];
+      let date = row.split(" onDate ")[1];
+      let search = moviesInfo.find((el) => el.name === name);
+
+      if (search) {
+        search["date"] = date;
+      }
     }
   }
+
+  let jsonStr = JSON.stringify(moviesInfo);
+  console.log(jsonStr);
 }
 
 solve([
