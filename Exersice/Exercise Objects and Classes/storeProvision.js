@@ -1,11 +1,10 @@
-function solve(input) {
-  let productStorage = {};
-  let ordered = {};
-
-  for (const arrEl of input) {
-    let [currProd, quantity] = arrEl.split(",");
-
-    productStorage = JSON.parse(JSON.stringify(currProd));
+function solve(currProd, ordered) {
+    
+  for (let i = 0; i < currProd.length; i++) {
+    console.log(currProd[i]);
+  }
+  for (let i = 0; i < ordered.length; i++) {
+    console.log(ordered[i]);
   }
 }
 
