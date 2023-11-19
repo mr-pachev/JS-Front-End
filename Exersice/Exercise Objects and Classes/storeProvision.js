@@ -1,8 +1,14 @@
 function solve(currProd, ordered) {
-    
-  for (let i = 0; i < currProd.length; i++) {
-    console.log(currProd[i]);
+  let productStorage = {};
+  let orderedProd = {};
+
+  for (let i = 0; i < currProd.length; i += 2) {
+    let prodName = currProd[i];
+    let prodQuantity = Number(currProd[i + 1]);
+
+    productStorage[prodName] = prodQuantity;
   }
+
   for (let i = 0; i < ordered.length; i++) {
     console.log(ordered[i]);
   }
