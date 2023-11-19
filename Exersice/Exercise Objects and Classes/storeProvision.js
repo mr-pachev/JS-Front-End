@@ -1,6 +1,5 @@
 function solve(currProd, ordered) {
   let productStorage = {};
-  let orderedProd = {};
 
   for (let i = 0; i < currProd.length; i += 2) {
     let prodName = currProd[i];
@@ -9,8 +8,19 @@ function solve(currProd, ordered) {
     productStorage[prodName] = prodQuantity;
   }
 
-  for (let i = 0; i < ordered.length; i++) {
-    console.log(ordered[i]);
+  for (let i = 0; i < ordered.length; i += 2) {
+    let prodName = ordered[i];
+    let prodQuantity = Number(ordered[i + 1]);
+
+    if (productStorage.hasOwnProperty(prodName)) {
+      productStorage[prodName] += prodQuantity;
+    } else {
+      productStorage[prodName] = prodQuantity;
+    }
+  }
+
+  for (const key in productStorage) {
+    console.log(`${key} -> ${productStorage[key]}`);
   }
 }
 
