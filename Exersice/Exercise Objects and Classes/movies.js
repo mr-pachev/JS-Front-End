@@ -2,11 +2,11 @@ function solve(input) {
   let moviesInfo = [];
 
   for (const row of input) {
-    let arrRow = row.split(" "); //превръщаме реда в масив
+    let arrRow = row.split(" ");                //превръщаме реда в масив
 
     if (arrRow.includes("addMovie")) {
       let name = arrRow.slice(1, arrRow.length).join(" ");
-      moviesInfo.push({ name: name });
+      moviesInfo.push({ name: name });         //добавяме обект в масива
     } else if (arrRow.includes("directedBy")) {
       let name = row.split(" directedBy ")[0];
       let director = row.split(" directedBy ")[1];
