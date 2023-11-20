@@ -19,17 +19,13 @@ function solve(input) {
     }
   }
 
-  let sortedNum = Object.entries(carsInParking); //превръщане на обекта people в масив от масиви
+  carsInParking.sort((a, b) => {
+    return a.localeCompare(b);
+});
 
-  let sortedByName = sortedNum.sort((personA, personB) => {
-    let personAName = personA[0];
-    let personBName = personB[0];
-
-    return personAName.localeCompare(personBName);
-  });
 
   for (const iterator of carsInParking) {
-    console.log(iterator.split(','));
+    console.log(iterator);
   }
 }
 
