@@ -2,29 +2,13 @@ function solve(input) {
   let descriptionArr = [];
 
   for (const iterator of input) {
-    let object = JSON.parse(iterator); //конвертиране от JSON в Obj
+    let jsonToObject = JSON.parse(iterator); //конвертиране от JSON в Obj
 
-    for (const el of descriptionArr) {
-        for (const keyy in el) {
-            
-            function areObjectsEqual(keyy, obj) {
-                // Проверка за броя на ключовете
-                if (Object.keys(keyy).length !== Object.keys(obj).length) {
-                  return false;
-                }
-                          
-                return true;
-              }
-
-
-            if (areObjectsEqual){
-                let index = descriptionArr.indexOf(el);
-	descriptionArr.splice(index, 1);
-            };
+    if (true) {
+      //премахване на елемент от масива с обектите
+      let index = descriptionArr.indexOf(el);
+      descriptionArr.splice(index, 1);
     }
-    
-    }   
-
 
     descriptionArr.push(object);
   }
@@ -44,7 +28,7 @@ function solve(input) {
       } else if (keyA > keyB) {
         return 1;
       }
-    };
+    }
 
     // Ако ключовете са еднакви, сравни стойностите
     return 0;
