@@ -2,15 +2,26 @@ function solve(input) {
   let descriptionArr = [];
 
   for (const iterator of input) {
+    //обхождаме входните данни
     let jsonToObject = JSON.parse(iterator); //конвертиране от JSON в Obj
 
-    if (true) {
-      //премахване на елемент от масива с обектите
-      let index = descriptionArr.indexOf(el);
-      descriptionArr.splice(index, 1);
+    for (const currObj of descriptionArr) {
+      //обхождаме масива с обекти
+      let descriptionArrKey = Object.keys(currObj);
+      let jsonToObjectKey = Object.keys(jsonToObject);
+
+      let search =
+        JSON.stringify(descriptionArrKey.sort()) ===
+        JSON.stringify(jsonToObjectKey.sort());
+
+      if (search) {
+        //премахване на елемент от масива с обектите
+        let index = descriptionArr.indexOf(currObj);
+        descriptionArr.splice(index, 1);
+      }
     }
 
-    descriptionArr.push(object);
+    descriptionArr.push(jsonToObject);
   }
 
   descriptionArr.sort((a, b) => {
