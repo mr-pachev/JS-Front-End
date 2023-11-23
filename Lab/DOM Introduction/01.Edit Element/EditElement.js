@@ -1,5 +1,6 @@
 function editElement(ref, match, replacer) {
   let content = ref.textContent;
-  let matcher = new RegExp(match, g);
-  let edited = content.replace(match, replacer);
+
+  let edited = content.replace(new RegExp(match, "g"), replacer);
+  ref.content - edited;
 }
