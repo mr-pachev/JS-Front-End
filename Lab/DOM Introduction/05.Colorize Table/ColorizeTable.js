@@ -1,8 +1,8 @@
 function colorize() {
-  const nodeList = document.querySelectorAll("tr");
+  const nodeList = document.querySelectorAll("tr:nth-child(even)");
   const listToArr = Array.from(nodeList);
-  
-  for (let index = 0; index < listToArr.length; index++) {
-    console.log(listToArr[index]);
+
+  for (const el of listToArr) {
+    el.style.background = "Teal";
   }
 }
