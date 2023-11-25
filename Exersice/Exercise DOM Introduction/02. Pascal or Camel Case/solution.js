@@ -6,13 +6,24 @@ function solve() {
 
   let result = "";
 
-  for (const iterator of textArr) {
-    let currentWord = iterator.toLowerCase(); //текущата дума
+  for (let index = 0; index < textArr.length; index++) {
+    let currentWord = textArr[index].toLowerCase(); //текущата дума
 
     if (namingConvention === "Pascal Case") {
-      let firstChat = currentWord.charAt().toUpperCase();
-      result += firstChat + currentWord.slice(1);
+      let firstChart = currentWord.charAt().toUpperCase();
+      result += firstChart + currentWord.slice(1);
+
+    } else if (namingConvention === "Camel Case") {
+      if (index === 0){
+        firstChart = currentWord.charAt().toLowerCase();
+      }else {
+        firstChart = currentWord.charAt().toUpperCase();
+      }
+      result += firstChart + currentWord.slice(1);
+    }else {
+      result = "Error!";
     }
   }
-  console.log(result);
+  
+  document.getElementById('result').textContent = result;
 }
