@@ -4,10 +4,14 @@ function solve() {
 
   let textArr = text.split(" ");
 
+  let result = "";
+
   for (const iterator of textArr) {
     let currentWord = iterator.toLowerCase(); //текущата дума
 
-    let firstChat = currentWord.charCodeAt()[0];
-    console.log(firstChat);
+    if (namingConvention === "Pascal Case") {
+      let firstChat = currentWord.charAt().toUpperCase();
+      result += firstChat;
+    }
   }
 }
