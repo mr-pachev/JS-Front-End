@@ -12,7 +12,7 @@ function solve() {
     if (namingConvention === "Pascal Case") {
       let firstChat = currentWord.charAt().toUpperCase();
       result += firstChat + currentWord.slice(1);
-          }
-    console.log(result);
+    }
   }
+  console.log(result);
 }
