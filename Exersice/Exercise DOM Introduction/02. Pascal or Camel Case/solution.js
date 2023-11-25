@@ -5,8 +5,9 @@ function solve() {
   let textArr = text.split(" ");
 
   for (const iterator of textArr) {
-    let cirrerntWord = iterator.toLowerCase(); //текущата дума
-   
-    
+    let currentWord = iterator.toLowerCase(); //текущата дума
+
+    let firstChat = currentWord.charCodeAt()[0];
+    console.log(firstChat);
   }
 }
