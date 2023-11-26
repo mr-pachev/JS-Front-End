@@ -1,28 +1,25 @@
 function solve() {
   let textArea = document.getElementById("input").value; //входните данни
-  let sentenceArr = Array.from(textArea.split(".")); //масив от изречения
+  let inputToArr = Array.from(textArea.split(".")); //масив от изречения
+  let sentenceArr = [];
 
   let output = document.getElementById("output"); //полето за изход на данните
 
   let newParagraph = document.createElement("p"); //създаване на параграф
+
+  for (const el of inputToArr) {
+    let newEl = el + ".";
+    sentenceArr.push(newEl);
+  }
+
   let index = 0;
-
-  console.log(sentenceArr);
-
   for (const el of sentenceArr) {
     index++;
-    console.log(index);
-    newParagraph.textContent += el;
-    console.log(newParagraph.textContent);
-
-    if (index < 3) {
-      newParagraph.textContent += ". ";
-      output.appendChild(newParagraph);
-    } else {
-      newParagraph.textContent += ".";
-      output.appendChild(newParagraph);
+    if (index === 4) {
       index = 0;
       newParagraph = document.createElement("p");
     }
+    newParagraph.textContent += el;
+    output.appendChild(newParagraph);
   }
 }
