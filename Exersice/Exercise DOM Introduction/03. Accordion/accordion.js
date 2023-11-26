@@ -1,3 +1,3 @@
 function toggle() {
-    console.log('TODO:...');
+    document.getElementById('extra').style.display = 'inline';
 }
