@@ -1,14 +1,14 @@
 function solve() {
-  let textArea = document.getElementById("input").value; //входните данни
-  let inputToArr = Array.from(textArea.split(".")); //масив от изречения
+  let textArea = document.getElementById("input").value;  //входните данни
+  let inputToArr = Array.from(textArea.split("."));       //масив от изречения
   let sentenceArr = [];
 
-  let output = document.getElementById("output"); //полето за изход на данните
+  let output = document.getElementById("output");         //полето за изход на данните
 
-  let newParagraph = document.createElement("p"); //създаване на параграф
+  let newParagraph = document.createElement("p");         //създаване на параграф
   let index = 0;
 
-  for (const el of inputToArr) {
+  for (const el of inputToArr) {                          //масив без празни изречения и с точка на края
     index++;
     let newEl = "";
 
@@ -24,7 +24,7 @@ function solve() {
 
   index = 0;
 
-  for (const el of sentenceArr) {
+  for (const el of sentenceArr) {                         //създаване и пелнене на параграф през три елемента от масива с изречения
     index++;
     if (index === 4) {
       index = 1;
