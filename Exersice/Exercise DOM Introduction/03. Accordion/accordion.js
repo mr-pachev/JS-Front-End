@@ -4,7 +4,7 @@ function toggle() {
     if (buttonContent === 'More'){
         document.getElementById('extra').style.display = 'inline';
         document.getElementsByClassName('button')[0].textContent = 'Less';
-    }else if(butoonContent){
+    }else if(buttonContent){
         document.getElementById('extra').style.display = 'none';
         document.getElementsByClassName('button')[0].textContent = 'More';
     }
