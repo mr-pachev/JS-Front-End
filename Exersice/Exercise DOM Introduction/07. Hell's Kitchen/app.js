@@ -65,13 +65,27 @@ function solve() {
 
     let bestPizza = {};
     let maxAvrSallary = 0;
-    for (const iterator of pizzaArr) { //взима пицарията с най-голяма средна заплата
+    for (const iterator of pizzaArr) {
+      //взима пицарията с най-голяма средна заплата
       if (maxAvrSallary <= iterator.get("avrSallary")) {
         maxAvrSallary = iterator.get("avrSallary");
         bestPizza = iterator;
       }
     }
 
-    console.log(`Name: ${bestPizza.get('pizzaName')} Average Salary: ${bestPizza.get('avrSallary')} Best Salary: ${bestPizza.get('bestSallary')}`);
+    console.log(
+      //принтиране първа част
+      `Name: ${bestPizza.get("pizzaName")} Average Salary: ${bestPizza.get(
+        "avrSallary"
+      )} Best Salary: ${bestPizza.get("bestSallary")}`
+    );
+
+    let emplObj = bestPizza.get("employees");
+
+    for (const index in emplObj) {      //принтиране втора част
+      let emplName = emplObj[index].get("workerName");
+      let emplSallary = emplObj[index].get("workerSallary");
+      console.log(`Name: ${emplName} With Salary: ${emplSallary}`);
+    }
   }
 }
