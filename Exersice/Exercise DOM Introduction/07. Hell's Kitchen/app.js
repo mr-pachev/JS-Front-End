@@ -48,7 +48,7 @@ function solve() {
 
         if (bestSallary < workerSallary) {
           //взима най-голямата заплата
-          bestSallary = workerSallary;
+          bestSallary = workerSallary.toFixed(2);
         }
         sumSallary += workerSallary;
         workerMap.set("workerName", workerName);
@@ -72,6 +72,6 @@ function solve() {
       }
     }
 
-    console.log(bestPizza);
+    console.log(`Name: ${bestPizza.get('pizzaName')} Average Salary: ${bestPizza.get('avrSallary')} Best Salary: ${bestPizza.get('bestSallary')}`);
   }
 }
