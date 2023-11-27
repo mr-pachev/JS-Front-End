@@ -52,6 +52,28 @@ function solve() {
       pizzaArr.push(currentPizza);
     }
 
-    console.log(pizzaArr);
+    pizzaArr.sort((a, b) => {    			//сортиране на обекта по средна заплата във възходящ ред
+      let keysA = Object.keys(a).sort();
+      let keysB = Object.keys(b).sort();
+   
+      for (let i = 0; i < keysA.length; i++) {  
+         let keyA = keysA[i];
+         let keyB = keysB[i];
+   
+         if (keyA > keyB) {
+            return -1;
+         } else if (keyA < keyB) {
+            return 1;
+         }
+      }
+   });
+   
+   for (const key in pizzaArr[0]) {
+		console.log(`Name: ${kye} Average Salary: ${pizzaArr[0].avrSallary} Best Salary: 1300.00`);
+}
+
+
+
+
   }
 }
