@@ -73,19 +73,23 @@ function solve() {
       }
     }
 
-    console.log(
-      //принтиране първа част
-      `Name: ${bestPizza.get("pizzaName")} Average Salary: ${bestPizza.get(
-        "avrSallary"
-      )} Best Salary: ${bestPizza.get("bestSallary")}`
-    );
+    document.querySelector(
+      "#bestRestaurant>p"
+    ).textContent = `Name: ${bestPizza.get(
+      "pizzaName"
+    )} Average Salary: ${bestPizza.get(
+      "avrSallary"
+    )} Best Salary: ${bestPizza.get("bestSallary")}`;
 
     let emplObj = bestPizza.get("employees");
 
-    for (const index in emplObj) {      //принтиране втора част
+    for (const index in emplObj) {
+      //принтиране втора част
       let emplName = emplObj[index].get("workerName");
       let emplSallary = emplObj[index].get("workerSallary");
-      console.log(`Name: ${emplName} With Salary: ${emplSallary}`);
+      document.querySelector(
+         "#workers>p"
+       ).textContent += `Name: ${emplName} With Salary: ${emplSallary}`;
     }
   }
 }
