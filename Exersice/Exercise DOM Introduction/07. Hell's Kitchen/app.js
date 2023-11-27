@@ -23,22 +23,35 @@ function solve() {
       }
     }
 
-    pizzaArr = [];
+    pizzaArr = []; //масив с пицариите, като обекти
 
     for (const iterator of arr) {
-      let pizzaName = iterator.split(' - ')[0];
+      //обхожда пицариите от входа
+      let pizzaName = iterator.split(" - ")[0];
+      let currentPizza = {};
 
-      pizzaArr[pizzaName] = pizzaName;
-      let employeeData = iterator.split(' - ')[1];
-      
-      for (const worker of employeeData.split(', ')) {
-         console.log(worker.split(' ')[0]);
+      currentPizza[pizzaName] = pizzaName;
+      let employeeData = iterator.split(" - ")[1];
+      let countEmployees = 0;
+      let avrSallary = 1;
+      let sumSallary = 0;
+
+      for (const worker of employeeData.split(", ")) {
+        //обхожда всяка пицария от входа
+        countEmployees++;
+
+        let workerName = worker.split(" ")[0];
+        let workerSallary = Number(worker.split(" ")[1]);
+
+        sumSallary += workerSallary;
+        currentPizza[workerName] = workerSallary;
       }
-      
+      avrSallary = sumSallary / countEmployees;
+      avrSallary = avrSallary.toFixed(2); //сумата се показва до втория знак
+      currentPizza[avrSallary] = avrSallary;
+      pizzaArr.push(currentPizza);
     }
 
     console.log(pizzaArr);
-    
-    
   }
 }
