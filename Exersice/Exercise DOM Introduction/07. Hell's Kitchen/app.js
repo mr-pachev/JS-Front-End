@@ -28,52 +28,50 @@ function solve() {
     for (const iterator of arr) {
       //обхожда пицариите от входа
       let pizzaName = iterator.split(" - ")[0];
-      let currentPizza = {};
+      let currentPizza = new Map();
 
-      currentPizza[pizzaName] = pizzaName;
+      currentPizza.set("pizzaName", pizzaName);
       let employeeData = iterator.split(" - ")[1];
       let countEmployees = 0;
       let avrSallary = 1;
       let sumSallary = 0;
+      let bestSallary = 0;
+      let workersArr = [];
 
       for (const worker of employeeData.split(", ")) {
         //обхожда всяка пицария от входа
         countEmployees++;
 
+        let workerMap = new Map();
         let workerName = worker.split(" ")[0];
         let workerSallary = Number(worker.split(" ")[1]);
 
+        if (bestSallary < workerSallary) {
+          //взима най-голямата заплата
+          bestSallary = workerSallary;
+        }
         sumSallary += workerSallary;
-        currentPizza[workerName] = workerSallary;
+        workerMap.set("workerName", workerName);
+        workerMap.set("workerSallary", workerSallary);
+        workersArr.push(workerMap);
       }
       avrSallary = sumSallary / countEmployees;
       avrSallary = avrSallary.toFixed(2); //сумата се показва до втория знак
-      currentPizza[avrSallary] = avrSallary;
+      currentPizza.set("avrSallary", avrSallary);
+      currentPizza.set("bestSallary", bestSallary);
+      currentPizza.set("employees", workersArr);
       pizzaArr.push(currentPizza);
     }
 
-    pizzaArr.sort((a, b) => {    			//сортиране на обекта по средна заплата във възходящ ред
-      let keysA = Object.keys(a).sort();
-      let keysB = Object.keys(b).sort();
-   
-      for (let i = 0; i < keysA.length; i++) {  
-         let keyA = keysA[i];
-         let keyB = keysB[i];
-   
-         if (keyA > keyB) {
-            return -1;
-         } else if (keyA < keyB) {
-            return 1;
-         }
+    let bestPizza = {};
+    let maxAvrSallary = 0;
+    for (const iterator of pizzaArr) { //взима пицарията с най-голяма средна заплата
+      if (maxAvrSallary <= iterator.get("avrSallary")) {
+        maxAvrSallary = iterator.get("avrSallary");
+        bestPizza = iterator;
       }
-   });
-   
-   for (const key in pizzaArr[0]) {
-		console.log(`Name: ${kye} Average Salary: ${pizzaArr[0].avrSallary} Best Salary: 1300.00`);
-}
+    }
 
-
-
-
+    console.log(bestPizza);
   }
 }
