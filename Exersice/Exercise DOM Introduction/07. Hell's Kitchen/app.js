@@ -15,14 +15,30 @@ function solve() {
       });
     }
 
-    for (const iterator of arr) { //премахване на елемента ','
+    for (const iterator of arr) {
+      //премахване на елемента ','
       if (iterator === ",") {
         let index = arr.indexOf(iterator);
         arr.splice(index, 1);
       }
     }
 
+    pizzaArr = [];
 
-    console.log(arr);
+    for (const iterator of arr) {
+      let pizzaName = iterator.split(' - ')[0];
+
+      pizzaArr[pizzaName] = pizzaName;
+      let employeeData = iterator.split(' - ')[1];
+      
+      for (const worker of employeeData.split(', ')) {
+         console.log(worker.split(' ')[0]);
+      }
+      
+    }
+
+    console.log(pizzaArr);
+    
+    
   }
 }
