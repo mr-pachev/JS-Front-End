@@ -47,10 +47,14 @@ function solve() {
         if (bestSalary < workerSalary) {                    //взима най-голямата заплата
           bestSalary = workerSalary.toFixed(2);
         }
-       
+             
         sumSalary += workerSalary;
         workerMap.set("workerName", workerName);
         workerMap.set("workerSalary", workerSalary);
+
+        workersArr.sort ((a, b) => b.get('workerSalary') - a.get('workerSalary'));
+
+
         workersArr.push(workerMap);
       }
       avgSalary = sumSalary / countEmployees;
@@ -66,7 +70,7 @@ function solve() {
     let maxAvgSalary = 0;
 
     for (const iterator of pizzaArr) {                      //взима пицарията с най-голяма средна заплата
-      if (maxAvgSalary <= iterator.get("avgSalary")) {
+      if (maxAvgSalary < iterator.get("avgSalary")) {
         maxAvgSalary = iterator.get("avgSalary");
         bestPizza = iterator;
       }
