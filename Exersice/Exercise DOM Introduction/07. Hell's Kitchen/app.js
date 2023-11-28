@@ -2,7 +2,8 @@ function solve() {
   document.querySelector("#btnSend").addEventListener("click", onClick);
 
   function onClick() {
-    let arr = document.querySelector("#inputs textarea").value.split(/"(.*?)"/);
+    let input = document.querySelector("#inputs textarea");
+    let arr = JSON.parse(input.value);
 
     arr = arr.filter(function (str) {
       return str.trim() !== "";                             // проверява дали стрингът след използването на trim() не е празен
