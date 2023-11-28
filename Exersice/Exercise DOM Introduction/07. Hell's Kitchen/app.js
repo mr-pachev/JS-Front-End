@@ -54,6 +54,9 @@ function solve() {
       
         workersArr.push(workerMap);
       }
+      //сортиране на масива с работници и техните заплати по низходящ ред
+      workersArr.sort ((a, b) => b.get('workerSalary') - a.get('workerSalary'));
+      
       avgSalary = sumSalary / countEmployees;
       avgSalary = avgSalary.toFixed(2);                     //сумата се показва до втория знак
       
