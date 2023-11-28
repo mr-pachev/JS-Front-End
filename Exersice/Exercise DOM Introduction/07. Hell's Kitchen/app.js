@@ -51,15 +51,7 @@ function solve() {
         sumSalary += workerSalary;
         workerMap.set("workerName", workerName);
         workerMap.set("workerSalary", workerSalary);
-        let tempSalary = 0;
-        for (const iterator of workerMap) {
-          if(workerMap.get('workerSalary') === bestSalary){
-            workerMap.set("workerName", workerName);
-            workerMap.set("workerSalary", workerSalary);
-          }else if (workerMap.get('workerSalary') >= tempSalary){
-            tempSalary = workerMap.get('workerSalary');
-          }
-
+      
         workersArr.push(workerMap);
       }
       avgSalary = sumSalary / countEmployees;
