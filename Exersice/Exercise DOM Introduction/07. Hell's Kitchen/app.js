@@ -19,33 +19,68 @@ function solve() {
       let bestSalary = 0;
       let workersArr = [];
 
-       if (currentPizza.get('pizzaName') === pizzaName){
-        
-        for (const worker of employeeData.split(", ")) {      //обхожда всяка пицария от входа
-          countEmployees++;
-  
-          let index = arr.indexOf(workerMap);
-          let workerMap = pizzaArr[index];                          //map съдържащ информацията за всеки служител: име и заплата
-          let workerName = worker.split(" ")[0];
-          let workerSalary = Number(worker.split(" ")[1]);
-  
-          // if (bestSalary < workerSalary) {                    //взима най-голямата заплата
-          //   bestSalary = workerSalary.toFixed(2);
-          // }
-               
-          // sumSalary += workerSalary;
-          workerMap.set("workerName", workerName);
-          workerMap.set("workerSalary", workerSalary);
-        
-          workersArr.push(workerMap);
+      for (const iterator of pizzaArr) {
+        console.log(iterator.get('pizzaName'));
 
-          console.log(workersArr);
+        if(iterator.get('pizzaName') === pizzaName){
+          console.log('YES');
+
+            for (const worker of employeeData.split(", ")) {      //обхожда всяка пицария от входа
+            countEmployees++;
+            
+            
+            let workerMap = iterator;                          //map съдържащ информацията за всеки служител: име и заплата
+            let workerName = worker.split(" ")[0];
+            let workerSalary = Number(worker.split(" ")[1]);
+            
+            // if (bestSalary < workerSalary) {                    //взима най-голямата заплата
+            //   bestSalary = workerSalary.toFixed(2);
+            // }
+
+            // sumSalary += workerSalary;
+            workerMap.set("workerName", workerName);
+            workerMap.set("workerSalary", workerSalary);
+            
+            workersArr.push(workerMap);
+
+            console.log(workersArr);
         }
 
 
 
 
-      }else {
+        
+        }
+
+      }
+
+      //  if (currentPizza.get('pizzaName') === pizzaName){
+        
+      //   for (const worker of employeeData.split(", ")) {      //обхожда всяка пицария от входа
+      //     countEmployees++;
+  
+      //     let index = arr.indexOf(workerMap);
+      //     let workerMap = pizzaArr[index];                          //map съдържащ информацията за всеки служител: име и заплата
+      //     let workerName = worker.split(" ")[0];
+      //     let workerSalary = Number(worker.split(" ")[1]);
+  
+      //     // if (bestSalary < workerSalary) {                    //взима най-голямата заплата
+      //     //   bestSalary = workerSalary.toFixed(2);
+      //     // }
+               
+      //     // sumSalary += workerSalary;
+      //     workerMap.set("workerName", workerName);
+      //     workerMap.set("workerSalary", workerSalary);
+        
+      //     workersArr.push(workerMap);
+
+      //     console.log(workersArr);
+      //   }
+
+
+
+
+      // }else {
       currentPizza.set("pizzaName", pizzaName);
 
       for (const worker of employeeData.split(", ")) {      //обхожда всяка пицария от входа
@@ -65,7 +100,7 @@ function solve() {
       
         workersArr.push(workerMap);
       }
-    }
+    // }
       //сортиране на масива с работници и техните заплати по низходящ ред
       workersArr.sort ((a, b) => b.get('workerSalary') - a.get('workerSalary'));
       
