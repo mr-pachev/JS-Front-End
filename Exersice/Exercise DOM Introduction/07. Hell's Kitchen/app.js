@@ -24,7 +24,8 @@ function solve() {
         for (const worker of employeeData.split(", ")) {      //обхожда всяка пицария от входа
           countEmployees++;
   
-          let workerMap = workersArr.;                          //map съдържащ информацията за всеки служител: име и заплата
+          let index = arr.indexOf(workerMap);
+          let workerMap = pizzaArr[index];                          //map съдържащ информацията за всеки служител: име и заплата
           let workerName = worker.split(" ")[0];
           let workerSalary = Number(worker.split(" ")[1]);
   
@@ -37,6 +38,8 @@ function solve() {
           workerMap.set("workerSalary", workerSalary);
         
           workersArr.push(workerMap);
+
+          console.log(workersArr);
         }
 
 
