@@ -10,8 +10,7 @@ function solve() {
     for (const iterator of arr) {                           //обхожда пицариите от входа
       let pizzaName = iterator.split(" - ")[0];             //взима името на пицарията
       let currentPizza = new Map();                         //текущата пицария, като map
-
-      currentPizza.set("pizzaName", pizzaName);
+     
       let employeeData = iterator.split(" - ")[1];          //взима имената на служителите, като string
 
       let countEmployees = 0;
@@ -19,6 +18,32 @@ function solve() {
       let sumSalary = 0;
       let bestSalary = 0;
       let workersArr = [];
+
+       if (currentPizza.get('pizzaName') === pizzaName){
+        
+        for (const worker of employeeData.split(", ")) {      //обхожда всяка пицария от входа
+          countEmployees++;
+  
+          let workerMap = workersArr.;                          //map съдържащ информацията за всеки служител: име и заплата
+          let workerName = worker.split(" ")[0];
+          let workerSalary = Number(worker.split(" ")[1]);
+  
+          // if (bestSalary < workerSalary) {                    //взима най-голямата заплата
+          //   bestSalary = workerSalary.toFixed(2);
+          // }
+               
+          // sumSalary += workerSalary;
+          workerMap.set("workerName", workerName);
+          workerMap.set("workerSalary", workerSalary);
+        
+          workersArr.push(workerMap);
+        }
+
+
+
+
+      }else {
+      currentPizza.set("pizzaName", pizzaName);
 
       for (const worker of employeeData.split(", ")) {      //обхожда всяка пицария от входа
         countEmployees++;
@@ -37,6 +62,7 @@ function solve() {
       
         workersArr.push(workerMap);
       }
+    }
       //сортиране на масива с работници и техните заплати по низходящ ред
       workersArr.sort ((a, b) => b.get('workerSalary') - a.get('workerSalary'));
       
