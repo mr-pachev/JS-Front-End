@@ -20,36 +20,37 @@ function solve() {
       let workersArr = [];
 
       for (const iterator of pizzaArr) {
-        console.log(iterator.get('pizzaName'));
-
+        
         if(iterator.get('pizzaName') === pizzaName){
-          console.log('YES');
+          console.log(iterator.get('employees'));
 
             for (const worker of employeeData.split(", ")) {      //обхожда всяка пицария от входа
-            countEmployees++;
-            
-            
-            let workerMap = iterator;                          //map съдържащ информацията за всеки служител: име и заплата
-            let workerName = worker.split(" ")[0];
-            let workerSalary = Number(worker.split(" ")[1]);
-            
-            // if (bestSalary < workerSalary) {                    //взима най-голямата заплата
-            //   bestSalary = workerSalary.toFixed(2);
-            // }
+              countEmployees++;
+              
+              let workerName = worker.split(" ")[0];
+              let workerSalary = Number(worker.split(" ")[1]);
+              
+              // if (bestSalary < workerSalary) {                    //взима най-голямата заплата
+              //   bestSalary = workerSalary.toFixed(2);
+              // }
 
-            // sumSalary += workerSalary;
-            workerMap.set("workerName", workerName);
-            workerMap.set("workerSalary", workerSalary);
-            
-            workersArr.push(workerMap);
+              // sumSalary += workerSalary;
+              iterator.get('employees').set("workerName", workerName);
+              iterator.get('employees').set("workerSalary", workerSalary);
+              
+              workersArr.push(iterator.get('employees'));
 
+            }
             console.log(workersArr);
-        }
-
-
-
 
         
+        }else{
+
+
+
+
+
+          
         }
 
       }
