@@ -1,3 +1,4 @@
 function attachEventsListeners() {
-    console.log('TODO:...');
+    console.log('TODOooo');
+    console.log('ikoooo');
 }
