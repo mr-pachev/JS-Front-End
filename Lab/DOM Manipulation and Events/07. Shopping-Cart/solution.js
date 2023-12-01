@@ -10,16 +10,18 @@ function solve() {
 
   let selectedProducts = [];
   let totalPrice = 0;
+  let textarea = document.querySelector('textarea'); 
 
   function addProduct(e) {
       let productData = e.currentTarget.parentNode.parentNode; ;
       let productName = productData.querySelector('.product-title').textContent;
       let productPrice = productData.querySelector('.product-line-price').textContent;
 
+      textarea.value += productName;
       totalPrice += Number(productPrice);
       selectedProducts.push(productName);
 
-      console.log(productPrice);
+      console.log(totalPrice);
   }
 
 }
