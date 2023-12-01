@@ -17,7 +17,7 @@ function solve() {
       let productName = productData.querySelector('.product-title').textContent;
       let productPrice = productData.querySelector('.product-line-price').textContent;
 
-      textarea.value += productName;
+      textarea.value += `Added ${productName} for ${productPrice} to the cart.\n`;
       totalPrice += Number(productPrice);
       selectedProducts.push(productName);
 
