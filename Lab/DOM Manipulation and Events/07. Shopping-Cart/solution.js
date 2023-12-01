@@ -5,12 +5,12 @@ function solve() {
   );
 
   for (const product of productSelected) {
-    product.addEventListener("click", addProduct); //събитие за всеки натиснат продукт
+    product.addEventListener("click", addProduct);    //събитие за всеки натиснат продукт
   }
 
   let selectedProducts = [];
   let totalPrice = 0;
-  let textarea = document.querySelector('textarea'); 
+  let textarea = document.querySelector('textarea');  //полето, в което трябва да се покажат добавените продукти -> количката
 
   function addProduct(e) {
       let productData = e.currentTarget.parentNode.parentNode; ;
@@ -19,9 +19,15 @@ function solve() {
 
       textarea.value += `Added ${productName} for ${productPrice} to the cart.\n`;
       totalPrice += Number(productPrice);
-      selectedProducts.push(productName);
 
-      console.log(totalPrice);
+      if (!selectedProducts.includes(productName)){
+         selectedProducts.push(productName);
+      }
   }
+
+  const check = document.querySelector('button.checkout');
+console.log(check);
+
+//   console.log(`You bought ${productName.join(', ')} for ${totalPrice}.`)
 
 }
