@@ -30,11 +30,11 @@ function solve() {
   check.addEventListener('click', onCheckout); 
 
   function onCheckout(e){
-   textarea.value += (`You bought ${selectedProducts.join(', ')} for ${totalPrice}.`);
+      textarea.value += (`You bought ${selectedProducts.join(', ')} for ${totalPrice.toFixed(2)}.`);
   
-
-}
-
-
+      for (const product of productSelected) {
+         product.removeEventListener("click", addProduct);    //премахва събитието за всеки натиснат продукт
+       }
+   }
 
 }
