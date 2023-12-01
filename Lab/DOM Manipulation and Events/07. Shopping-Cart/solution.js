@@ -26,8 +26,15 @@ function solve() {
   }
 
   const check = document.querySelector('button.checkout');
-console.log(check);
 
-//   console.log(`You bought ${productName.join(', ')} for ${totalPrice}.`)
+  check.addEventListener('click', onCheckout); 
+
+  function onCheckout(e){
+   textarea.value += (`You bought ${selectedProducts.join(', ')} for ${totalPrice}.`);
+  
+
+}
+
+
 
 }
