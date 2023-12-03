@@ -9,18 +9,18 @@ function lockedProfile() {
 
       let profileChildren = Array.from(profile.children);
       let buttonCondition = e.target;
-      let radioBtn = profileChildren[2];
+      let radioBtn = profileChildren[4];
       let hiddenFiels = profileChildren[9];
 
       if (buttonCondition.textContent === "Show more" && radioBtn.checked) {
         e.target.textContent = "Hide it";
         hiddenFiels.style.display = "block";
 
-      } else if (buttonCondition.textContent === "Hide it") {
+      } else if (buttonCondition.textContent === "Hide it" && radioBtn.checked) {
         e.target.textContent = "Show more";
         hiddenFiels.style.display = "none";
       }
-      
+
     }
   }
 }
