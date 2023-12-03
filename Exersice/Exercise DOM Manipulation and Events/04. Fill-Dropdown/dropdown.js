@@ -1,14 +1,16 @@
 function addItem() {
-  const parentEl = Array.from(document.querySelector("article").children);
+  let text = document.getElementById("newItemText");
+  let textValue = document.getElementById("newItemValue");
+  let menu = document.getElementById("menu");
 
-  const text = parentEl[2];
-  const value = parentEl[4];
+  let option = document.createElement("option");
+  option.textContent = text.value;
+  option.value = textValue.value;
 
-  let op = document.createElement("option");
+  if (text.value !== "" && textValue.value !== "") {
+    menu.appendChild(option);
+  }
 
-  op.textContent = text.value;
-  op.value = value.value;
-
-  document.getElementById("menu").appendChild(op);
-  parentEl[6].disabled = false; 
+  text.value = "";
+  textValue.value = "";
 }
