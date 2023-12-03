@@ -1,3 +1,7 @@
 function create(words) {
-   console.log('TODO:...');
+   let divContent = document.getElementById('content');
+
+   for (const word of words) {
+      let div = cre
+   }
 }
