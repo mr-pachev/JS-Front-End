@@ -16,7 +16,7 @@ function attachEventsListeners() {
     minutes.value = Number(hours.value) * 60;
     seconds.value = Number(minutes.value) * 60;
   });
-  
+
   hoursBtn.addEventListener("click", () => {
     days.value = Number(hours.value) / 24;
     minutes.value = Number(hours.value) * 60;
@@ -27,5 +27,11 @@ function attachEventsListeners() {
     hours.value = Number(minutes.value) / 60;
     days.value = Number(hours.value) / 24;
     seconds.value = Number(minutes.value) * 60;
+  });
+
+  secondsBtn.addEventListener("click", () => {
+    minutes.value = Number(seconds.value) / 60;
+    hours.value = Number(minutes.value) / 60;
+    days.value = Number(hours.value) / 24;
   });
 }
