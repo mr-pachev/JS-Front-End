@@ -1,42 +1,47 @@
 function encodeAndDecodeMessages() {
-    let encodeTextBox = document.getElementsByTagName('textarea')[0];
-    let encodeBtn = document.getElementsByTagName('button')[0];
+    let encodeTextBox = document.getElementsByTagName('textarea');
+    let encodeBtn = document.getElementsByTagName('button');
 
-    let decodeTextBox = document.getElementsByTagName('textarea')[1];
-    let decodeBtn = document.getElementsByTagName('button')[1];
+    let encodeText = encodeTextBox[0];     //некодиран текст
+    let decodeText = encodeTextBox[1];     //кодиран текст
 
-    encodeBtn.addEventListener('click', encodeMessage);
-    decodeBtn.addEventListener('click', decodeMessage);
+    let btnEncode = encodeBtn[0];
+    let btnDecode = encodeBtn[1];
 
-    function encodeMessage(){                 //кодиране на текста
+    btnEncode.addEventListener('click', encoded);
+     btnDecode.addEventListener('click', decoded);
+
+    function encoded(){                 //кодиране на текста
         
-        let message = encodeTextBox.value;
-        let newMessage = '';
+        let inputText = encodeText.value.split('');
 
-        for (let index = 0; index < message.length; index++) {
-           let newText = String.fromCodePoint(message[index].charCodeAt(0) + 1);
+        let result = '';
 
-           newMessage += newText;
+        for (const char of inputText) {
+            let ASCiiCode = char.charCodeAt(0) + 1;
+
+           result += String.fromCodePoint(ASCiiCode);
         }
         
-        decodeTextBox.value = newMessage;
-        encodeTextBox.value = '';
-        document.getElementsByTagName('button')[1].disabled = false;
+        decodeText.value = result;
+        encodeText.value = '';
+
+        
     }
 
-    
-    function decodeMessage(){                 //кодиране на текста
+   
+    function decoded(){                 //кодиране на текста
                 
-        let message = decodeTextBox.value;
-        let newMessage = '';
+        let inputText = decodeText.value.split('');
+        let result = '';
 
-        for (let index = 0; index < message.length; index++) {
-           let newText = String.fromCodePoint(message[index].charCodeAt(0) - 1);
 
-           newMessage += newText;
+        for (const char of inputText) {
+           let ASCiiCode = char.charCodeAt(0) - 1;
+
+           result += String.fromCodePoint(ASCiiCode);
         }
         
-        decodeTextBox.value = newMessage;
-        document.getElementsByTagName('button')[1].disabled = true;
+        decodeText.value = result;
     }
 }
