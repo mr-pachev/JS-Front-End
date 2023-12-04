@@ -12,9 +12,15 @@ function encodeAndDecodeMessages() {
 
     function encoded(){                 //кодиране на текста
         let inputText = encodeText.value.split('');
+        let result = '';
 
         for (const char of inputText) {
-            console.log(char.charCodeAt(0));
+           let ASCiiCode = char.charCodeAt(0) + 1;
+
+           result += String.fromCharCode(ASCiiCode);
         }
+        
+        decodeText.value = result;
+        encodeText.value = '';
     }
 }
