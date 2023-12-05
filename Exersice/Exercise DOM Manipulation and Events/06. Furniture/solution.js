@@ -14,26 +14,24 @@ function solve() {
       let price = iterator.price;
       let decFactor = iterator.decFactor;
       
-      
+      console.log(img);
       
       let tbodyTag = document.querySelector('tbody');
       let trFurniture = document.createElement('tr'); 
       
       let tdImg = document.createElement('td');
       let pImg = document.createElement('p');
+      let image = document.createElement('img');
 
-      pImg.textContent = img;
+      image.setAttribute('src', img);
+
+      pImg.appendChild(image);
      
       tdImg.appendChild(pImg);
       trFurniture.appendChild(tdImg);
 
       tbodyTag.appendChild(trFurniture);
       
-
-
-      
-
-      console.log(img, name, price, decFactor);
     }
   }
 }
