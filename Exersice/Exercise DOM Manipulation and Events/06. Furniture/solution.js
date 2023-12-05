@@ -21,8 +21,9 @@ function solve() {
       
       let tdImg = document.createElement('td');
       let pImg = document.createElement('p');
+
+      pImg.textContent = img;
      
-      pImg.appendChild(img);
       tdImg.appendChild(pImg);
       trFurniture.appendChild(tdImg);
 
