@@ -32,10 +32,13 @@ function solve() {
 
   function buy(){
     let checked = Array.from(document.querySelectorAll('tbody input'));
+    let textarea = document.querySelectorAll('#exercise textarea')[1];
+    
     let buyFurnitures = [];
     let allPrice = 0;
     let alldecFactor = 0;
     let countChecked = 0;
+    let buyed = false;
 
     for (const iterator of checked) {
       if(iterator.checked){
@@ -45,6 +48,7 @@ function solve() {
         let price = tdArr[2].textContent;
         let decFactor = tdArr[3].textContent;
        
+        buyed = true;
         buyFurnitures.push(name);
         countChecked++;
         allPrice += Number(price);
@@ -52,10 +56,11 @@ function solve() {
       }
     }
 
-    
-      console.log('Bought furniture: ' + buyFurnitures.join(', '));
-      console.log(`Total price: ${allPrice}`);
-      console.log(`Average decoration factor: ${allPrice / countChecked}`);   
+      if (buyed){
+        textarea.value += 'Bought furniture: ' + buyFurnitures.join(', ') + '\n';
+        textarea.value += `Total price: ${allPrice}` + '\n';
+        textarea.value += `Average decoration factor: ${allPrice / countChecked}`;   
+      }
   }
 
   function creatTdImg(img) {
