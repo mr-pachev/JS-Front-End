@@ -21,6 +21,7 @@ function solve() {
       trFurniture.appendChild(creatTdName(name));
       trFurniture.appendChild(creatTdPrice(price));
       trFurniture.appendChild(creatTdDecFactor(decFactor));
+      trFurniture.appendChild(creatCheckBox());
 
       tbodyTag.appendChild(trFurniture);
     }
@@ -67,5 +68,15 @@ function solve() {
     pDecFactor.textContent = Number(decFactor);
     tdDecFactor.appendChild(pDecFactor);
     return tdDecFactor;
+  }
+
+  function creatCheckBox() {
+    //създаване и добавяне на колона с checkBox в реда
+    let tdCheckBox = document.createElement("td");
+    let checkBox = document.createElement('input');
+    checkBox.setAttribute('type', 'checkbox');    
+    
+    tdCheckBox.appendChild(checkBox);
+    return tdCheckBox;
   }
 }
