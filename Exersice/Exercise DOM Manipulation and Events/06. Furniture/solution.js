@@ -58,21 +58,18 @@ function solve() {
 
       if (buyed){
         textarea.value += 'Bought furniture: ' + buyFurnitures.join(', ') + '\n';
-        textarea.value += `Total price: ${allPrice}` + '\n';
-        textarea.value += `Average decoration factor: ${allPrice / countChecked}`;   
+        textarea.value += `Total price: ${allPrice.toFixed(2)}` + '\n';
+        textarea.value += `Average decoration factor: ${allPrice / countChecked}` + '\n';   
       }
   }
 
   function creatTdImg(img) {
     //създаване и добавяне на колона с картина в реда
     let tdImg = document.createElement("td");
-    let pImg = document.createElement("p");
-
     let image = document.createElement("img");
     image.setAttribute("src", img);
 
-    pImg.appendChild(image);
-    tdImg.appendChild(pImg);
+    tdImg.appendChild(image);
     return tdImg;
   }
 
