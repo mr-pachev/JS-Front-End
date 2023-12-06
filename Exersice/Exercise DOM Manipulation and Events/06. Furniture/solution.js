@@ -20,9 +20,9 @@ function solve() {
       trFurniture.appendChild(creatTdImg(img));
       trFurniture.appendChild(creatTdName(name));
       trFurniture.appendChild(creatTdPrice(price));
+      trFurniture.appendChild(creatTdDecFactor(decFactor));
 
       tbodyTag.appendChild(trFurniture);
-      console.log(tbodyTag);
     }
   }
 
@@ -50,12 +50,22 @@ function solve() {
   }
 
   function creatTdPrice(price) {
-    //създаване и добавяне на колона с името в реда
+    //създаване и добавяне на колона с цената в реда
     let tdPrice = document.createElement("td");
     let pPrice = document.createElement("p");
     
     pPrice.textContent = Number(price);
     tdPrice.appendChild(pPrice);
     return tdPrice;
+  }
+
+  function creatTdDecFactor(decFactor) {
+    //създаване и добавяне на колона с цената в реда
+    let tdDecFactor = document.createElement("td");
+    let pDecFactor = document.createElement("p");
+    
+    pDecFactor.textContent = Number(decFactor);
+    tdDecFactor.appendChild(pDecFactor);
+    return tdDecFactor;
   }
 }
