@@ -37,7 +37,7 @@ function solve() {
     
     let buyFurnitures = [];
     let allPrice = 0;
-    let alldecFactor = 0;
+    let allDecFactor = 0;
     let countChecked = 0;
     let buyed = false;
 
@@ -53,15 +53,22 @@ function solve() {
         buyFurnitures.push(name);
         countChecked++;
         allPrice += Number(price);
-        alldecFactor += Number(decFactor);
+        allDecFactor += Number(decFactor);
       }
     }
 
+      let printArr = [];
       if (buyed){
-        textarea.value += 'Bought furniture: ' + buyFurnitures.join(', ') + '\n';
-        textarea.value += `Total price: ${allPrice.toFixed(2)}` + '\n';
-        textarea.value += `Average decoration factor: ${allPrice / countChecked}` + '\n';   
+        printArr.push('Bought furniture: ' + buyFurnitures.join(', ') + '\n');
+        printArr.push(`Total price: ${allPrice.toFixed(2)}\n`);
+        printArr.push(`Average decoration factor: ${allDecFactor / countChecked}`);
+        // textarea.value += 'Bought furniture: ' + buyFurnitures.join(', ') + '\n';
+        // textarea.value += `Total price: ${allPrice.toFixed(2)}` + '\n';
+        // textarea.value += `Average decoration factor: ${allDecFactor / countChecked}` + '\n';   
       }
+      
+      printArr.forEach(e => textarea.value += e);
+
   }
 
   function creatTdImg(img) {
