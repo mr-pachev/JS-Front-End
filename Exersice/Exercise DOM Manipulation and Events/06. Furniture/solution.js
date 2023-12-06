@@ -17,10 +17,8 @@ function solve() {
 
       let trFurniture = document.createElement("tr");
 
-      console.log(name);
-
       trFurniture.appendChild(creatTdImg(img));
-      // trFurniture.appendChild(creatTdName(name));
+      trFurniture.appendChild(creatTdName(name));
 
       tbodyTag.appendChild(creatTdImg(trFurniture));
     }
@@ -40,7 +38,7 @@ function solve() {
       let tdName = document.createElement("td");
       let pName = document.createElement("p");
 
-      pName.appendChild(name);
+      pName.textContent = name;
       console.log(pName);
       return tdName.appendChild(pName);
     }
