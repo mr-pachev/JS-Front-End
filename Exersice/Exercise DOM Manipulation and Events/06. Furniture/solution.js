@@ -1,8 +1,11 @@
 function solve() {
   let generateBtn = document.querySelector("#exercise button");
+  let bayBtn = document.querySelectorAll('#exercise button')[1];
+
   let tbodyTag = document.querySelector("tbody");
 
   generateBtn.addEventListener("click", createObj);
+  bayBtn.addEventListener("click", buy);
 
   function createObj() {
     let textarea = document.querySelector("textarea").value;
@@ -25,6 +28,27 @@ function solve() {
 
       tbodyTag.appendChild(trFurniture);
     }
+  }
+
+  function buy(){
+    let checked = Array.from(document.querySelectorAll('tbody input'));
+    let buyFurnitures = [];
+    let allPrice = 0;
+    
+    for (const iterator of checked) {
+      if(iterator.checked){
+        let tr = iterator.parentElement.parentElement;
+        let tdArr = Array.from(tr.children);
+        let name = tdArr[1].textContent
+        let price = Number(tdArr[2].textContent).toFixed(2);
+        let decFactor = Number(tdArr[3].textContent);
+       
+        buyFurnitures.push(name);
+        allPrice += price;
+      }
+    }
+
+    console.log(allPrice);
   }
 
   function creatTdImg(img) {
