@@ -16,6 +16,7 @@ function solve() {
       let img = iterator.img;
       let name = iterator.name;
       let price = iterator.price;
+
       let decFactor = iterator.decFactor;
       
       let trFurniture = document.createElement("tr");
@@ -52,7 +53,7 @@ function solve() {
         buyFurnitures.push(name);
         countChecked++;
         allPrice += Number(price);
-        allPrice += Number(decFactor);
+        alldecFactor += Number(decFactor);
       }
     }
 
