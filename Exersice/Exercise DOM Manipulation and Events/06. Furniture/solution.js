@@ -4,25 +4,30 @@ function solve() {
 
   generateBtn.addEventListener("click", createObj);
 
-  function createObj(e) {
+  function createObj() {
     let textarea = document.querySelector("textarea").value;
     let furnitureInfo = JSON.parse(textarea); //обект от входа
-  
-    for (const iterator of furnitureInfo) {   //итерация по стойностите на обекта
+
+    for (const iterator of furnitureInfo) {
+      //итерация по стойностите на обекта
       let img = iterator.img;
       let name = iterator.name;
       let price = iterator.price;
       let decFactor = iterator.decFactor;
-      let trFurniture = document.createElement("tr");
       
+      let trFurniture = document.createElement("tr");
+
       trFurniture.appendChild(creatTdImg(img));
       trFurniture.appendChild(creatTdName(name));
+      trFurniture.appendChild(creatTdPrice(price));
 
       tbodyTag.appendChild(trFurniture);
+      console.log(tbodyTag);
     }
   }
 
-  function creatTdImg(img) {      //създаване и добавяне на колона с картина в реда
+  function creatTdImg(img) {
+    //създаване и добавяне на колона с картина в реда
     let tdImg = document.createElement("td");
     let pImg = document.createElement("p");
 
@@ -30,16 +35,27 @@ function solve() {
     image.setAttribute("src", img);
 
     pImg.appendChild(image);
-    return tdImg.appendChild(pImg);
+    tdImg.appendChild(pImg);
+    return tdImg;
   }
 
-  function creatTdName(name) {    //създаване и добавяне на колона с името в реда
+  function creatTdName(name) {
+    //създаване и добавяне на колона с името в реда
     let tdName = document.createElement("td");
     let pName = document.createElement("p");
-
-    pName.setAttribute('class', name)
-
+    
     pName.textContent = name;
-    return tdName.appendChild(pName);
+    tdName.appendChild(pName);
+    return tdName;
+  }
+
+  function creatTdPrice(price) {
+    //създаване и добавяне на колона с името в реда
+    let tdPrice = document.createElement("td");
+    let pPrice = document.createElement("p");
+    
+    pPrice.textContent = Number(price);
+    tdPrice.appendChild(pPrice);
+    return tdPrice;
   }
 }
