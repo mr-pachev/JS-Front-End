@@ -34,21 +34,28 @@ function solve() {
     let checked = Array.from(document.querySelectorAll('tbody input'));
     let buyFurnitures = [];
     let allPrice = 0;
-    
+    let alldecFactor = 0;
+    let countChecked = 0;
+
     for (const iterator of checked) {
       if(iterator.checked){
         let tr = iterator.parentElement.parentElement;
         let tdArr = Array.from(tr.children);
         let name = tdArr[1].textContent
-        let price = Number(tdArr[2].textContent).toFixed(2);
-        let decFactor = Number(tdArr[3].textContent);
+        let price = tdArr[2].textContent;
+        let decFactor = tdArr[3].textContent;
        
         buyFurnitures.push(name);
-        allPrice += price;
+        countChecked++;
+        allPrice += Number(price);
+        allPrice += Number(decFactor);
       }
     }
 
-    console.log(allPrice);
+    
+      console.log('Bought furniture: ' + buyFurnitures.join(', '));
+      console.log(`Total price: ${allPrice}`);
+      console.log(`Average decoration factor: ${allPrice / countChecked}`);   
   }
 
   function creatTdImg(img) {
