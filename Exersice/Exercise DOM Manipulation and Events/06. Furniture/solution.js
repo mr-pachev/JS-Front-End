@@ -17,10 +17,15 @@ function solve() {
 
       let trFurniture = document.createElement("tr");
 
-      tbodyTag.appendChild(creatTdImg(img, trFurniture));
+      console.log(name);
+
+      trFurniture.appendChild(creatTdImg(img));
+      // trFurniture.appendChild(creatTdName(name));
+
+      tbodyTag.appendChild(creatTdImg(trFurniture));
     }
 
-    function creatTdImg(img, trFurniture) {
+    function creatTdImg(img) { //създаване и добавяне на колона с картина в реда
       let tdImg = document.createElement("td");
       let pImg = document.createElement("p");
 
@@ -28,8 +33,18 @@ function solve() {
       image.setAttribute("src", img);
 
       pImg.appendChild(image);
-      tdImg.appendChild(pImg);
-      return trFurniture.appendChild(tdImg);
+      return tdImg.appendChild(pImg);
     }
+
+    function creatTdName(name) { //създаване и добавяне на колона с името в реда
+      let tdName = document.createElement("td");
+      let pName = document.createElement("p");
+
+      pName.appendChild(name);
+      console.log(pName);
+      return tdName.appendChild(pName);
+    }
+
+
   }
 }
