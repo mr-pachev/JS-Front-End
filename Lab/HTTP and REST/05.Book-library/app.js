@@ -1,24 +1,25 @@
+const { util } = require("chai");
+
 function attachEvents() {
     const loadBooks = document.getElementById('loadBooks');
     const booksContainer = document.querySelector('table > tbody');
     const [titleInput, authorInput] = Array.from(document.querySelectorAll('#form > input'));
     const submitBtn = document.querySelector('#form > button');
     const formHeader = document.querySelector('#form > h3');
+    let editBookId = null;
     let allBooks = {};
-    let editBooksId = null;
     const BASE_URL = 'http://localhost:3030/jsonstore/collections/books/';
 
     loadBooks.addEventListener('click', loadAllBooksHandler);
-    submitBtn.addEventListener('click', createBookHandler);
+    submitBtn.addEventListener('click', submitFormHandler);
 
     async function loadAllBooksHandler(){
         booksContainer.innerHTML = '';
         const booksRes = await fetch(BASE_URL);
         const booksData = await booksRes.json();
         allBooks = booksData;
-
         for (const bookId in booksData){
-            const {autor, title} = booksData[bookId];
+            const {author, title} = booksData[bookId];
             const tableRow = document.createElement('tr');
             const titleColumn = document.createElement('td');
             const authorColumn = document.createElement('td');
@@ -26,15 +27,22 @@ function attachEvents() {
             const editBtn = document.createElement('button');
             const deleteBtn = document.createElement('button');
             titleColumn.textContent = title;
-            authorColumn.textContent = autor;
+            authorColumn.textContent = author;
             editBtn.textContent = 'Edit';
             deleteBtn.textContent = 'Delete';
+            deleteBtn.id = bookId;
+            editBtn.id = bookId;
 
-            editBtn.addEventListener('click', () => {
-                editBooksId = bookId;
-                formHeader.textContent = 'Edit Form';
-                submitBtn.textContent = 'Save';
-            });
+            editBtn.addEventListener('click', loadEditForm);
+            deleteBtn.addEventListener('click', deleteBookHandler);
+
+            // editBtn.addEventListener('click', () => {
+            //     editBookId = bookId;
+            //     formHeader.textContent = 'Edit FORM';
+            //     submitBtn.textContent = 'Save';
+            //     titleInput.value = title;
+            //     authorInput.value = author;
+            // });
 
             //DOM Manipulations
             tableRow.appendChild(titleColumn);
@@ -46,21 +54,48 @@ function attachEvents() {
         }
     }
 
-    async function submitFormHandler(){
+    function loadEditForm(){
+        editBookId = this.id;
+        formHeader.textContent = 'Edit FORM';
+        submitBtn.textContent = 'Save';
+        const bookId = allBooksData[this.id];
+        titleInput.value = bookById.title;
+        authorInput.value = bookById.author;
+    }
+
+    async function submitFormHandler(){ 
         const title = titleInput.value;
         const autor = authorInput.value;
         const httpHeaders = {
             method: 'POST',
             body: JSON.stringify({title, autor})
         }
+        let url = BASE_URL;
 
-        const resData = await fetch(BASE_URL, httpHeaders);
+        if(formHeader.textContent === 'Edit FORM'){
+            httpHeaders.method = 'PUT';
+            url += editBookId;
+        }
+
+        const resData = await fetch(url, httpHeaders);
         loadAllBooksHandler();
+        if (formHeader.textContent === 'Edit FORM'){
+            formHeader.textContent = 'FORM';
+            submitBtn.textContent = 'Submit';
+        }
         titleInput.value = '';
         authorInput.value = '';
     }
 
+    async function deleteBookHandler(){
+        const id = this.id;
+        const httpHeaders = {
+            method: 'DELETE'
+        }
 
+        await fetch(BASE_URL + id, httpHeaders);
+        loadAllBooksHandler();
+    }
 }
 
 attachEvents();
