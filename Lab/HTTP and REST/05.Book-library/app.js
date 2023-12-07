@@ -37,7 +37,17 @@ function attachEvents() {
     }
 
     async function createBookHandler(event){
-        
+        const title = titleInput.value;
+        const autor = authorInput.value;
+        const httpHeaders = {
+            mthod: 'POST',
+            body: JSON.stringify({title, autor})
+        }
+
+        const resData = await fetch(BASE_URL, httpHeaders);
+        loadAllBooksHandler();
+        titleInput.value = '';
+        authorInput.value = '';
     }
 }
 
