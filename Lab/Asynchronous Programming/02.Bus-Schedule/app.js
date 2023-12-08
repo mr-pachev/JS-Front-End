@@ -7,8 +7,8 @@ function solve() {
     let busStopName = '';
 
     function depart() {
-        departBtn.disabled = true; 
         arriveBtn.disabled = false; 
+        departBtn.disabled = true; 
 
         fetch(`${BASE_URL}${nextBusStopId}`)
         .then((res) => res.json())
@@ -20,8 +20,10 @@ function solve() {
             nextBusStopId = next;
         })
         .catch(() => {
-            departBtn.disabled = true; 
             arriveBtn.disabled = true; 
+            departBtn.disabled = true; 
+
+            console.log('Error');
         })
         
     }
