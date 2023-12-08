@@ -1,5 +1,5 @@
 function solve() {
-    const contentBox = document.getElementById('info');
+    const contentBox = document.querySelector('#info > span');
     const BASE_URL = 'http://localhost:3030/jsonstore/bus/schedule/';
     const departBtn = document.getElementById('depart');
     const arriveBtn = document.getElementById('arrive');
@@ -37,8 +37,6 @@ function solve() {
         .then((busStopInfo) => {
             const {name, next} = busStopInfo;
 
-            console.log(next);
-           
             contentBox.textContent = `Arriving at ${busStopName}`;
             nextBusStopId = next;
         })
