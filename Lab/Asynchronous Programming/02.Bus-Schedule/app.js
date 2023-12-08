@@ -3,18 +3,18 @@ function solve() {
     const BASE_URL = 'http://localhost:3030/jsonstore/bus/schedule/';
     const departBtn = document.getElementById('depart');
     const arriveBtn = document.getElementById('arrive');
-    const busStopId = 'depot';
+    let busStopId = 'depot';
 
     function depart() {
-        departBtn.disabled = false; 
-        arriveBtn.disabled = true; 
+        document.getElementById('depart').disabled = true; 
+        document.getElementById('arrive').disabled = false; 
 
         fetch(`${BASE_URL}${busStopId}`)
         .then((res) => res.json())
         .then((busStopInfo) => {
             const {name, next} = busStopInfo;
            
-            contentBox.textContent = `Next stop ${stopName}`;
+            contentBox.textContent = `Next stop ${name}`;
             busStopId = next;
         })
     }
