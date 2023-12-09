@@ -1,14 +1,21 @@
-function attachEvents() {
-    const inputLocation = document.querySelector('#request > #location').value;
-    let BASE_URL = 'http://localhost:3030/jsonstore/forecaster/locations/';
+const inputLocation = document.querySelector('#request > #location');
+const buttonGetWeather = document.querySelector('#request > #submit');
+let BASE_URL = 'http://localhost:3030/jsonstore/forecaster/locations/';
 
-    fetch(`${BASE_URL}${inputLocation}`)
+buttonGetWeather.addEventListener('click', attachEvents)
+
+function attachEvents() {
+    fetch(BASE_URL)
     .then((res) => res.json())
     .then((locationInfo) => {
-        const {name, forecast} = locationInfo;
-
-        console.log(name);
+    
+    let {code, name} = locationInfo;
+        console.log(typeof code);
+    })
+    .catch((err) => {
+        
     })
 }
+
 
 attachEvents();
