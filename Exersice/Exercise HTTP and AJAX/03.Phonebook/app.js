@@ -8,7 +8,7 @@ function attachEvents() {
 
   loadBtn.addEventListener("click", loadPhoneBook);
   createBtn.addEventListener("click", createPhoneAddress);
-
+  
   async function loadPhoneBook() {
     try {
       const phoneBook = await fetch(BASE_URL);
@@ -21,7 +21,9 @@ function attachEvents() {
         const li = document.createElement("li");
         const deleteBtn = document.createElement("button");
         deleteBtn.textContent = "Delete";
-        deleteBtn.id = this.id;
+        deleteBtn.id = _id;
+
+        deleteBtn.addEventListener('click', deletePhoneAddress);
 
         li.textContent = `${person}: ${phone}`;
         li.appendChild(deleteBtn);
@@ -47,9 +49,18 @@ function attachEvents() {
             loadPhoneBook();
         })
         .catch((err) => console.error(err));
+  }
 
+   function deletePhoneAddress(){
+    const id = this.id;
 
-    
+    console.log(id);
+
+    fetch(`${BASE_URL}${id}`,{
+        method: 'DELETE',
+        })
+        .then(loadPhoneBook)
+        .catch((err) => console.error(err))
   }
 }
 
