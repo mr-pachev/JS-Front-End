@@ -3,11 +3,15 @@ const username = document.getElementById('username').value;
 const ul = document.getElementById('repos');
 
 function loadRepos() {
+	ul.textContent = '';
 	fetch(`${BASE_URL}/${username}/repos`)
 	.then((res) => res.json())
 	.then((repo) => {
-		
-		console.log(repo.name);
+		for (const key in repo) {
+			const li = document.createElement('li');
+			li.textContent = repo[key].name;
+			ul.appendChild(li);
+		}
 	})
 	.catch((err) => console.error(''))
 }
