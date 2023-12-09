@@ -15,7 +15,7 @@ function loadRepos() {
 	})
 	.catch((err) => {
 		const li = document.createElement('li');
-			li.textContent = err;
+			li.textContent = err.message;
 			ul.appendChild(li);
 	})
 }
