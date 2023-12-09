@@ -1,4 +1,8 @@
+const BASE_URL = 'https://api.github.com/repos';
+const username = document.getElementById('username').value;
+const idRepo = document.getElementById('repo').value;
+
 function loadCommits() {
-    // Try it with Fetch API
-    console.log('TODO...');
+    console.log(username);
+    console.log(idRepo);
 }
