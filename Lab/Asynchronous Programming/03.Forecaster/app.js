@@ -1,5 +1,6 @@
 function attachEvents() {
-    // TODO:
+    let textInput = document.querySelector('input#location');
+console.log(textInput);
 }
 
 attachEvents();
