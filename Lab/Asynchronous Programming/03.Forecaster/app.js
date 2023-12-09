@@ -1,6 +1,8 @@
-function attachEvents() {
-    let textInput = document.querySelector('input#location');
+let textInput = Array.from(document.getElementById('content').children[0]);
 console.log(textInput);
+
+function attachEvents() {
+    
 }
 
 attachEvents();
