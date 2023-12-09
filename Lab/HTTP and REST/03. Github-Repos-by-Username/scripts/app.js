@@ -13,5 +13,9 @@ function loadRepos() {
 			ul.appendChild(li);
 		}
 	})
-	.catch((err) => console.error(''))
+	.catch((err) => {
+		const li = document.createElement('li');
+			li.textContent = err;
+			ul.appendChild(li);
+	})
 }
