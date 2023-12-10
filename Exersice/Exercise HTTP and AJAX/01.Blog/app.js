@@ -29,11 +29,23 @@ function attachEvents() {
 
         const lectedElId = selectContainer.value;           //id-то на селектирания пост
 
-        const postBody = postsContent[lectedElId].body;     //теста на избрания коментар
+        const postBody = postsContent[lectedElId].body;     //текста на избрания коментар
         const titlePost = postsContent[lectedElId].title;   //заглавиетго на коментара за избрания пост
         
-        postTitile.textContent = titlePost;
-        postContent.textContent = postBody;
+        postTitile.textContent = titlePost;                 //зарежда заглавието на поста
+        postContent.textContent = postBody;                 //зарежда съсържанието на поста
+        
+        ul.textContent = '';
+        
+        for (const [postId, obj] of Object.entries(commnetInfo)) {
+            if (commnetInfo.hasOwnProperty(postId)){
+                const li = document.createElement('li');
+               
+                li.textContent = obj.text;
+                ul.appendChild(li);
+            };
+        
+        }
      })
      
 
