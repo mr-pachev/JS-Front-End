@@ -22,26 +22,32 @@ function attachEvents() {
       .then((res) => {
         return res.json();
       })
-      .then(() => {})
+      .then(() => {
+        refresh();
+        personMessage.author = "";
+        personMessage.content = "";
+
+        nameInput.value = "";
+        messageInput.value = "";
+      })
       .catch((err) => console.log(err));
   });
 
-  refreshBtn.addEventListener("click", async () => {
-    textContainer.innerHTML = '';
-    try {
-      const messages = await fetch(BASE_URL);
-      let messageContent = await messages.json();
+  refreshBtn.addEventListener("click", refresh);
 
-      const values = Object.values(messageContent);
-      
-      for (const obj of values) {
-        textContainer.innerHTML += `${obj.author}: ${obj.content}\n`
-      }
+  async function refresh() {
+    textContainer.innerHTML = "";
 
-    } catch (err) {
-      console.log(err);
-    }
-  });
+    fetch(BASE_URL)
+      .then((res) => res.json())
+      .then((result) => {
+        const values = Object.values(result);
+        for (const obj of values) {
+          textContainer.innerHTML += `${obj.author}: ${obj.content}\n`;
+        }
+      })
+      .catch((err) => console.error(err));
+  }
 }
 
 attachEvents();
