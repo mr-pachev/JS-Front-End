@@ -24,8 +24,8 @@ function attachEvents() {
       })
       .then(() => {
         refresh();
-        personMessage.author = "";
-        personMessage.content = "";
+        // personMessage.author = "";
+        // personMessage.content = "";
 
         nameInput.value = "";
         messageInput.value = "";
@@ -42,8 +42,16 @@ function attachEvents() {
       .then((res) => res.json())
       .then((result) => {
         const values = Object.values(result);
+        let count = 0;
         for (const obj of values) {
-          textContainer.innerHTML += `${obj.author}: ${obj.content}\n`;
+          const text = `${obj.author}: ${obj.content}`;
+          count++
+
+          if (count < values.length){
+              textContainer.textContent += `${obj.author}: ${obj.content}\n`;
+            }else {
+                textContainer.textContent += `${obj.author}: ${obj.content}`;
+            }
         }
       })
       .catch((err) => console.error(err));
