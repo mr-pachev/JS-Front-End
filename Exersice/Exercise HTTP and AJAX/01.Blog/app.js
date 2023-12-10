@@ -1,14 +1,26 @@
 function attachEvents() {
     const loadPostBtn = document.getElementById('btnLoadPosts');
     const viewPostBtn = document.getElementById('btnViewPost');
-    let selectContainer= document.getElementById('post');
-    const BAS_URL = 'http://localhost:3030/jsonstore/blog/';
-     
-     loadPostBtn.addEventListener('click', async() => {
-        const posts = await fetch(BAS_URL + 'posts');
-        const postsContent = await posts.json();
+    let selectContainer= document.getElementById('posts');
+    const BASE_URL = 'http://localhost:3030/jsonstore/blog/';
 
-        console.log(postsContent);
+    let postsContent = {};
+     
+     loadPostBtn.addEventListener('click', async () => {
+        const posts = await fetch(BASE_URL + 'posts');
+        postsContent = await posts.json();
+
+        for (const [postId, postObj] of Object.entries(postsContent)) {
+            const option = document.createElement('option');
+            
+            option.value = postId;
+            option.textContent = postObj.title;
+
+            selectContainer.appendChild(option);
+        }
+        
+
+
      });
 
      
