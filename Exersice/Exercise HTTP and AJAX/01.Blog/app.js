@@ -27,6 +27,9 @@ function attachEvents() {
         const comments = await fetch(BASE_URL + 'comments')
         const commnetInfo = await comments.json();
 
+        postTitile.textContent = '';                 //зарежда заглавието на поста
+        postContent.textContent = '';
+
         const lectedElId = selectContainer.value;           //id-то на селектирания пост
 
         const postBody = postsContent[lectedElId].body;     //текста на избрания коментар
