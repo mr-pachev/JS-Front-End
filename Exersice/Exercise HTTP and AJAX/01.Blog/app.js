@@ -16,10 +16,10 @@ function attachEvents() {
         for (const [postId, postObj] of Object.entries(postsContent)) {
             const option = document.createElement('option');
 
-            option.value = postId;
-            option.textContent = postObj.title;
+            option.value = postId;                          //добавя стойност postId към конкретния таг option
+            option.textContent = postObj.title;             //добавя съдържание postObj.title към конкретния таг option
 
-            selectContainer.appendChild(option);
+            selectContainer.appendChild(option);            //добавяме конкретния таг в контейнера за селект
         }
      });
 
@@ -27,8 +27,9 @@ function attachEvents() {
         const comments = await fetch(BASE_URL + 'comments')
         const commnetInfo = await comments.json();
 
-        postTitile.textContent = '';                 //зарежда заглавието на поста
-        postContent.textContent = '';
+        postTitile.textContent = '';                        //изчиства полето преди пълнене
+        postContent.textContent = '';                       //изчиства полето преди пълнене
+        ul.textContent = '';                                //изчиства полето преди пълнене
 
         const lectedElId = selectContainer.value;           //id-то на селектирания пост
 
@@ -37,9 +38,7 @@ function attachEvents() {
         
         postTitile.textContent = titlePost;                 //зарежда заглавието на поста
         postContent.textContent = postBody;                 //зарежда съсържанието на поста
-        
-        ul.textContent = '';
-        
+             
         for (const [postId, obj] of Object.entries(commnetInfo)) {
             if (commnetInfo.hasOwnProperty(postId)){
                 const li = document.createElement('li');
