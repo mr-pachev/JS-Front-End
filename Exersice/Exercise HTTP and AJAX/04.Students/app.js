@@ -36,7 +36,8 @@ function attachEvents() {
           inputGrade.value = "";
 
           loadStudents();
-        });
+        })
+        .catch((err) => console.error(err));
     } else {
       loadStudents();
     }
@@ -51,31 +52,30 @@ function attachEvents() {
 
         for (const obj of values) {
           let tr = document.createElement("tr");
-          let th = document.createElement("th");
+          let td = document.createElement("td");
 
-          th.innerHTML = obj.firstName;
-          tr.appendChild(th);
+          td.innerHTML = obj.firstName;
+          tr.appendChild(td);
           console.log(tr);
 
-          th = document.createElement("th");
-          th.textContent = obj.lastName;
-          tr.appendChild(th);
+          td = document.createElement("td");
+          td.textContent = obj.lastName;
+          tr.appendChild(td);
           console.log(tr);
 
-          th = document.createElement("th");
-          th.textContent = obj.facultyNumber;
-          tr.appendChild(th);
+          td = document.createElement("td");
+          td.textContent = obj.facultyNumber;
+          tr.appendChild(td);
           console.log(tr);
 
-          th = document.createElement("th");
-          th.textContent = obj.grade;
-          tr.appendChild(th);
-
-          console.log(tr);
+          td = document.createElement("td");
+          td.textContent = obj.grade;
+          tr.appendChild(td);
 
           containerResult.appendChild(tr);
         }
-      });
+      })
+      .catch((err) => console.error(err));
   }
 }
 
