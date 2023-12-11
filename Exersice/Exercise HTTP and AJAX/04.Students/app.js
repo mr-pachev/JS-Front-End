@@ -14,7 +14,7 @@ function attachEvents() {
       firstName: inputFirstName.value,
       lastName: inputlLastName.value,
       facultyNumber: inputFacultyNumber.value,
-      grade: Number(inputGrade.value),
+      grade: inputGrade.value,
     };
 
     if (
@@ -37,6 +37,8 @@ function attachEvents() {
 
           loadStudents();
         });
+    } else {
+      loadStudents();
     }
   });
 
