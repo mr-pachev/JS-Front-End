@@ -13,19 +13,31 @@ function attachEvents() {
     let studentObj = {
       firstName: inputFirstName.value,
       lastName: inputlLastName.value,
-      facultyNumber: inputFacultyNumber,
-      grade: Number(inputGrade.value).toFixed(2),
+      facultyNumber: inputFacultyNumber.value,
+      grade: Number(inputGrade.value),
     };
 
-    fetch(BASE_URL, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(studentObj),
-    })
-      .then((res) => res.json())
-      .then(() => {
-        loadStudents();
-      });
+    if (
+      inputFirstName.value !== "" &&
+      inputlLastName.value !== "" &&
+      inputFacultyNumber.value !== "" &&
+      inputGrade.value !== ""
+    ) {
+      fetch(BASE_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(studentObj),
+      })
+        .then((res) => res.json())
+        .then(() => {
+          inputFirstName.value = "";
+          inputlLastName.value = "";
+          inputFacultyNumber.value = "";
+          inputGrade.value = "";
+
+          loadStudents();
+        });
+    }
   });
 
   async function loadStudents() {
@@ -33,6 +45,7 @@ function attachEvents() {
       .then((res) => res.json())
       .then((studensData) => {
         const values = Object.values(studensData);
+        containerResult.innerHTML = "";
 
         for (const obj of values) {
           let tr = document.createElement("tr");
