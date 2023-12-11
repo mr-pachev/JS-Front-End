@@ -10,12 +10,6 @@ function attachEvents() {
   const BASE_URL = "http://localhost:3030/jsonstore/collections/students/";
 
   submitBtn.addEventListener("click", async () => {
-    let studentObj = {
-      firstName: inputFirstName.value,
-      lastName: inputlLastName.value,
-      facultyNumber: inputFacultyNumber.value,
-      grade: inputGrade.value,
-    };
 
     if (
       inputFirstName.value !== "" &&
@@ -23,6 +17,13 @@ function attachEvents() {
       inputFacultyNumber.value !== "" &&
       inputGrade.value !== ""
     ) {
+      let studentObj = {
+        firstName: inputFirstName.value,
+        lastName: inputlLastName.value,
+        facultyNumber: inputFacultyNumber.value,
+        grade: inputGrade.value,
+      };
+
       fetch(BASE_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -30,6 +31,7 @@ function attachEvents() {
       })
         .then((res) => res.json())
         .then(() => {
+          studentObj = {};
           inputFirstName.value = "";
           inputlLastName.value = "";
           inputFacultyNumber.value = "";
@@ -43,8 +45,8 @@ function attachEvents() {
     }
   });
 
-  async function loadStudents() {
-    fetch(BASE_URL)
+ async function loadStudents() {
+   fetch(BASE_URL)
       .then((res) => res.json())
       .then((studensData) => {
         const values = Object.values(studensData);
@@ -56,18 +58,15 @@ function attachEvents() {
 
           td.innerHTML = obj.firstName;
           tr.appendChild(td);
-          console.log(tr);
 
           td = document.createElement("td");
           td.textContent = obj.lastName;
           tr.appendChild(td);
-          console.log(tr);
 
           td = document.createElement("td");
           td.textContent = obj.facultyNumber;
           tr.appendChild(td);
-          console.log(tr);
-
+       
           td = document.createElement("td");
           td.textContent = obj.grade;
           tr.appendChild(td);
