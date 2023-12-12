@@ -1,7 +1,7 @@
 window.addEventListener("load", solve);
 
 function solve() {
-  let inputDOMElements = {
+  const inputDOMElements = {        //обект съдържащ входните полета
     firstName: document.getElementById('first-name'),
     lastName: document.getElementById('last-name'),
     age: document.getElementById('age'),
@@ -10,24 +10,28 @@ function solve() {
     story: document.getElementById('story')
   }
 
-  const publishBtn = document.getElementById('form-btn');
+  const publishBtn = document.getElementById('form-btn'); 
 
   publishBtn.addEventListener('click', sendStory)
 
-  function sendStory(){
+  function sendStory(){             //зареждане на данните от полетата в ul
     const allFormInputs = Object.values(inputDOMElements) .every(input => input.value !== '');	
 
-    if(!allFormInputs){
+    if(!allFormInputs){             //проверка за празни полета
       return;
     }
 
-    const {firstName, lastName, age, storyTitle, genre, story} = inputDOMElements;
+    const {firstName, lastName, age, storyTitle, genre, story} = inputDOMElements; //взимане на полетата от входния обект
     const ul = document.getElementById('preview-list');
 
+    //създаване на DOM елементи в ul
     const li = createElement('li', null, ul, null, ['story-info']);
     const article = createElement('article', null, li);
     const h4 = createElement('h4', `Name: ${firstName.value} ${lastName.value}`, article);
     const agePar = createElement('p', `Age: ${age.value}`, article);
+    const titlePar = createElement('p', `Title: ${storyTitle.value}`, article);
+    const genrePar = createElement('p', `Genre: ${genre.value}`, article);
+    const textPar = createElement('p', `Genre: ${story.value}`, article);
   }
 	
 
