@@ -1,14 +1,16 @@
 window.addEventListener("load", solve);
 
 function solve() {
-  const inputDOMElements = {        //обект съдържащ входните полета
-    firstName: document.getElementById('first-name'),
-    lastName: document.getElementById('last-name'),
-    age: document.getElementById('age'),
-    storyTitle: document.getElementById('story-title'),
-    genre: document.getElementById('genre'),
-    story: document.getElementById('story')
+    const inputDOMElements = {        //обект съдържащ входните полета
+                    firstName: document.getElementById('first-name'),
+                    lastName: document.getElementById('last-name'),
+                    age: document.getElementById('age'),
+                    storyTitle: document.getElementById('story-title'),
+                    genre: document.getElementById('genre'),
+                    story: document.getElementById('story')
   }
+
+  const dOMFields = {};
 
   const publishBtn = document.getElementById('form-btn'); 
 
@@ -22,6 +24,12 @@ function solve() {
     }
 
     const {firstName, lastName, age, storyTitle, genre, story} = inputDOMElements; //взимане на полетата от входния обект
+    
+    //запазва информацията от полетата
+    for (const key in inputDOMElements) {
+      dOMFields[key] = inputDOMElements[key].value;
+    }
+
     const ul = document.getElementById('preview-list');
 
     //създаване на DOM елементи в ul
@@ -31,10 +39,19 @@ function solve() {
     const agePar = createElement('p', `Age: ${age.value}`, article);
     const titlePar = createElement('p', `Title: ${storyTitle.value}`, article);
     const genrePar = createElement('p', `Genre: ${genre.value}`, article);
-    const textPar = createElement('p', `Genre: ${story.value}`, article);
+    const textPar = createElement('p', story.value, article);
+
+    publishBtn.disabled = true; //бутова за публикуване не е активен
+    clearFields();
   }
 	
+  function clearFields(){
+    for (const key in inputDOMElements) {
+      inputDOMElements[key].value = '';
+    }
+  }
 
+  //създаване на DOM елемент
   function createElement(type, content, parentNode, id, classes, attributes){
     const htmlElement = document.createElement(type)
    
