@@ -58,9 +58,18 @@ function solve() {
     });
 
     saveBtn.addEventListener('click', () => {
-     const divBody = document.getElementById('main');
-     divBody.innerHTML = ''
+      const divBody = document.getElementById('main');
+      divBody.innerHTML = ''
       const h1 = createElement('h1', 'Your scary story is saved!', divBody);
+    })
+
+    deleteBtn.addEventListener('click', () => {
+      ul.remove(); //премахва DOM елемента ul
+      const parent = document.getElementById('side-wrapper');
+      const newUl = createElement('ul', null, parent, ['preview-list']);
+      const locationUl = document.getElementById('preview-list');
+      const h3 = createElement('h3', 'Preview', locationUl);
+      publishBtn.disabled = false;
     })
   }
 
@@ -111,7 +120,6 @@ function solve() {
     } 
     return htmlElement
   }
-  
 
 }
 
