@@ -30,6 +30,7 @@ function solve() {
       dOMFields[key] = inputDOMElements[key].value;
     }
 
+    console.log(dOMFields);
     const ul = document.getElementById('preview-list');
 
     //създаване на DOM елементи в ul
@@ -40,20 +41,23 @@ function solve() {
     const titlePar = createElement('p', `Title: ${storyTitle.value}`, article);
     const genrePar = createElement('p', `Genre: ${genre.value}`, article);
     const textPar = createElement('p', story.value, article);
-    const saveBtn = createElement('button', 'Save', li, null, ['save-btn']);
-    const editBtn = createElement('button', 'Edit', li, null, ['edit-btn']);
-    const deleteBtn = createElement('button', 'Delete', li, null, ['delete-btn']);
+    const saveBtn = createElement('button', 'Save Story', li, null, ['save-btn']);
+    const editBtn = createElement('button', 'Edit Story', li, null, ['edit-btn']);
+    const deleteBtn = createElement('button', 'Delete Story', li, null, ['delete-btn']);
 
-    publishBtn.disabled = true; //бутова за публикуване не е активен
+    publishBtn.disabled = true; //бутона за публикуване не е активен
     clearFields();
+
+    editBtn.addEventListener('click', () => {
+     fullFields();
+      publishBtn.disabled = false;
+      saveBtn.disabled = true;
+      editBtn.disabled = true;
+      deleteBtn.disabled = true;
+      ul.innerHTML = '';
+    });
   }
 
-  editBtn.addEventListener('click', editStory);
-    
-  function editStory(){
-    fullFields();
-    publishBtn.disabled = false;
-  }
 	
   //чисти входните полета
   function clearFields(){
@@ -65,7 +69,7 @@ function solve() {
   //пълнене на входните полета
   function fullFields(){
     for (const key in dOMFields) {
-      inputDOMElements[key] = dOMFields[key].value;
+      inputDOMElements[key].value = dOMFields[key];
     }
   }
 
