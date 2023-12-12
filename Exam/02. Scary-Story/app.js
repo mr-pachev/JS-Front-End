@@ -40,14 +40,32 @@ function solve() {
     const titlePar = createElement('p', `Title: ${storyTitle.value}`, article);
     const genrePar = createElement('p', `Genre: ${genre.value}`, article);
     const textPar = createElement('p', story.value, article);
+    const saveBtn = createElement('button', 'Save', li, null, ['save-btn']);
+    const editBtn = createElement('button', 'Edit', li, null, ['edit-btn']);
+    const deleteBtn = createElement('button', 'Delete', li, null, ['delete-btn']);
 
     publishBtn.disabled = true; //бутова за публикуване не е активен
     clearFields();
   }
+
+  editBtn.addEventListener('click', editStory);
+    
+  function editStory(){
+    fullFields();
+    publishBtn.disabled = false;
+  }
 	
+  //чисти входните полета
   function clearFields(){
     for (const key in inputDOMElements) {
       inputDOMElements[key].value = '';
+    }
+  }
+
+  //пълнене на входните полета
+  function fullFields(){
+    for (const key in dOMFields) {
+      inputDOMElements[key] = dOMFields[key].value;
     }
   }
 
