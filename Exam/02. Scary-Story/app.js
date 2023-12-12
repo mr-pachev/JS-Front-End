@@ -30,7 +30,6 @@ function solve() {
       dOMFields[key] = inputDOMElements[key].value;
     }
 
-    console.log(dOMFields);
     const ul = document.getElementById('preview-list');
 
     //създаване на DOM елементи в ul
@@ -55,7 +54,14 @@ function solve() {
       editBtn.disabled = true;
       deleteBtn.disabled = true;
       ul.innerHTML = '';
+      const h3 = createElement('h3', 'Preview', ul);
     });
+
+    saveBtn.addEventListener('click', () => {
+     const divBody = document.getElementById('main');
+     divBody.innerHTML = ''
+      const h1 = createElement('h1', 'Your scary story is saved!', divBody);
+    })
   }
 
 	
