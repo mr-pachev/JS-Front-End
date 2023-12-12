@@ -1,21 +1,22 @@
 function attachEvents() {
   const inputFirstName = document.querySelector('input[name="firstName"]');
   const inputlLastName = document.querySelector('input[name="lastName"]');
-  const inputFacultyNumber = document.querySelector('input[name="facultyNumber"]');
+  const inputFacultyNumber = document.querySelector(
+    'input[name="facultyNumber"]'
+  );
   const inputGrade = document.querySelector('input[name="grade"]');
   const submitBtn = document.getElementById("submit");
   const containerResult = document.querySelector("tbody");
   const BASE_URL = "http://localhost:3030/jsonstore/collections/students/";
 
-  loadStudents();
+  loadStudents(); //винаги зарежда студентите от сървъра
   submitBtn.addEventListener("click", creatStudent);
 
   function createRow(object) {
     const values = Object.values(object);
     containerResult.innerHTML = "";
 
-      values.forEach((obj) => {
-
+    values.forEach((obj) => {
       let row = document.createElement("tr");
       row.innerHTML = ` <tr>
                                   <th>${obj.firstName}</th>
@@ -74,13 +75,12 @@ function attachEvents() {
                                   <th>${obj.facultyNumber}</th>
                                   <th>${obj.grade}</th>
                           		</tr>`;
-      
+
           containerResult.appendChild(row);
-        
-      })})
+        });
+      })
       .catch((err) => console.log(err));
   }
- 
 }
 
 attachEvents();
