@@ -9,6 +9,8 @@ function attachEvents() {
   loadAllBtn.addEventListener("click", loadItems);
   addBtn.addEventListener("click", addItems);
 
+  loadItems();
+
   function loadItems(e) {
     if (e) {
       e.preventDefault();
