@@ -3,6 +3,7 @@ function attachEvents() {
   const loadAllBtn = document.getElementById("load-button");
   const addBtn = document.getElementById("add-button");
   const textContainer = document.getElementById("title");
+  const ul = document.getElementById("todo-list");
   const BASE_URL = "http://localhost:3030/jsonstore/tasks/";
 
   loadAllBtn.addEventListener("click", loadItems);
@@ -12,6 +13,8 @@ function attachEvents() {
     if(e){
         e.preventDefault();
     }
+
+    ul.innerHTML = '';
 
     fetch(BASE_URL)
       .then((res) => res.json())
@@ -42,7 +45,6 @@ function attachEvents() {
   }
 
   function creatLiData(name) {
-    const ul = document.getElementById("todo-list");
     const li = document.createElement("li");
 
     const span = document.createElement("span");
@@ -53,9 +55,36 @@ function attachEvents() {
 
     const editBtn = document.createElement("button");
     editBtn.textContent = "Edit";
+    editBtn.addEventListener('click', editItems);
 
     li.append(span, removeBtn, editBtn);
     ul.appendChild(li);
+  }
+
+  function editItems(e){
+    e.preventDefault();
+
+    let currentTagParent = e.currentTarget.parentNode;  //взима родетилския таг
+    let arrCildren = Array.from(currentTagParent.children);          //масив с децата
+
+    let editInput = document.createElement('input');
+    
+    editInput.value = arrCildren[0].textContent;
+    arrCildren[0].remove();
+
+    currentTagParent.prepend(editInput);
+
+    const name = editInput.value;
+    const httpHeaders = {
+        method: 'PATCH',
+        body: JSON.stringify({name})
+}
+
+fetch(BASE_URL, httpHeaders)
+    .then(loadItems())
+    .catch((err) => {
+        concole.error(err)
+    })
   }
 }
 
