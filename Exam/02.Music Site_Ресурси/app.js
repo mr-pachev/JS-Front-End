@@ -1,52 +1,76 @@
-window.addEventListener('load', solve);
+window.addEventListener("load", solve);
 
 function solve() {
-    
-    
-    const inputFileds = {
-        genre: document.getElementById('genre'),
-        name: document.getElementById('name'),
-        author: document.getElementById('author'),
-        date: document.getElementById('date'),
-    };
+  let countLikes = 0;
+  const inputFileds = {
+    genre: document.getElementById("genre"),
+    name: document.getElementById("name"),
+    author: document.getElementById("author"),
+    date: document.getElementById("date"),
+  };
 
-    const othersDOMElements = {
-        addBtn: document.getElementById('add-btn'),
-        addBtn: document.getElementById('add-btn'),
-        collectionsSong: document.getElementById('all-hits-container'),
-        
-    };
+  const othersDOMElements = {
+    addBtn: document.getElementById("add-btn"),
+    collectionsSong: document.querySelector("#all-hits > div"),
+    saveSongsContainer: document.querySelector("#saved-hits > div"),
+    likesContainer: document.querySelector(".likes > p"),
+  };
 
-    function createElement(type, content, parentNode, classes,  id, attributes){
-        const htmlElement = document.createElement(type)
-       
-        if(content && type !== 'input'){
-          htmlElement.textContent = content;
-        }
-       
-        if(content && type === 'input'){
-          htmlElement.value = content;
-        }
-       
-        if(id){
-          htmlElement.id = id;
-        }
-      
-      if (parentNode){
-          parentNode.appendChild(htmlElement);
-          }
-       
-        if (classes){
-          htmlElement.classList.add(...classes);
-        }
-       
-        //{ src: 'link to img', href: 'link to site' }
-        if (attributes){
-          for (const key in attributes) {
-            htmlElement.setAttribute(key, attributes[key]); 
-          }
-        } 
-        return htmlElement
+  const { addBtn, collectionsSong, saveSongsContainer, likesContainer } =
+    othersDOMElements;
+  const { genre, name, author, date } = inputFileds;
+
+  addBtn.addEventListener("click", createSong);
+
+  function createSong(e) {
+    e.preventDefault();
+
+    //създаване на DOM елементите
+    const divContainer = createElement("div", collectionsSong,  null, ["hits-info"]);
+    const img = createElement("img", collectionsSong, null, null, null, { src: './static/img/img.png' });
+    const h2Gener = createElement("h2", divContainer, `Genere: ${genre.value}`);
+    const h2Name = createElement("h2", divContainer, `Name: ${name.value}`);
+    const h2Author = createElement("h2", divContainer,`Author: ${author.value}`);
+    const h3Date = createElement("h2", divContainer, `Date: ${date.value}`);
+    const saveBtn = createElement('button', divContainer, 'Save song', ['save-btn']);
+    const likeBtn = createElement('button', divContainer, 'Like song', ['like-btn']);
+    const deleteBtn = createElement('button', divContainer, 'Delete', ['delete-btn']);
+  }
+
+  function createElement(type, parentNode, content, classes, id, attributes, useInnerHtml) {
+    const htmlElement = document.createElement(type);
+  
+    if (content && useInnerHtml) {
+      htmlElement.innerHTML = content;
+    } else {
+      if (content && type !== 'input') {
+        htmlElement.textContent = content;
       }
-      
+  
+      if (content && type === 'input') {
+        htmlElement.value = content;
+      }
+    }
+  
+    if (classes && classes.length > 0) {
+      htmlElement.classList.add(...classes);
+    }
+  
+    if (id) {
+      htmlElement.id = id;
+    }
+  
+    // { src: 'link', href: 'http' }
+    if (attributes) {
+      for (const key in attributes) {
+        htmlElement.setAttribute(key, attributes[key])
+      }
+    }
+  
+    if (parentNode) {
+      parentNode.appendChild(htmlElement);
+    }
+  
+    return htmlElement;
+}
 }
