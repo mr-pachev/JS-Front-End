@@ -10,11 +10,11 @@ function attachEvents() {
   addBtn.addEventListener("click", addItems);
 
   function loadItems(e) {
-    if(e){
-        e.preventDefault();
+    if (e) {
+      e.preventDefault();
     }
 
-    ul.innerHTML = '';
+    ul.innerHTML = "";
 
     fetch(BASE_URL)
       .then((res) => res.json())
@@ -22,7 +22,7 @@ function attachEvents() {
         values = Object.values(itemsObj);
 
         for (const { name, _id } of values) {
-          creatLiData(name);
+          creatLiData(name, _id);
         }
       })
       .catch((err) => console.error(err));
@@ -30,22 +30,22 @@ function attachEvents() {
 
   function addItems(e) {
     e.preventDefault();
-        const name = textContainer.value;
+    const name = textContainer.value;
     const httpHeaders = {
-		method: 'POST',
-		body: JSON.stringify({name})
-	}
+      method: "POST",
+      body: JSON.stringify({ name }),
+    };
 
-	fetch(BASE_URL, httpHeaders)
-		.then(loadItems())
-		.catch((err) => {
-			concole.error(err)
-		})
-
+    fetch(BASE_URL, httpHeaders)
+      .then(loadItems())
+      .catch((err) => {
+        concole.error(err);
+      });
   }
 
-  function creatLiData(name) {
+  function creatLiData(name, _id) {
     const li = document.createElement("li");
+    li.id = _id;
 
     const span = document.createElement("span");
     span.textContent = name;
@@ -55,36 +55,49 @@ function attachEvents() {
 
     const editBtn = document.createElement("button");
     editBtn.textContent = "Edit";
-    editBtn.addEventListener('click', editItems);
+    editBtn.addEventListener("click", editItems);
 
     li.append(span, removeBtn, editBtn);
     ul.appendChild(li);
   }
 
-  function editItems(e){
+  function editItems(e) {
     e.preventDefault();
 
-    let currentTagParent = e.currentTarget.parentNode;  //взима родетилския таг
-    let arrCildren = Array.from(currentTagParent.children);          //масив с децата
+    let currentTagParent = e.currentTarget.parentNode; //взима родетилския таг
+    let arrCildren = Array.from(currentTagParent.children); //масив с децата
 
-    let editInput = document.createElement('input');
-    
+    let editInput = document.createElement("input");
     editInput.value = arrCildren[0].textContent;
-    arrCildren[0].remove();
 
+    arrCildren[0].remove();
     currentTagParent.prepend(editInput);
 
-    const name = editInput.value;
-    const httpHeaders = {
-        method: 'PATCH',
-        body: JSON.stringify({name})
-}
+    let submitBtn = document.createElement('button');
+    submitBtn.textContent = 'Submit';
+    arrCildren[2].remove();
+    currentTagParent.appendChild(submitBtn);
 
-fetch(BASE_URL, httpHeaders)
-    .then(loadItems())
-    .catch((err) => {
-        concole.error(err)
-    })
+    submitBtn.addEventListener('click', submitOperation);
+  }
+
+  function submitOperation(e){
+    let currentTagParent = e.currentTarget.parentNode;      //взима родетилския таг
+    let arrCildren = Array.from(currentTagParent.children); //масив с децата
+ 
+    const parentId = e.currentTarget.parentNode.id;
+  
+    const text = arrCildren[0];
+    const httpHeaders = {
+            method: 'PATCH',
+            body: JSON.stringify({name: text.value})
+    }
+
+    fetch(`${BASE_URL}${parentId}`, httpHeaders)
+        .then(() => loadItems())
+        .catch((err) => {
+            concole.error(err)
+        })
   }
 }
 

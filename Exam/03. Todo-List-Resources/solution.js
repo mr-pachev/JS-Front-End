@@ -47,6 +47,7 @@ function attachEvents() {
       const editInput = document.createElement('input')
       editInput.value = span.textContent
       liParent.prepend(editInput)
+      
       const submitBtn = document.createElement('button')
       submitBtn.textContent = 'Submit'
       submitBtn.addEventListener("click", submitTaskHandler)
