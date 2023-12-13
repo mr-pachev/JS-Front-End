@@ -47,7 +47,11 @@ function solve() {
   }
 
   function saveSongs(e){
-    saveSongsContainer.appendChild(e.currentTarget.parentNode);
+    const parentElement = e.currentTarget.parentNode;
+    saveSongsContainer.appendChild(parentElement);
+    parentElement.querySelector('.save-btn').remove();
+    parentElement.querySelector('.like-btn').remove();
+     
   }
 
   function createElement(type, parentNode, content, classes, id, attributes, useInnerHtml) {
