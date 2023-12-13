@@ -11,8 +11,8 @@ function solve() {
 
   const othersDOMElements = {
     addBtn: document.getElementById("add-btn"),
-    collectionsSong: document.querySelector("#all-hits > div"),
-    saveSongsContainer: document.querySelector("#saved-hits > div"),
+    collectionsSong: document.querySelector('.all-hits-container'),
+    saveSongsContainer: document.querySelector(".saved-container"),
     likesContainer: document.querySelector(".likes > p"),
   };
 
@@ -25,9 +25,16 @@ function solve() {
   function createSong(e) {
     e.preventDefault();
 
+    //проверка за непопълнени полета
+    let allFormInputs = Object.values(inputFileds) .every((input) => input.value !== '');
+
+    if(!allFormInputs){
+      return;
+    }
+
     //създаване на DOM елементите
     const divContainer = createElement("div", collectionsSong,  null, ["hits-info"]);
-    const img = createElement("img", collectionsSong, null, null, null, { src: './static/img/img.png' });
+    const img = createElement("img", divContainer, null, null, null, { src: './static/img/img.png' });
     const h2Gener = createElement("h2", divContainer, `Genere: ${genre.value}`);
     const h2Name = createElement("h2", divContainer, `Name: ${name.value}`);
     const h2Author = createElement("h2", divContainer,`Author: ${author.value}`);
@@ -35,6 +42,12 @@ function solve() {
     const saveBtn = createElement('button', divContainer, 'Save song', ['save-btn']);
     const likeBtn = createElement('button', divContainer, 'Like song', ['like-btn']);
     const deleteBtn = createElement('button', divContainer, 'Delete', ['delete-btn']);
+
+    saveBtn.addEventListener('click', saveSongs);
+  }
+
+  function saveSongs(e){
+    saveSongsContainer.appendChild(e.currentTarget.parentNode);
   }
 
   function createElement(type, parentNode, content, classes, id, attributes, useInnerHtml) {
