@@ -56,6 +56,7 @@ function attachEvents() {
     const editBtn = document.createElement("button");
     editBtn.textContent = "Edit";
     editBtn.addEventListener("click", editItems);
+    removeBtn.addEventListener("click", removeItems);
 
     li.append(span, removeBtn, editBtn);
     ul.appendChild(li);
@@ -73,31 +74,45 @@ function attachEvents() {
     arrCildren[0].remove();
     currentTagParent.prepend(editInput);
 
-    let submitBtn = document.createElement('button');
-    submitBtn.textContent = 'Submit';
+    let submitBtn = document.createElement("button");
+    submitBtn.textContent = "Submit";
     arrCildren[2].remove();
     currentTagParent.appendChild(submitBtn);
 
-    submitBtn.addEventListener('click', submitOperation);
+    submitBtn.addEventListener("click", submitOperation);
   }
 
-  function submitOperation(e){
-    let currentTagParent = e.currentTarget.parentNode;      //взима родетилския таг
+  function submitOperation(e) {
+    let currentTagParent = e.currentTarget.parentNode; //взима родетилския таг
     let arrCildren = Array.from(currentTagParent.children); //масив с децата
- 
+
     const parentId = e.currentTarget.parentNode.id;
-  
+
     const text = arrCildren[0];
     const httpHeaders = {
-            method: 'PATCH',
-            body: JSON.stringify({name: text.value})
-    }
+      method: "PATCH",
+      body: JSON.stringify({ name: text.value }),
+    };
 
     fetch(`${BASE_URL}${parentId}`, httpHeaders)
-        .then(() => loadItems())
-        .catch((err) => {
-            concole.error(err)
-        })
+      .then(() => loadItems())
+      .catch((err) => {
+        concole.error(err);
+      });
+  }
+
+  function removeItems(e) {
+    const parentId = e.currentTarget.parentNode.id;
+
+    const httpHeaders = {
+      method: "DELETE",
+    };
+
+    fetch(`${BASE_URL}${parentId}`, httpHeaders)
+      .then(() => loadItems())
+      .catch((err) => {
+        concole.error(err);
+      });
   }
 }
 
