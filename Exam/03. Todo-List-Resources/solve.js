@@ -16,13 +16,27 @@ function attachEvents() {
         values = Object.values(itemsObj);
 
         for (const { name, _id } of values) {
+            creatData(name, _id);
         }
       });
   }
 
   function creatData (name, _id){
     const ul = document.getElementById('todo-list');
-    const span = do
+    const li = document.createElement('li');
+    li.id = _id;
+
+    const span = document.createElement('span');
+    span.textContent = name;
+
+    const removeBtn = document.createElement('button');
+    removeBtn.textContent = 'Remove';
+
+    const editBtn = document.createElement('button');
+    editBtn.textContent = 'Edit';
+
+    li.append(span, removeBtn, editBtn);
+    ul.appendChild(li);
   }
 }
 
