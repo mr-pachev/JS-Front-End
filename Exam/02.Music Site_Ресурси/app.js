@@ -44,6 +44,7 @@ function solve() {
     const deleteBtn = createElement('button', divContainer, 'Delete', ['delete-btn']);
 
     saveBtn.addEventListener('click', saveSongs);
+    likeBtn.addEventListener('click', likeSong);
   }
 
   function saveSongs(e){
@@ -52,6 +53,12 @@ function solve() {
     parentElement.querySelector('.save-btn').remove();
     parentElement.querySelector('.like-btn').remove();
      
+  }
+
+  function likeSong(e){
+    countLikes++
+    likesContainer.textContent = `Total Likes: ${countLikes}`;
+    e.currentTarget.disabled = true; 
   }
 
   function createElement(type, parentNode, content, classes, id, attributes, useInnerHtml) {
