@@ -51,10 +51,29 @@ function solve() {
 
   function addProducts(e){
     e.preventDefault();
+    const { product, count, price } = inputFields;
+    const httpHeaders = {
+		method: 'POST',
+		body: JSON.stringify({
+            product: product.value,
+            count: count.value,
+            price: price.value
+        })
+	}
+
+	fetch(BASE_URL, httpHeaders)
+		.then(() => {
+            productsContainer.innerHTML = '';
+            loadsProducts()})
+		.catch((err) => {
+			concole.error(err)
+		})
+
+    
   }
 
   function updateProduct(e){
-
+    e.preventDefault();
   }
 
   function deleteProduct(e){
