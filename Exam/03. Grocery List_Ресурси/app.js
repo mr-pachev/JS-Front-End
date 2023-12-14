@@ -15,8 +15,9 @@ function solve() {
 
   const BASE_URL = "http://localhost:3030/jsonstore/grocery/";
   let allProducts = [];
+  productToEdit = {};
 
-  const { product, count, price } = inputFields;
+  const { product, count, price, _id } = inputFields;
   const { addBtn, updateBtn, loadBtn, productsContainer,  inputContainer} = othersDOMElements;
 
   loadBtn.addEventListener("click", loadsProducts);
@@ -30,15 +31,17 @@ function solve() {
     fetch(BASE_URL)
       .then((res) => res.json())
       .then((products) => {
+        productsContainer.innerHTML = '';
         creatProduct(products);
-    })
+        })
       .catch((err) => console.error(err));
   }
 
   function creatProduct(Obj){
-    let values = Object.values(Obj);
-        for (const { product, count, price } of values) {
+    allProducts = Object.values(Obj);
+        for (const { product, count, price, _id } of allProducts) {
           const row = createElement("tr", productsContainer);
+          row.id = _id;
           const nameProduct = createElement("td", row, product, ["name"]);
           const priceProduct = createElement("td", row, price, ["product-price",]);
           const btnsContainer = createElement("td", row, null, ["btn"]);
@@ -78,6 +81,17 @@ function solve() {
 
   function updateProduct(e){
     e.preventDefault();
+    
+    const id = e.currentTarget.parentNode.parentNode.id;
+   
+    productToEdit = allProducts.find((el) => el._id === id);
+    
+    for (const key in inputFields) {
+        inputFields[key].value = productToEdit[key];
+    }
+    
+    addBtn.disabled = true;
+    updateBtn.disabled = false;
   }
 
   function deleteProduct(e){
