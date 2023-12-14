@@ -10,13 +10,14 @@ function solve() {
     updateBtn: document.getElementById("update-product"),
     loadBtn: document.getElementById("load-product"),
     productsContainer: document.getElementById("tbody"),
+    inputContainer: document.querySelector('.list')
   };
 
   const BASE_URL = "http://localhost:3030/jsonstore/grocery/";
   let allProducts = [];
 
   const { product, count, price } = inputFields;
-  const { addBtn, updateBtn, loadBtn, productsContainer } = othersDOMElements;
+  const { addBtn, updateBtn, loadBtn, productsContainer,  inputContainer} = othersDOMElements;
 
   loadBtn.addEventListener("click", loadsProducts);
   addBtn.addEventListener('click', addProducts);
@@ -64,7 +65,10 @@ function solve() {
 	fetch(BASE_URL, httpHeaders)
 		.then(() => {
             productsContainer.innerHTML = '';
-            loadsProducts()})
+            loadsProducts()
+            inputContainer.reset();
+        })
+
 		.catch((err) => {
 			concole.error(err)
 		})
