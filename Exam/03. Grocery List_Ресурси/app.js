@@ -1,4 +1,5 @@
-function solve() {
+function attachEvents() {
+    const BASE_URL = "http://localhost:3030/jsonstore/grocery/";
   let inputFields = {
     product: document.getElementById("product"),
     count: document.getElementById("count"),
@@ -13,7 +14,6 @@ function solve() {
     inputContainer: document.querySelector('.list')
   };
 
-  const BASE_URL = "http://localhost:3030/jsonstore/grocery/";
   let allProducts = [];
   productToEdit = {};
 
@@ -33,18 +33,13 @@ function solve() {
       .then((res) => res.json())
       .then((products) => {
         productsContainer.innerHTML = '';
-        creatProduct(products);
-        })
-      .catch((err) => console.error(err));
-  }
-
-  function creatProduct(Obj){
-    allProducts = Object.values(Obj);
+        allProducts = Object.values(products);
         for (const { product, count, price, _id } of allProducts) {
           const row = createElement("tr", productsContainer);
           row.id = _id;
-          const nameProduct = createElement("td", row, product, ["name"]);
-          const priceProduct = createElement("td", row, price, ["product-price",]);
+          createElement("td", row, product, ["name"]);
+          createElement("td", row, count, ["count"]);
+          createElement("td", row, price, ["product-price",]);
           const btnsContainer = createElement("td", row, null, ["btn"]);
           const updateBtn = createElement("button", btnsContainer, "Update", ["update",]);
           const deleteBtn = createElement("button", btnsContainer, "Delete", ["delete",]);
@@ -52,6 +47,8 @@ function solve() {
           updateBtn.addEventListener('click', updateFunction);
           deleteBtn.addEventListener('click', deleteProduct);
         }
+        })
+      .catch((err) => console.error(err));
   }
 
   function addProducts(e){
@@ -84,7 +81,6 @@ function solve() {
     e.preventDefault();
     
     const id = e.currentTarget.parentNode.parentNode.id;
-   
     productToEdit = allProducts.find((el) => el._id === id);
     
     for (const key in inputFields) {
@@ -188,4 +184,4 @@ function solve() {
   }
 }
 
-solve();
+attachEvents();
