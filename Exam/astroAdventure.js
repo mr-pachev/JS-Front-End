@@ -1,19 +1,19 @@
 function solve(input) {
      const n = input.shift();
-    
+
      let astronauts = [];
-    
+
      for (let i = 0; i < n; i++) {
        const [name, oxygen, energy] = input.shift().split(" ");
        astronauts.push({ name, oxygen: Number(oxygen), energy: Number(energy) });
      }
-  
+
      let inputLine = input.shift();
      let command = inputLine.split(" - ")[0];
-  
+
      while (command !== "End") {
        let name = inputLine.split(" - ")[1];
-    
+
        if (command === "Explore") {
          const neededEnergy = inputLine.split(" - ")[2];
          explore(name, neededEnergy);
@@ -24,16 +24,16 @@ function solve(input) {
          const refOxygen = inputLine.split(" - ")[2];
          breathe(name, refOxygen);
        }
-    
+
        inputLine = input.shift();
        command = inputLine.split(" - ")[0];
      }
-  
+
      function explore(nameAstro, neededEnergy) {
        for (const key in astronauts) {
          if (astronauts[key].name === nameAstro) {
            let result = astronauts[key].energy - Number(neededEnergy);
-        
+
            if (result > 0) {
              astronauts[key].energy = result;
              console.log(`${nameAstro} has successfully explored a new area and now has ${result} energy!`);
@@ -43,28 +43,28 @@ function solve(input) {
          }
        }
      }
-  
+
      function refuel(nameAstro, refAmount) {
        for (const key in astronauts) {
          if (astronauts[key].name === nameAstro) {
            let result = astronauts[key].energy + Number(refAmount);
-        
+
            if (result > 200) {
              console.log(`${nameAstro} refueled their energy by ${200 - astronauts[key].energy}!`);
              astronauts[key].energy = 200;
            } else {
              astronauts[key].energy = result;
-             console.log(`${nameAstro} refueled their energy by ${result}!`);
+             console.log(`${nameAstro} refueled their energy by ${refAmount}!`);
            }
          }
        }
      }
-  
+
      function breathe(nameAstro, refOxygen) {
        for (const key in astronauts) {
          if (astronauts[key].name === nameAstro) {
            let result = astronauts[key].oxygen + Number(refOxygen);
-        
+
            if (result > 100) {
              console.log(`${nameAstro} took a breath and recovered ${100 - astronauts[key].oxygen} oxygen!`);
              astronauts[key].oxygen = 100;
