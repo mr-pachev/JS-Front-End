@@ -7,7 +7,7 @@ function solve() {
 
   let othersDOMElements = {
     addBtn: document.getElementById("add-product"),
-    updateBtn: document.getElementById("update-product"),
+    updateProductsBtn: document.getElementById("update-product"),
     loadBtn: document.getElementById("load-product"),
     productsContainer: document.getElementById("tbody"),
     inputContainer: document.querySelector('.list')
@@ -18,10 +18,11 @@ function solve() {
   productToEdit = {};
 
   const { product, count, price, _id } = inputFields;
-  const { addBtn, updateBtn, loadBtn, productsContainer,  inputContainer} = othersDOMElements;
+  const { addBtn, updateProductsBtn, loadBtn, productsContainer,  inputContainer} = othersDOMElements;
 
   loadBtn.addEventListener("click", loadsProducts);
   addBtn.addEventListener('click', addProducts);
+  updateProductsBtn.addEventListener('click', updateProducts);
 
   function loadsProducts(e) {
     if (e) {
@@ -48,7 +49,7 @@ function solve() {
           const updateBtn = createElement("button", btnsContainer, "Update", ["update",]);
           const deleteBtn = createElement("button", btnsContainer, "Delete", ["delete",]);
 
-          updateBtn.addEventListener('click', updateProduct);
+          updateBtn.addEventListener('click', updateFunction);
           deleteBtn.addEventListener('click', deleteProduct);
         }
   }
@@ -79,7 +80,7 @@ function solve() {
     
   }
 
-  function updateProduct(e){
+  function updateFunction(e){
     e.preventDefault();
     
     const id = e.currentTarget.parentNode.parentNode.id;
@@ -91,7 +92,35 @@ function solve() {
     }
     
     addBtn.disabled = true;
-    updateBtn.disabled = false;
+    updateProductsBtn.disabled = false;
+  }
+
+  function updateProducts(e){
+    e.preventDefault();
+    const { product, count, price } = inputFields;
+    const id = productToEdit._id;
+
+    console.log(id)
+
+    const httpHeaders = {
+		method: 'POST',
+		body: JSON.stringify({
+            product: product.value,
+            count: count.value,
+            price: price.value
+        })
+	}
+
+	fetch(BASE_URL, httpHeaders)
+		.then(() => {
+            productsContainer.innerHTML = '';
+            loadsProducts()
+            inputContainer.reset();
+        })
+
+		.catch((err) => {
+			concole.error(err)
+		})
   }
 
   function deleteProduct(e){
