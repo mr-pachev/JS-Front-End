@@ -45,6 +45,7 @@ function solve() {
 
     saveBtn.addEventListener('click', saveSongs);
     likeBtn.addEventListener('click', likeSong);
+    deleteBtn.addEventListener('click', deleteSong);
   }
 
   function saveSongs(e){
@@ -59,6 +60,10 @@ function solve() {
     countLikes++
     likesContainer.textContent = `Total Likes: ${countLikes}`;
     e.currentTarget.disabled = true; 
+  }
+
+  function deleteSong(e){
+    e.currentTarget.parentNode.remove();
   }
 
   function createElement(type, parentNode, content, classes, id, attributes, useInnerHtml) {
