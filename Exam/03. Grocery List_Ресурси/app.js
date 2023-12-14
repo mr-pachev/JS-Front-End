@@ -100,10 +100,8 @@ function solve() {
     const { product, count, price } = inputFields;
     const id = productToEdit._id;
 
-    console.log(id)
-
     const httpHeaders = {
-		method: 'POST',
+		method: 'PATCH',
 		body: JSON.stringify({
             product: product.value,
             count: count.value,
@@ -111,11 +109,13 @@ function solve() {
         })
 	}
 
-	fetch(BASE_URL, httpHeaders)
+	fetch(`${BASE_URL}${id}`, httpHeaders)
 		.then(() => {
             productsContainer.innerHTML = '';
             loadsProducts()
             inputContainer.reset();
+            addBtn.disabled = false;
+    updateProductsBtn.disabled = true;
         })
 
 		.catch((err) => {
@@ -124,7 +124,22 @@ function solve() {
   }
 
   function deleteProduct(e){
-    //TODO:
+    e.preventDefault();
+    
+    const id = e.currentTarget.parentNode.parentNode.id;
+
+    fetch(`${BASE_URL}${id}`, {
+		method: 'DELETE',
+    })
+    .then(() => {
+        productsContainer.innerHTML = '';
+        loadsProducts()
+        inputContainer.reset();
+    })
+    .catch((err) => {
+        concole.error(err)
+    })
+
   }
 
   function createElement(
