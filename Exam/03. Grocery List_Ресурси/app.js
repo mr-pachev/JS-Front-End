@@ -19,6 +19,7 @@ function solve() {
   const { addBtn, updateBtn, loadBtn, productsContainer } = othersDOMElements;
 
   loadBtn.addEventListener("click", loadsProducts);
+  addBtn.addEventListener('click', addProducts);
 
   function loadsProducts(e) {
     if (e) {
@@ -28,23 +29,36 @@ function solve() {
     fetch(BASE_URL)
       .then((res) => res.json())
       .then((products) => {
-        let values = Object.values(products);
+        creatProduct(products);
+    })
+      .catch((err) => console.error(err));
+  }
+
+  function creatProduct(Obj){
+    let values = Object.values(Obj);
         for (const { product, count, price } of values) {
           const row = createElement("tr", productsContainer);
           const nameProduct = createElement("td", row, product, ["name"]);
-          const priceProduct = createElement("td", row, price, [
-            "product-price",
-          ]);
+          const priceProduct = createElement("td", row, price, ["product-price",]);
           const btnsContainer = createElement("td", row, null, ["btn"]);
-          const updateBtn = createElement("button", btnsContainer, "Update", [
-            "update",
-          ]);
-          const deleteBtn = createElement("button", btnsContainer, "Delete", [
-            "delete",
-          ]);
+          const updateBtn = createElement("button", btnsContainer, "Update", ["update",]);
+          const deleteBtn = createElement("button", btnsContainer, "Delete", ["delete",]);
+
+          updateBtn.addEventListener('click', updateProduct);
+          deleteBtn.addEventListener('click', deleteProduct);
         }
-      })
-      .catch((err) => console.error(err));
+  }
+
+  function addProducts(e){
+    e.preventDefault();
+  }
+
+  function updateProduct(e){
+
+  }
+
+  function deleteProduct(e){
+    //TODO:
   }
 
   function createElement(
