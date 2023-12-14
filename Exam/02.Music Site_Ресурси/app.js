@@ -48,7 +48,7 @@ function solve() {
       divContainer,
       `Author: ${author.value}`
     );
-    const h3Date = createElement("h2", divContainer, `Date: ${date.value}`);
+    const h3Date = createElement("h3", divContainer, `Date: ${date.value}`);
     const saveBtn = createElement("button", divContainer, "Save song", [
       "save-btn",
     ]);
