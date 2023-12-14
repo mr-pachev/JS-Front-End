@@ -11,7 +11,7 @@ function solve() {
 
   const othersDOMElements = {
     addBtn: document.getElementById("add-btn"),
-    collectionsSong: document.querySelector('.all-hits-container'),
+    collectionsSong: document.querySelector(".all-hits-container"),
     saveSongsContainer: document.querySelector(".saved-container"),
     likesContainer: document.querySelector(".likes > p"),
   };
@@ -26,80 +26,105 @@ function solve() {
     e.preventDefault();
 
     //проверка за непопълнени полета
-    let allFormInputs = Object.values(inputFileds) .every((input) => input.value !== '');
+    let allFormInputs = Object.values(inputFileds).every(
+      (input) => input.value !== ""
+    );
 
-    if(!allFormInputs){
+    if (!allFormInputs) {
       return;
     }
 
     //създаване на DOM елементите
-    const divContainer = createElement("div", collectionsSong,  null, ["hits-info"]);
-    const img = createElement("img", divContainer, null, null, null, { src: './static/img/img.png' });
-    const h2Gener = createElement("h2", divContainer, `Genere: ${genre.value}`);
+    const divContainer = createElement("div", collectionsSong, null, [
+      "hits-info",
+    ]);
+    const img = createElement("img", divContainer, null, null, null, {
+      src: "./static/img/img.png",
+    });
+    const h2Gener = createElement("h2", divContainer, `Genre: ${genre.value}`);
     const h2Name = createElement("h2", divContainer, `Name: ${name.value}`);
-    const h2Author = createElement("h2", divContainer,`Author: ${author.value}`);
+    const h2Author = createElement(
+      "h2",
+      divContainer,
+      `Author: ${author.value}`
+    );
     const h3Date = createElement("h2", divContainer, `Date: ${date.value}`);
-    const saveBtn = createElement('button', divContainer, 'Save song', ['save-btn']);
-    const likeBtn = createElement('button', divContainer, 'Like song', ['like-btn']);
-    const deleteBtn = createElement('button', divContainer, 'Delete', ['delete-btn']);
+    const saveBtn = createElement("button", divContainer, "Save song", [
+      "save-btn",
+    ]);
+    const likeBtn = createElement("button", divContainer, "Like song", [
+      "like-btn",
+    ]);
+    const deleteBtn = createElement("button", divContainer, "Delete", [
+      "delete-btn",
+    ]);
 
-    saveBtn.addEventListener('click', saveSongs);
-    likeBtn.addEventListener('click', likeSong);
-    deleteBtn.addEventListener('click', deleteSong);
+    saveBtn.addEventListener("click", saveSongs);
+    likeBtn.addEventListener("click", likeSong);
+    deleteBtn.addEventListener("click", deleteSong);
+
+    Object.values(inputFileds).forEach((input) => input.value = '');
   }
 
-  function saveSongs(e){
+  function saveSongs(e) {
     const parentElement = e.currentTarget.parentNode;
     saveSongsContainer.appendChild(parentElement);
-    parentElement.querySelector('.save-btn').remove();
-    parentElement.querySelector('.like-btn').remove();
-     
+    parentElement.querySelector(".save-btn").remove();
+    parentElement.querySelector(".like-btn").remove();
   }
 
-  function likeSong(e){
-    countLikes++
+  function likeSong(e) {
+    countLikes++;
     likesContainer.textContent = `Total Likes: ${countLikes}`;
-    e.currentTarget.disabled = true; 
+    e.currentTarget.disabled = true;
   }
 
-  function deleteSong(e){
+  function deleteSong(e) {
     e.currentTarget.parentNode.remove();
   }
 
-  function createElement(type, parentNode, content, classes, id, attributes, useInnerHtml) {
+  function createElement(
+    type,
+    parentNode,
+    content,
+    classes,
+    id,
+    attributes,
+    useInnerHtml
+  ) {
     const htmlElement = document.createElement(type);
-  
+
     if (content && useInnerHtml) {
       htmlElement.innerHTML = content;
     } else {
-      if (content && type !== 'input') {
+      if (content && type !== "input") {
         htmlElement.textContent = content;
       }
-  
-      if (content && type === 'input') {
+
+      if (content && type === "input") {
         htmlElement.value = content;
       }
     }
-  
+
     if (classes && classes.length > 0) {
       htmlElement.classList.add(...classes);
     }
-  
+
     if (id) {
       htmlElement.id = id;
     }
-  
+
     // { src: 'link', href: 'http' }
     if (attributes) {
       for (const key in attributes) {
-        htmlElement.setAttribute(key, attributes[key])
+        htmlElement.setAttribute(key, attributes[key]);
       }
     }
-  
+
     if (parentNode) {
       parentNode.appendChild(htmlElement);
     }
-  
+
     return htmlElement;
-}
+  }
 }
