@@ -16,7 +16,7 @@ function solve() {
 
   const BASE_URL = "http://localhost:3030/jsonstore/tasks/";
 
-  const { location, temperature, date } = inputFields;
+  let { location, temperature, date } = inputFields;
   const {
     inputContainer,
     addWeatherBtn,
@@ -107,16 +107,12 @@ function solve() {
    if (containerId === arrWeathers[key]._id &&  event.target.textContent === 'Change'){ 
        let obj = arrWeathers[key];
 
-      for (const key in obj) {
+      for (const key in inputFields) {
         inputFields[key].value = obj[key]; 
         clickedElement.parentNode.parentNode.parentNode.remove();
       }
-    //  for (const iterator of Object.keys(arrWeathers[key])) {
-    //     inputFields[iterator].value = arrWeathers[key][iterator]; 
-    //   }
-    
+   
     }
-    
   }
 
   addWeatherBtn.disabled = true;
@@ -130,7 +126,7 @@ function edithWeth(e){
 
   const { location, temperature, date } = inputFields;
 
-    console.log(tagId)
+    console.log(inputFields)
 
     const httpHeaders = {
 		method: 'PUT',
