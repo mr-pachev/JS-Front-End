@@ -140,8 +140,8 @@ function edithWeth(e){
 	fetch(`${BASE_URL}${tagId}`, httpHeaders)
 		.then(() => {
       tagId = null;
-      Object.values(inputFields).forEach((input) => input.value = '');
       loadWeather()
+      Object.values(inputFields).forEach((input) => input.value = '');
     })
 		.catch((err) => {
 			concole.error(err)
