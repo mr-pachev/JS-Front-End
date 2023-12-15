@@ -34,8 +34,10 @@ function loadInfo(e){
  createElement('p', articleInfo, playerName.value);
  createElement('p', articleInfo, `Score: ${score.value}`);
  createElement('p', articleInfo, `Round: ${round.value}`);
- const editBtn = createElement('button', liInfo, 'edit', ['btn-edit']);
- const okBtn = createElement('button', liInfo, 'ok', ['btn-ok']);
+ const editBtn = createElement('button', liInfo, 'edit', ['btn']);
+ editBtn.classList.add("edit");
+ const okBtn = createElement('button', liInfo, 'ok', ['btn']);
+ okBtn.classList.add("ok");
 
  for (const key in inputFields) {
     playerData[key] = inputFields[key].value
@@ -53,7 +55,6 @@ function reloadPage(){
   location.reload();
 }
 
-
 function editInfo(e){
   for (const key in playerData) {
       inputFields[key].value = playerData[key];
@@ -64,11 +65,11 @@ function editInfo(e){
 
 function finished(e){
   const liInfo = e.currentTarget.previousSibling.previousSibling;
-  e.currentTarget.style.display = 'none';
-  e.currentTarget.previousSibling.style.display = 'none';
-
+  
   const li = createElement('li', scoreboardList, null, ['dart-item']);
   li.appendChild(liInfo);
+  e.currentTarget.parentNode.removeChild(e.currentTarget.previousSibling);
+  e.currentTarget.parentNode.removeChild(e.currentTarget);
 }
 
   function createElement(type,parentNode,content,classes,
