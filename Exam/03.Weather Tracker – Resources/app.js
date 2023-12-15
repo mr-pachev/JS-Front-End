@@ -1,16 +1,17 @@
 function solve() {
-  const inputFields = {
+  let inputFields = {
     location: document.getElementById("location"),
     temperature: document.getElementById("temperature"),
     date: document.getElementById("date"),
   };
 
-  const otherDOMElements = {
+  let otherDOMElements = {
     inputContainer: document.getElementById("form"),
     addWeatherBtn: document.getElementById("add-weather"),
     editWeatherBtn: document.getElementById("edit-weather"),
     loadBtn: document.getElementById("load-history"),
     wetherContainer: document.getElementById("list"),
+    changeBtn: document.querySelector('.change-btn'),
   };
 
   const BASE_URL = "http://localhost:3030/jsonstore/tasks/";
@@ -22,12 +23,11 @@ function solve() {
     editWeatherBtn,
     loadBtn,
     wetherContainer,
-    changeBtn,
-    deleteBtn,
   } = otherDOMElements;
 
-  const weatherData = {};
-
+  let arrWeathers = {};
+  let weatherData = {};
+  
   loadBtn.addEventListener("click", loadWeather);
   addWeatherBtn.addEventListener('click', addWeather);
 
@@ -39,7 +39,8 @@ function solve() {
     fetch(BASE_URL)
       .then((res) => res.json())
       .then((data) => {
-        wetherContainer.innerHTML = '';     
+        wetherContainer.innerHTML = ''; 
+         arrWeathers = Object.values(data);
 
         for (const key in data) {
           const div = createElement("div", wetherContainer, null, [
@@ -93,6 +94,28 @@ function solve() {
 
   }
 
+  document.addEventListener('click', function(event) {
+       let clickedElement = event.target;
+    //id-то на DOM елемента
+    let containerId = clickedElement.parentNode.parentNode.id;
+
+    for (const key in arrWeathers) {
+      if (containerId === arrWeathers[key]._id){ 
+          
+        for (const iterator of Object.keys(arrWeathers[key])) {
+          inputFields[iterator].value = arrWeathers[key][iterator];
+      }
+
+      console.log(clickedElement.parentNode.parentNode)
+  
+    }
+  }
+
+  });
+
+
+
+
   function createElement(
     type,
     parentNode,
@@ -137,6 +160,7 @@ function solve() {
 
     return htmlElement;
   }
+
 }
 
 solve();
