@@ -1,22 +1,22 @@
 function solve() {
-  let inputFields = {
+  const inputFields = {
     location: document.getElementById("location"),
     temperature: document.getElementById("temperature"),
     date: document.getElementById("date"),
   };
 
-  let otherDOMElements = {
+  const otherDOMElements = {
     inputContainer: document.getElementById("form"),
     addWeatherBtn: document.getElementById("add-weather"),
     editWeatherBtn: document.getElementById("edit-weather"),
     loadBtn: document.getElementById("load-history"),
     wetherContainer: document.getElementById("list"),
-    changeBtn: document.querySelector('.change-btn'),
+    changeBtn: document.querySelector(".change-btn"),
   };
 
   const BASE_URL = "http://localhost:3030/jsonstore/tasks/";
 
-  let { location, temperature, date } = inputFields;
+  const { location, temperature, date } = inputFields;
   const {
     inputContainer,
     addWeatherBtn,
@@ -27,9 +27,9 @@ function solve() {
 
   let arrWeathers = {};
   let tagId = null;
-  
+
   loadBtn.addEventListener("click", loadWeather);
-  addWeatherBtn.addEventListener('click', addWeather);
+  addWeatherBtn.addEventListener("click", addWeather);
 
   function loadWeather(e) {
     if (e) {
@@ -39,114 +39,122 @@ function solve() {
     fetch(BASE_URL)
       .then((res) => res.json())
       .then((data) => {
-        wetherContainer.innerHTML = ''; 
-         arrWeathers = Object.values(data);
+        wetherContainer.innerHTML = "";
+        addWeatherBtn.disabled = false;
+        editWeatherBtn.disabled = true;
+
+        arrWeathers = Object.values(data);
 
         for (const key in data) {
-          const div = createElement("div", wetherContainer, null, [
-            "container",
-          ]);
+          const div = createElement("div", wetherContainer, null, ["container",]);
           div.id = data[key]._id;
           createElement("h2", div, data[key].location);
           createElement("h3", div, data[key].date);
           createElement("h3", div, data[key].temperature, null, ["celsius"]);
-          const divButtons = createElement("div", div, null, [
-            "buttons-container",
-          ]);
-          const changeBtn = createElement("button", divButtons, "Change", [
-            "change-btn",
-          ]);
-          const deleteBtn = createElement("button", divButtons, "Delete", [
-            "delete-btn",
-          ]);
+          const divButtons = createElement("div", div, null, ["buttons-container",]);
+          const changeBtn = createElement("button", divButtons, "Change", ["change-btn",]);
+          const deleteBtn = createElement("button", divButtons, "Delete", ["delete-btn",]);
         }
       })
       .catch((err) => console.error(err));
   }
 
-  function addWeather(e){
+  function addWeather(e) {
     e.preventDefault();
 
-    let allFormInputs = Object.values(inputFields) .every((input) => input.value !== '');
-    if(!allFormInputs){
-        return;
+    let allFormInputs = Object.values(inputFields).every(
+      (input) => input.value !== ""
+    );
+    if (!allFormInputs) {
+      return;
     }
 
     const { location, temperature, date } = inputFields;
 
     const httpHeaders = {
-		method: 'POST',
-		body: JSON.stringify({ 
-		            location: location.value,
-            		temperature: temperature.value,
-            		date: date.value
-        })
-	}
+      method: "POST",
+      body: JSON.stringify({
+        location: location.value,
+        temperature: temperature.value,
+        date: date.value,
+      }),
+    };
 
-	fetch(BASE_URL, httpHeaders)
-		.then(() => {
-      Object.values(inputFields).forEach((input) => input.value = '');
-      loadWeather()
-    })
-		.catch((err) => {
-			concole.error(err)
-		})
-
+    fetch(BASE_URL, httpHeaders)
+      .then(() => {
+        Object.values(inputFields).forEach((input) => (input.value = ""));
+        loadWeather();
+        addWeatherBtn.disabled = true;
+        editWeatherBtn.disabled = false;
+      })
+      .catch((err) => {
+        concole.error(err);
+      });
   }
 
-  document.addEventListener('click', click);
+  document.addEventListener("click", click);
 
   function click(event) {
-    event.preventDefault();
+    const tagNme = event.target.textContent;
 
-    let clickedElement = event.target; 
+    if (tagNme === 'Change' || tagNme === 'Delete'){
+    
+    let clickedElement = event.target;
     let containerId = clickedElement.parentNode.parentNode.id;
     tagId = clickedElement.parentNode.parentNode.id;
 
- for (const key in arrWeathers) {
-   if (containerId === arrWeathers[key]._id &&  event.target.textContent === 'Change'){ 
-       let obj = arrWeathers[key];
+    for (const key in arrWeathers) {
+      let obj = arrWeathers[key];
+      if (containerId === arrWeathers[key]._id && event.target.textContent === "Change") {
+        
+        for (const key in inputFields) {
+          inputFields[key].value = obj[key];
+          clickedElement.parentNode.parentNode.parentNode.remove();
+        }
+      } else if (containerId === arrWeathers[key]._id && event.target.textContent === "Delete") {
+        const httpHeaders = {
+          method: "DELETE",
+        };
 
-      for (const key in inputFields) {
-        inputFields[key].value = obj[key]; 
-        clickedElement.parentNode.parentNode.parentNode.remove();
+        fetch(`${BASE_URL}${containerId}`, httpHeaders)
+          .then(() => {
+            loadWeather();
+          })
+          .catch((err) => {
+            concole.error(err);
+          });
       }
-   
     }
+  
+    editWeatherBtn.addEventListener("click", (edithWeth));
+    addWeatherBtn.disabled = true;
+    editWeatherBtn.disabled = false;
   }
-
-  addWeatherBtn.disabled = true;
-  editWeatherBtn.disabled = false;
-
-  editWeatherBtn.addEventListener('click', edithWeth);
 }
 
-function edithWeth(e){
-  e.preventDefault();
-
-  const { location, temperature, date } = inputFields;
-
-    console.log(inputFields)
+  function edithWeth(e) {
+    e.preventDefault();
 
     const httpHeaders = {
-		method: 'PUT',
-		body: JSON.stringify({ 
-		            location: location.value,
-            		temperature: temperature.value,
-            		date: date.value
-        })
-	}
+      method: "PUT",
+      body: JSON.stringify({
+        location: location.value,
+        temperature: temperature.value,
+        date: date.value,
+        _id: tagId,
+      }),
+    };
 
-	fetch(`${BASE_URL}${tagId}`, httpHeaders)
-		.then(() => {
-      tagId = null;
-      loadWeather()
-      Object.values(inputFields).forEach((input) => input.value = '');
-    })
-		.catch((err) => {
-			concole.error(err)
-		})
-}
+    fetch(`${BASE_URL}${tagId}`, httpHeaders)
+      .then(() => {
+        tagId = null;
+        loadWeather();
+        Object.values(inputFields).forEach((input) => (input.value = ""));
+      })
+      .catch((err) => {
+        concole.error(err);
+      });
+  }
 
   function createElement(
     type,
@@ -192,7 +200,6 @@ function edithWeth(e){
 
     return htmlElement;
   }
-
 }
 
 solve();
