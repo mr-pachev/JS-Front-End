@@ -12,7 +12,7 @@ const otherDOMelements = {
   addBtn: document.getElementById('add-btn'),
   sureList: document.getElementById('sure-list'),
   scoreboardList: document.getElementById('scoreboard-list'),
-  clearBtn: document.querySelector('.btn clear'),
+  clearBtn: document.querySelector('.clear'),
 }
 
 playerData = {};
@@ -21,7 +21,6 @@ const {playerName, score, round} = inputFields;
 const {inputConatiner, addBtn, sureList, scoreboardList, clearBtn} = otherDOMelements;
 
 addBtn.addEventListener('click', loadInfo);
-
 
 function loadInfo(e){
   let allFormInputs = Object.values(inputFields).every((input) => input.value !== '');
@@ -43,18 +42,33 @@ function loadInfo(e){
   }
 
   Object.values(inputFields).forEach((input) => input.value = '');
+  addBtn.disabled = true; 
+  editBtn.addEventListener('click', editInfo);
+  okBtn.addEventListener('click', finished);
+}
+
+clearBtn.addEventListener('click', reloadPage);
+
+function reloadPage(){
+  location.reload();
+}
+
+
+function editInfo(e){
   for (const key in playerData) {
-    inputFields[key] = playerData[key];
-}
-  editBtn.addEventListener('click', (editInfo));
+      inputFields[key].value = playerData[key];
+   }
+   e.currentTarget.parentNode.remove();
+   addBtn.disabled = false; 
 }
 
-function editInfo(){
-for (const key in playerData) {
-     inputFields[key] = playerData[key];
-     console.log(inputFields)
- }
+function finished(e){
+  const liInfo = e.currentTarget.previousSibling.previousSibling;
+  e.currentTarget.style.display = 'none';
+  e.currentTarget.previousSibling.style.display = 'none';
 
+  const li = createElement('li', scoreboardList, null, ['dart-item']);
+  li.appendChild(liInfo);
 }
 
   function createElement(type,parentNode,content,classes,
