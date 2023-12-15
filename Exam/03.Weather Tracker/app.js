@@ -105,14 +105,18 @@ function solve() {
 
  for (const key in arrWeathers) {
    if (containerId === arrWeathers[key]._id &&  event.target.textContent === 'Change'){ 
-       
-     for (const iterator of Object.keys(arrWeathers[key])) {
-        inputFields[iterator].value = arrWeathers[key][iterator];
+       let obj = arrWeathers[key];
 
-       clickedElement.parentNode.parentNode.parentNode.remove();
+      for (const key in obj) {
+        inputFields[key].value = obj[key]; 
+        clickedElement.parentNode.parentNode.parentNode.remove();
       }
+    //  for (const iterator of Object.keys(arrWeathers[key])) {
+    //     inputFields[iterator].value = arrWeathers[key][iterator]; 
+    //   }
     
     }
+    
   }
 
   addWeatherBtn.disabled = true;
