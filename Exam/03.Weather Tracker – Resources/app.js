@@ -39,11 +39,13 @@ function solve() {
     fetch(BASE_URL)
       .then((res) => res.json())
       .then((data) => {
-        wetherContainer.innerHTML = '';
+        wetherContainer.innerHTML = '';     
+
         for (const key in data) {
           const div = createElement("div", wetherContainer, null, [
             "container",
           ]);
+          div.id = data[key]._id;
           createElement("h2", div, data[key].location);
           createElement("h3", div, data[key].date);
           createElement("h3", div, data[key].temperature, null, ["celsius"]);
@@ -82,8 +84,9 @@ function solve() {
 
 	fetch(BASE_URL, httpHeaders)
 		.then(() => {
-            loadWeather()
-        })
+      Object.values(inputFields).forEach((input) => input.value = '');
+      loadWeather()
+    })
 		.catch((err) => {
 			concole.error(err)
 		})
