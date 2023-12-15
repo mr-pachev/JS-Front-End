@@ -97,6 +97,7 @@ function solve() {
   document.addEventListener('click', click);
 
   function click(event) {
+    
     let clickedElement = event.target;
   //id-то на DOM елемента
   let containerId = clickedElement.parentNode.parentNode.id;
@@ -104,12 +105,10 @@ function solve() {
  for (const key in arrWeathers) {
    if (containerId === arrWeathers[key]._id &&  event.target.textContent === 'Change'){ 
        
-    //  for (const iterator of Object.keys(arrWeathers[key])) {
-    //    inputFields[iterator].value = arrWeathers[key][iterator];
-    //   }
-
-   console.log(inputFields)
-
+     for (const iterator of Object.keys(arrWeathers[key])) {
+       inputFields[iterator].value = arrWeathers[key][iterator];
+      }
+    
   }
 }
 
