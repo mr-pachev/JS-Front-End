@@ -20,14 +20,26 @@ playerData = {};
 const {playerName, score, round} = inputFields;
 const {inputConatiner, addBtn, sureList, scoreboardList, clearBtn} = otherDOMelements;
 
+addBtn.addEventListener('click', loadInfo);
 
 
+function loadInfo(e){
+ const liInfo = createElement('li', sureList, null, ['dart-item']);
+ const articleInfo = createElement('article', liInfo);
+ createElement('p', articleInfo, playerName.value);
+ createElement('p', articleInfo, `Score: ${score.value}`);
+ createElement('p', articleInfo, `Round: ${round.value}`);
+ const editBtn = createElement('button', liInfo, 'edit', ['btn-edit']);
+ const okBtn = createElement('button', liInfo, 'ok', ['btn-ok']);
 
-  function createElement(
-    type,
-    parentNode,
-    content,
-    classes,
+ editBtn.addEventListener('click', editInfo);
+}
+
+function editInfo(){
+  
+}
+
+  function createElement(type,parentNode,content,classes,
     id,
     attributes,
     useInnerHtml
