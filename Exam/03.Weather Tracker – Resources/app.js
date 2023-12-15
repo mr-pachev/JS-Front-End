@@ -94,26 +94,26 @@ function solve() {
 
   }
 
-  document.addEventListener('click', function(event) {
-       let clickedElement = event.target;
-    //id-то на DOM елемента
-    let containerId = clickedElement.parentNode.parentNode.id;
+  document.addEventListener('click', click);
 
-    for (const key in arrWeathers) {
-      if (containerId === arrWeathers[key]._id){ 
-          
-        for (const iterator of Object.keys(arrWeathers[key])) {
-          inputFields[iterator].value = arrWeathers[key][iterator];
-      }
+  function click(event) {
+    let clickedElement = event.target;
+  //id-то на DOM елемента
+  let containerId = clickedElement.parentNode.parentNode.id;
 
-      console.log(clickedElement.parentNode.parentNode)
-  
-    }
+ for (const key in arrWeathers) {
+   if (containerId === arrWeathers[key]._id &&  event.target.textContent === 'Change'){ 
+       
+    //  for (const iterator of Object.keys(arrWeathers[key])) {
+    //    inputFields[iterator].value = arrWeathers[key][iterator];
+    //   }
+
+   console.log(inputFields)
+
   }
+}
 
-  });
-
-
+}
 
 
   function createElement(
