@@ -146,9 +146,10 @@ function solve() {
     };
 
     fetch(`${BASE_URL}${tagId}`, httpHeaders)
-      .then(() => {
-        tagId = null;
+      .then((res) => res.json())
+      .then((data) => {
         loadWeather();
+        tagId = null;
         Object.values(inputFields).forEach((input) => (input.value = ""));
       })
       .catch((err) => {
