@@ -26,7 +26,7 @@ function solve() {
   } = otherDOMElements;
 
   let arrWeathers = {};
-  let weatherData = {};
+  let tagId = null;
   
   loadBtn.addEventListener("click", loadWeather);
   addWeatherBtn.addEventListener('click', addWeather);
@@ -97,23 +97,56 @@ function solve() {
   document.addEventListener('click', click);
 
   function click(event) {
-    
-    let clickedElement = event.target;
-  //id-то на DOM елемента
-  let containerId = clickedElement.parentNode.parentNode.id;
+    event.preventDefault();
+
+    let clickedElement = event.target; 
+    let containerId = clickedElement.parentNode.parentNode.id;
+    tagId = clickedElement.parentNode.parentNode.id;
 
  for (const key in arrWeathers) {
    if (containerId === arrWeathers[key]._id &&  event.target.textContent === 'Change'){ 
        
      for (const iterator of Object.keys(arrWeathers[key])) {
-       inputFields[iterator].value = arrWeathers[key][iterator];
+        inputFields[iterator].value = arrWeathers[key][iterator];
+
+       clickedElement.parentNode.parentNode.parentNode.remove();
       }
     
+    }
   }
+
+  addWeatherBtn.disabled = true;
+  editWeatherBtn.disabled = false;
+
+  editWeatherBtn.addEventListener('click', edithWeth);
 }
 
-}
+function edithWeth(e){
+  e.preventDefault();
 
+  const { location, temperature, date } = inputFields;
+
+    console.log(tagId)
+
+    const httpHeaders = {
+		method: 'PUT',
+		body: JSON.stringify({ 
+		            location: location.value,
+            		temperature: temperature.value,
+            		date: date.value
+        })
+	}
+
+	fetch(`${BASE_URL}${tagId}`, httpHeaders)
+		.then(() => {
+      tagId = null;
+      Object.values(inputFields).forEach((input) => input.value = '');
+      loadWeather()
+    })
+		.catch((err) => {
+			concole.error(err)
+		})
+}
 
   function createElement(
     type,
