@@ -24,6 +24,7 @@ function solve() {
   loadBtn.addEventListener("click", loadsMeals);
 
   function loadsMeals() {
+    wrapper.style.display = 'block';
     fetch(BASE_URL)
       .then((res) => res.json())
       .then((data) => {
@@ -80,21 +81,22 @@ function solve() {
       inputFields[key].value = currentMeal[key];
     }
 
-    wrapper.remove();
+    wrapper.style.display = 'none';
     addBtn.disabled = true;
     editBtn.disabled = false;
     editBtn.addEventListener('click', () => {
-        const { food, time, calories } = inputFields;
-        const httpHeaders = {
-                    method: "PUT",
-                    body: JSON.stringify({
-                        food: food.value,
-                        time: time.value,
-                    calories: calories.value,
-                        _id: id.value
-                    })
-            };
-        fetch(BASE_URL, httpHeaders)
+        const { food, time, calories, _id } = inputFields;
+        
+        fetch(`${BASE_URL}${tagId}`, {
+            method: 'PUT',
+            headers: { 'Content-type': 'application/json' },
+            body: JSON.stringify({
+                food: food.value,
+                time: time.value,
+                calories: calories.value,
+                _id: tagId,
+            }),
+        })
           .then(() => {
             loadsMeals();
             Object.values(inputFields).forEach((input) => (input.value = ""));
