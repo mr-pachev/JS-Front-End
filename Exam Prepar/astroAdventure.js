@@ -54,7 +54,7 @@ function solve(input) {
       if (astronauts[key].name === nameAstro) {
         let result = astronauts[key].energy + Number(refAmount);
 
-        if (result >= 200) {
+        if (result > 200) {
           console.log(
             `${nameAstro} refueled their energy by ${
               200 - astronauts[key].energy
