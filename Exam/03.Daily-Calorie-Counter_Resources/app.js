@@ -19,7 +19,6 @@ function solve (){
     const BASE_URL = 'http://localhost:3030/jsonstore/tasks/';
 
     const arrMeals = [];
-    const mealObj = {};
 
     loadBtn.addEventListener('click', loadsMeals);
 
@@ -65,8 +64,6 @@ function solve (){
                     
                     })
                 }
-
-                console.log(arrMeals);
             })
             .catch(err => console.error(err));
         }
@@ -74,15 +71,23 @@ function solve (){
     function chamgeMeal(e){
         const tagId = e.currentTarget.parentNode.parentNode.id;
 
-        
+        let currentMeal = {};
+
+        for (const obj of arrMeals) {
+            for (const key in obj) {
+                if (obj[key]._id === tagId){
+                    currentMeal = obj[key];
+                }
+            }
+        }
+
+       console.log(currentMeal)
+
     }
     
     addBtn.addEventListener('click', () => {
-            for (const [key, value] of Object.entries(inputFields)) {
-                mealObj[key] = value.value;
-            };
-        
-            const { food, time, calories, _id} = mealObj;
+
+            const { food, time, calories} = inputFields;
 
 	        const httpHeaders = {
 	        	method: 'POST',
@@ -90,7 +95,6 @@ function solve (){
                             food: food.value,
                             time: time.value,
                     		calories: calories.value,
-                            id: _id.value
                 })
 	        }
 
