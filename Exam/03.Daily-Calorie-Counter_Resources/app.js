@@ -83,15 +83,31 @@ function solve() {
     wrapper.remove();
     addBtn.disabled = true;
     editBtn.disabled = false;
-    addMeal();
+    editBtn.addEventListener('click', () => {
+        const { food, time, calories } = inputFields;
+        const httpHeaders = {
+                    method: "PUT",
+                    body: JSON.stringify({
+                        food: food.value,
+                        time: time.value,
+                    calories: calories.value,
+                        _id: id.value
+                    })
+            };
+        fetch(BASE_URL, httpHeaders)
+          .then(() => {
+            loadsMeals();
+            Object.values(inputFields).forEach((input) => (input.value = ""));
+          })
+          .catch((err) => {
+            concole.error(err);
+          });
+        });
   }
 
   addBtn.addEventListener("click", addMeal);
 
-  function addMeal() {
-    if(e){
-        e.preventDefault();
-    }
+  function addMeal(e) {
     const { food, time, calories } = inputFields;
     const httpHeaders = {
       method: "POST",
@@ -99,7 +115,7 @@ function solve() {
         food: food.value,
         time: time.value,
         calories: calories.value,
-      }),
+      })
     };
     fetch(BASE_URL, httpHeaders)
       .then(() => {
