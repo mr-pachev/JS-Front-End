@@ -4,32 +4,35 @@ function solve(input) {
   let astronauts = [];
 
   for (let i = 0; i < n; i++) {
-    const [name, oxygen, energy] = input.shift().split(" ");
-    astronauts.push({ name, oxygen: Number(oxygen), energy: Number(energy) });
+    const [name, oxygen, energy] = input.shift().split(" ");                    //сплитване входните данни от всеки ред в масив
+    astronauts.push({ name, oxygen: Number(oxygen), energy: Number(energy) });  //всеки масива от реда се добавя, като нов обект в масива
   }
 
-  let inputLine = input.shift();
-  let command = inputLine.split(" - ")[0];
+  let inputLine = input.shift();                      //взимане на следващия ред
+  let command = inputLine.split(" - ")[0];            //сплитва реда, като елементи с индекси и взима командата
 
   while (command !== "End") {
-    let name = inputLine.split(" - ")[1];
+    let name = inputLine.split(" - ")[1];             //името
 
     if (command === "Explore") {
-      const neededEnergy = inputLine.split(" - ")[2];
+      const neededEnergy = inputLine.split(" - ")[2]; //нужната енергия за извършване на работата
       explore(name, neededEnergy);
+
     } else if (command === "Refuel") {
-      const refAmount = inputLine.split(" - ")[2];
+      const refAmount = inputLine.split(" - ")[2];    //нова енергия за астронавта
       refuel(name, refAmount);
+
     } else if (command === "Breathe") {
-      const refOxygen = inputLine.split(" - ")[2];
+      const refOxygen = inputLine.split(" - ")[2];    //допълнително кислород за астронавта
       breathe(name, refOxygen);
     }
 
-    inputLine = input.shift();
-    command = inputLine.split(" - ")[0];
+    inputLine = input.shift();                        //следващия реда с входни данни
+    command = inputLine.split(" - ")[0];              //новата команда
   }
 
-  function explore(nameAstro, neededEnergy) {
+  //проверка наличието на енергия за извършване на задачата
+  function explore(nameAstro, neededEnergy) {       
     for (const key in astronauts) {
       if (astronauts[key].name === nameAstro) {
 
@@ -45,6 +48,7 @@ function solve(input) {
     }
   }
 
+  //зареждане с допълнителна енергия
   function refuel(nameAstro, refAmount) {
     for (const key in astronauts) {
       if (astronauts[key].name === nameAstro) {
@@ -65,6 +69,7 @@ function solve(input) {
     }
   }
 
+  //зареждане с допълнителен кислород
   function breathe(nameAstro, refOxygen) {
     for (const key in astronauts) {
       if (astronauts[key].name === nameAstro) {
