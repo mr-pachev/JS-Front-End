@@ -52,18 +52,17 @@ function solve(input) {
         let rideOnePosition = findByName(rideOneName).position;
         let rideTwoPosition = findByName(rideTwoName).position;
 
-        for (const obj of ridersArr) {
-          if(obj.name === rideOneName){
-            obj.position = rideTwoPosition
+        if (rideOnePosition <= rideTwoPosition){
+          for (const obj of ridersArr) {
+            if(obj.name === rideOneName){
+              obj.position--;
+            }
           }
-        }
-        for (const obj of ridersArr) {
-          if(obj.name === rideTwoName){
-            obj.position = rideOnePosition
+          for (const obj of ridersArr) {
+            if(obj.name === rideTwoName){
+              obj.position--;
+            }
           }
-        }
-
-        if (rideOnePosition > rideTwoPosition){
           console.log(`${rideOneName} overtook ${rideTwoName}!`);
         }
             break;
@@ -84,7 +83,8 @@ function solve(input) {
   }
   
   ridersArr.forEach(rider => {
-    console.log(`${rider.name}:\nFinal position: ${rider.position}`);
+    console.log(rider.name)
+    console.log(`  Final position: ${rider.position}`)
   });
 
 
@@ -97,14 +97,12 @@ function solve(input) {
   }
 }
 
-solve([
-  "4",
-  "Valentino Rossi|100|1",
-  "Marc Marquez|90|3",
-  "Jorge Lorenzo|80|4",
-  "Johann Zarco|80|2",
-  "StopForFuel - Johann Zarco - 90 - 5",
-  "Overtaking - Marc Marquez - Jorge Lorenzo",
-  "EngineFail - Marc Marquez - 10",
-  "Finish",
-]);
+solve(["3",
+"Valentino Rossi|100|1",
+"Marc Marquez|90|2",
+"Jorge Lorenzo|80|3",
+"StopForFuel - Valentino Rossi - 50 - 1",
+"Overtaking - Marc Marquez - Jorge Lorenzo",
+"EngineFail - Marc Marquez - 10",
+"Finish"])
+;
