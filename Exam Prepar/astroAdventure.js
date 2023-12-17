@@ -4,8 +4,8 @@ function solve(input) {
   let astronautsArr = [];
 
   for (let i = 0; i < n; i++) {
-    const [name, oxygen, energy] = input.shift().split(" ");                    //сплитване входните данни от всеки ред в масив
-    astronautsArr.push({ name, oxygen: Number(oxygen), energy: Number(energy) });  //всеки масива от реда се добавя, като нов обект в масива
+    const [name, oxygen, energy] = input.shift().split(" ");                        //сплитване входните данни от всеки ред в масив
+    astronautsArr.push({ name, oxygen: Number(oxygen), energy: Number(energy) });   //всеки масива от реда се добавя, като нов обект в масива
   }
 
    let inputLine = input.shift().split(' - ');
@@ -13,12 +13,6 @@ function solve(input) {
 
    while(command !== 'End'){
     let astroName = inputLine[1];
-
-    const astronaut = astronautsArr.find( astr => astr.name === astroName );
-
-    if(!astronaut){
-      return;
-    }
 
     switch(command){
       case 'Explore':
