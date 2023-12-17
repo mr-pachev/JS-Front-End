@@ -6,7 +6,12 @@ function solve(input) {
 
   for (let i = 0; i < n; i++) {
     const [name, fuel, position] = input.shift().split("|");                    //сплитване входните данни от всеки ред в масив
-    ridersArr.push({ name, fuel: Number(fuel), position: Number(position) });  //всеки масива от реда се добавя, като нов обект в масива
+    
+    if (Number(fuel) > 100){
+        ridersArr.push({ name, fuel: Number(100), position: Number(position) });  //всеки масива от реда се добавя, като нов обект в масива
+    }else {
+      ridersArr.push({ name, fuel: Number(fuel), position: Number(position) });  //всеки масива от реда се добавя, като нов обект в масива
+    }
 
   }
 
@@ -19,7 +24,7 @@ function solve(input) {
     const rider = ridersArr.find(obj => obj.name === riderName ); //проверка дали съществува бариста
 
     if(!rider){
-        return;
+      return;
     }
 
     switch(command){
@@ -53,16 +58,18 @@ function solve(input) {
         let rideTwoPosition = findByName(rideTwoName).position;
 
         if (rideOnePosition <= rideTwoPosition){
+
           for (const obj of ridersArr) {
             if(obj.name === rideOneName){
-              obj.position--;
+              obj.position = rideTwoPosition;
             }
           }
           for (const obj of ridersArr) {
             if(obj.name === rideTwoName){
-              obj.position--;
+              obj.position = rideOnePosition;
             }
           }
+        
           console.log(`${rideOneName} overtook ${rideTwoName}!`);
         }
             break;
@@ -82,12 +89,17 @@ function solve(input) {
     command = inputLine[0];
   }
   
-  ridersArr.forEach(rider => {
+  // ridersArr.forEach(rider => {
+  //   console.log(rider.name)
+  //   console.log(`  Final position: ${rider.position}`)
+  // });
+
+  for (const rider of ridersArr) {
     console.log(rider.name)
     console.log(`  Final position: ${rider.position}`)
-  });
+  }
 
-
+ 
   function findByName(riderName){
     for (const obj of ridersArr) {
       if(obj.name === riderName){
@@ -97,12 +109,12 @@ function solve(input) {
   }
 }
 
-solve(["3",
+solve(["4",
 "Valentino Rossi|100|1",
-"Marc Marquez|90|2",
-"Jorge Lorenzo|80|3",
-"StopForFuel - Valentino Rossi - 50 - 1",
+"Marc Marquez|90|3",
+"Jorge Lorenzo|80|4",
+"Johann Zarco|80|2",
+"StopForFuel - Johann Zarco - 90 - 5",
 "Overtaking - Marc Marquez - Jorge Lorenzo",
-"EngineFail - Marc Marquez - 10",
 "Finish"])
 ;
