@@ -8,8 +8,20 @@ function solve(input) {
       const [assignee, taskId, title, status, estimatedPoints] = input.shift().split(":"); //сплитване входните данни от всеки ред в масив
       
       const empl = {assignee,
-                    task:  {taskId, title, status, estimatedPoints}};
-      individualTasksArr.push( empl); //всеки масива от реда се добавя, като нов обект в масива
+                    task:  [{taskId, title, status, estimatedPoints}]};
+
+        const person = individualTasksArr.find( task => task.assignee === assignee ); 
+
+        if (person){
+            for (const el of individualTasksArr) {
+                if(el.assignee === person.assignee){
+                    let obj = {taskId, title, status, estimatedPoints}
+                    el.task.push(obj);
+                }
+            }
+        }else {
+            individualTasksArr.push(empl); //всеки масива от реда се добавя, като нов обект в масива
+        }
     }
 
     while(input.length > 0){
@@ -30,8 +42,14 @@ function solve(input) {
                 let status = inputLine[4];
                 let estimatedPoints = inputLine[5];
 
-                const newTask = {assignee, task:  {taskId, title, status, estimatedPoints}};
-                individualTasksArr.push(newTask);
+                for (const el of individualTasksArr) {
+                    if(el.assignee === assignee){
+                        let obj = {taskId, title, status, estimatedPoints}
+                        el.task.push(obj);
+                    }
+                }
+                // const newTask = {assignee, task:  {taskId, title, status, estimatedPoints}};
+                // individualTasksArr.push(newTask);
                 break;
             case 'Change Status':
                 let taskIdChange = inputLine[2];
@@ -54,21 +72,21 @@ function solve(input) {
                 let index = inputLine[2];
                 let isExistIndex = false;
 
-                if (index < individualTasksArr.length && index >= 0){
-                      for (const el of individualTasksArr) {
-                          if(el.assignee === assignee){
-                            let assigneeIndex = individualTasksArr.indexOf(el);
-                            if (assigneeIndex === index){
-                                isExistIndex = true;
-                            }
-                          }
+                for (const el of individualTasksArr) {
+                    if (el.assignee === assignee){
+                       if (index < el.task.length && index >= 0){
+                        isExistIndex = true;  
+                       }else {
+                        console.log('Index is out of range!');
                       }
-                  }else {
-                    console.log('Index is out of range!');
-                  }
-
+                    }
+                }   
                 if(isExistIndex){
-                    individualTasksArr.splice(index, 1);
+                    for (const el of individualTasksArr) {
+                        if (el.assignee === assignee){
+                            el.task.splice(index, 1);
+                        }
+                    }
                 }
 
                 break;
@@ -80,16 +98,25 @@ function solve(input) {
     let codeReview = 0;
     let done = 0;
 
-    for (const el of individualTasksArr) {
-        if(el.task.status === 'ToDo'){
-            tODo += Number(el.task.estimatedPoints);
-        }else if(el.task.status === 'In Progress'){
-            inProgr += Number(el.task.estimatedPoints);
-        }else if(el.task.status === 'Code Review'){
-            codeReview += Number(el.task.estimatedPoints);
-        }else if(el.task.status === 'Done'){
-            done += Number(el.task.estimatedPoints);
-        }
+    for (const obj of individualTasksArr) {
+    
+        let task = obj.task;
+
+       for (const iterator of task) {
+
+            if(iterator.status === 'ToDo'){
+                tODo += Number(iterator.estimatedPoints);
+            }else if(iterator.status === 'In Progress'){
+                inProgr += Number(iterator.estimatedPoints);
+            }else if(iterator.status === 'Code Review'){
+                codeReview += Number(iterator.estimatedPoints);
+            }else if(iterator.status === 'Done'){
+                done += Number(iterator.estimatedPoints);
+            }
+
+       } 
+    
+   
     }
 
     console.log(`ToDo: ${tODo}pts`);
