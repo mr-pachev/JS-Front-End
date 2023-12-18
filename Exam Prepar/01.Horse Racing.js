@@ -24,8 +24,8 @@ function solve(input){
 
                 if(indexOne > indexTwo){
                     hourseArr.splice(indexOne, 1);
-                    hourseArr.splice(indexTwo + 1, 0, overtakingHorse);
-    
+                    hourseArr.splice(indexTwo, 0, overtakingHorse);
+                    
                     console.log(`${overtakingHorse} retakes ${overtakenHorse}.`)
                 }
                 break;
@@ -86,5 +86,7 @@ solve(['Bella|Alexia|Sugar',
 'Rage Bella',
 'Trouble Bella',
 'Finish'])
+
+
 
 
