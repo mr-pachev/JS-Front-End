@@ -12,19 +12,14 @@ function solve(input) {
       individualTasksArr.push( empl); //всеки масива от реда се добавя, като нов обект в масива
     }
 
-    let inputLine = input.shift().split(':');
-    let command = inputLine[0];
-
-    while(input.length >= 0){
+    while(input.length > 0){
+        let inputLine = input.shift().split(':');
+        let command = inputLine[0];
         let assignee = inputLine[1];
         const currentAssignee = individualTasksArr.find( task => task.assignee === assignee ); 
 
         if (!currentAssignee){
-            console.log(`Assignee ${currentAssignee} does not exist on the board!`);
-            if (input.length > 0){
-                inputLine = input.shift().split(':');
-                command = inputLine[0];
-            }
+            console.log(`Assignee ${assignee} does not exist on the board!`);
             continue;
         }
 
@@ -78,20 +73,42 @@ function solve(input) {
 
                 break;
         }
-
-        inputLine = input.shift().split(':');
-        command = inputLine[0];
     }
+   
+    let tODo = 0;
+    let inProgr = 0;
+    let codeReview = 0;
+    let done = 0;
+
+    for (const el of individualTasksArr) {
+        if(el.task.status === 'ToDo'){
+            tODo += Number(el.task.estimatedPoints);
+        }else if(el.task.status === 'In Progress'){
+            inProgr += Number(el.task.estimatedPoints);
+        }else if(el.task.status === 'Code Review'){
+            codeReview += Number(el.task.estimatedPoints);
+        }else if(el.task.status === 'Done'){
+            done += Number(el.task.estimatedPoints);
+        }
+    }
+
+    console.log(`ToDo: ${tODo}pts`);
+    console.log(`In Progress: ${inProgr}pts`);
+    console.log(`Code Review: ${codeReview}pts`);
+    console.log(`Done Points: ${done}pts`);
+
 }
 
 solve( [
-        '5',
-        'Kiril:BOP-1209:Fix Minor Bug:ToDo:3',
-        'Mariya:BOP-1210:Fix Major Bug:In Progress:3',
-        'Peter:BOP-1211:POC:Code Review:5',
-        'Georgi:BOP-1212:Investigation Task:Done:2',
-        'Mariya:BOP-1213:New Account Page:In Progress:13',
-        'Remove Task:Joro:1',
-    ]
-
+    '5',
+    'Kiril:BOP-1209:Fix Minor Bug:ToDo:3',
+    'Mariya:BOP-1210:Fix Major Bug:In Progress:3',
+    'Peter:BOP-1211:POC:Code Review:5',
+    'Georgi:BOP-1212:Investigation Task:Done:2',
+    'Mariya:BOP-1213:New Account Page:In Progress:13',
+    'Add New:Kiril:BOP-1217:Add Info Page:In Progress:5',
+    'Change Status:Peter:BOP-1290:ToDo',
+    'Remove Task:Mariya:1',
+    'Remove Task:Joro:1',
+]
 );
