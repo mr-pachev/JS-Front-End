@@ -25,7 +25,7 @@ function solve(){
     function load(e){
         e.preventDefault();
 
-        wrapper.style.display = 'block';
+        wraper.style.display = 'block';
         fetch(BASE_URL)
             .then((res) => res.json())
             .then((data) => {
@@ -68,7 +68,8 @@ function solve(){
         }
         wraper.style.display = 'none';
 
-        
+        editBtn.disabled = false;
+        addBtn.disabled = true;
 
     }
 
