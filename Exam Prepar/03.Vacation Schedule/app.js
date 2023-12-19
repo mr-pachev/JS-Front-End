@@ -9,14 +9,15 @@ function solve(){
         addBtn: document.getElementById('add-vacation'),
         editBtn: document.getElementById('edit-vacation'),
         loadBtn: document.getElementById('load-vacations'),
-        list: document.getElementById('list')
+        list: document.getElementById('list'),
+        wraper: document.getElementById('wrapper')
     }
 
     const {name, days, date, _id} = inputFields;
-    const {addBtn, editBtn, loadBtn, list} = otherDOMElements;
+    const {addBtn, editBtn, loadBtn, list, wraper} = otherDOMElements;
 
-    let taskArr = [];
-    let currentTask = {};
+    let arrReservationa = [];
+    
     const BASE_URL = 'http://localhost:3030/jsonstore/tasks/';
 
     loadBtn.addEventListener('click', load);
@@ -24,31 +25,52 @@ function solve(){
     function load(e){
         e.preventDefault();
 
+        wrapper.style.display = 'block';
         fetch(BASE_URL)
             .then((res) => res.json())
             .then((data) => {
         
                 list.innerHTML = "";
-                taskArr.length = 0;
-                taskArr.push(data);
+                arrReservationa.length = 0;
+                arrReservationa.push(data);
 
                 for (const key in data) {
-        
                 const div = createElement('div', list, null, ['container']);
-                div.id = _id;
+                div.id = data[key]._id;
                 createElement('h2', div, data[key].name);
                 createElement('h3', div, data[key].date);
                 createElement('h3', div, data[key].days);
                 const changeBtn = createElement('button', div, 'Change', ['change-btn']);
                 const doneBtn = createElement('button', div, 'Done', ['done-btn']);
-        
-                Object.values(inputFields).forEach((input) => input.value = '');
+                
+                changeBtn.addEventListener('click', change);
                 }
             })
             .catch((err) => console.error(err));
-
     }
 
+   
+    function change(e){
+        const divId = e.currentTarget.parentNode.id;
+        
+        let currentTask = {};
+
+        for (const obj of arrReservationa) {
+          for (const key in obj) {
+            if (obj[key]._id === divId) {
+                currentTask = obj[key];
+            }
+          }
+        }
+
+        for (const key in inputFields) {
+          inputFields[key].value = currentTask[key];
+        }
+        wraper.style.display = 'none';
+
+        
+
+    }
 
     function createElement(type, parentNode, content, classes, id, attributes, useInnerHtml) {
         const htmlElement = document.createElement(type);
