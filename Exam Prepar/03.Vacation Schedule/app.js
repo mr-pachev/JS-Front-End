@@ -28,13 +28,12 @@ function solve(){
             .then((res) => res.json())
             .then((data) => {
         
-                taskArr.innerHTML = "";
+                list.innerHTML = "";
                 taskArr.length = 0;
                 taskArr.push(data);
 
                 for (const key in data) {
         
-                    console.log(data[key])
                 const div = createElement('div', list, null, ['container']);
                 div.id = _id;
                 createElement('h2', div, data[key].name);
