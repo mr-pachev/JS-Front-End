@@ -1,8 +1,8 @@
 function solve(){
     const inputFields = {
         name: document.getElementById('name'),
-        numDays: document.getElementById('num-days'),
-        fromDate: document.getElementById('from-date'),
+        days: document.getElementById('num-days'),
+        date: document.getElementById('from-date'),
     }
 
     const otherDOMElements = {
@@ -12,16 +12,42 @@ function solve(){
         list: document.getElementById('list')
     }
 
-    const {name, numDays, fromDate} = inputFields;
+    const {name, days, date, _id} = inputFields;
     const {addBtn, editBtn, loadBtn, list} = otherDOMElements;
 
+    let taskArr = [];
     let currentTask = {};
+    const BASE_URL = 'http://localhost:3030/jsonstore/tasks/';
 
-    addBtn.addEventListener('click', add);
+    loadBtn.addEventListener('click', load);
 
-    function add(){
-        const div = createElement('div', list, null, ['container']);
+    function load(e){
+        e.preventDefault();
+
+        fetch(BASE_URL)
+            .then((res) => res.json())
+            .then((data) => {
         
+                taskArr.innerHTML = "";
+                taskArr.length = 0;
+                taskArr.push(data);
+
+                for (const key in data) {
+        
+                    console.log(data[key])
+                const div = createElement('div', list, null, ['container']);
+                div.id = _id;
+                createElement('h2', div, data[key].name);
+                createElement('h3', div, data[key].date);
+                createElement('h3', div, data[key].days);
+                const changeBtn = createElement('button', div, 'Change', ['change-btn']);
+                const doneBtn = createElement('button', div, 'Done', ['done-btn']);
+        
+                Object.values(inputFields).forEach((input) => input.value = '');
+                }
+            })
+            .catch((err) => console.error(err));
+
     }
 
 
