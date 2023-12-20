@@ -1,5 +1,5 @@
 function solve(){
-    const inputFields = {
+    let inputFields = {
         name: document.getElementById('name'),
         days: document.getElementById('num-days'),
         date: document.getElementById('from-date'),
@@ -17,13 +17,17 @@ function solve(){
     const {addBtn, editBtn, loadBtn, list, wraper} = otherDOMElements;
 
     let arrReservationa = [];
-    
+
     const BASE_URL = 'http://localhost:3030/jsonstore/tasks/';
 
+    addBtn.addEventListener('click', add);
     loadBtn.addEventListener('click', load);
+    editBtn.addEventListener('click', edit);
 
     function load(e){
-        e.preventDefault();
+        if (e){
+            e.preventDefault();
+        }
 
         wraper.style.display = 'block';
         fetch(BASE_URL)
@@ -49,16 +53,65 @@ function solve(){
             .catch((err) => console.error(err));
     }
 
+function add(e){
+    if (e){
+        e.preventDefault();
+    }
+
+    const httpHeaders = {
+		method: 'POST',
+		body: JSON.stringify({ 
+            name: name.value,
+            days: days.value,
+            date: date.value
+    })
+	}
+
+	fetch(BASE_URL, httpHeaders)
+		.then(() => {
+            load();
+            Object.values(inputFields).forEach((input) => (input.value = ""));
+        })
+		.catch((err) => {
+			concole.error(err)
+		})
+
+}
+
+    function edit(e){
+        e.preventDefault();
+        const {name, days, date, _id} = inputFields;
+   
+        fetch(`${BASE_URL}${_id}`, {
+            method: 'PUT',
+            headers: { 'Content-type': 'application/json' },
+            body: JSON.stringify({
+                name: name,
+                days: days,
+                date: date,
+                _id: _id,
+            }),
+        })
+          .then(() => {
+            load();
+            Object.values(inputFields).forEach((input) => (input.value = ""));
+          })
+          .catch((err) => {
+            concole.error(err);
+          });
+        
+
+    
+    }
    
     function change(e){
         const divId = e.currentTarget.parentNode.id;
-        
         let currentTask = {};
 
         for (const obj of arrReservationa) {
           for (const key in obj) {
             if (obj[key]._id === divId) {
-                currentTask = obj[key];
+                inputFields = obj[key];
             }
           }
         }
@@ -70,7 +123,6 @@ function solve(){
 
         editBtn.disabled = false;
         addBtn.disabled = true;
-
     }
 
     function createElement(type, parentNode, content, classes, id, attributes, useInnerHtml) {
