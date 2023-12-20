@@ -17,6 +17,7 @@ function solve(){
     const {addBtn, editBtn, loadBtn, list, wraper} = otherDOMElements;
 
     let arrReservationa = [];
+    let currentId = null;
 
     const BASE_URL = 'http://localhost:3030/jsonstore/tasks/';
 
@@ -48,14 +49,20 @@ function solve(){
                 const doneBtn = createElement('button', div, 'Done', ['done-btn']);
                 
                 changeBtn.addEventListener('click', change);
+                doneBtn.addEventListener('click', deleteFun);
                 }
             })
             .catch((err) => console.error(err));
     }
 
-function add(e){
+    function add(e){
     if (e){
         e.preventDefault();
+    }
+
+    let allFormInputs = Object.values(inputFields) .every((input) => input.value !== '');
+    if(!allFormInputs){
+        return;
     }
 
     const httpHeaders = {
@@ -64,7 +71,7 @@ function add(e){
             name: name.value,
             days: days.value,
             date: date.value
-    })
+        })
 	}
 
 	fetch(BASE_URL, httpHeaders)
@@ -76,20 +83,18 @@ function add(e){
 			concole.error(err)
 		})
 
-}
+    }
 
     function edit(e){
         e.preventDefault();
-        const {name, days, date, _id} = inputFields;
    
-        fetch(`${BASE_URL}${_id}`, {
+        fetch(`${BASE_URL}${currentId}`, {
             method: 'PUT',
             headers: { 'Content-type': 'application/json' },
             body: JSON.stringify({
-                name: name,
-                days: days,
-                date: date,
-                _id: _id,
+                name: name.value,
+                days: days.value,
+                date: date.value
             }),
         })
           .then(() => {
@@ -99,19 +104,18 @@ function add(e){
           .catch((err) => {
             concole.error(err);
           });
-        
-
-    
+        editBtn.disabled = true;
+        addBtn.disabled = false;
     }
    
     function change(e){
-        const divId = e.currentTarget.parentNode.id;
+        currentId = e.currentTarget.parentNode.id;
         let currentTask = {};
 
         for (const obj of arrReservationa) {
           for (const key in obj) {
-            if (obj[key]._id === divId) {
-                inputFields = obj[key];
+            if (obj[key]._id === currentId) {
+                currentTask = obj[key];
             }
           }
         }
@@ -123,6 +127,20 @@ function add(e){
 
         editBtn.disabled = false;
         addBtn.disabled = true;
+    }
+
+    function deleteFun(e){
+        currentId = e.currentTarget.parentNode.id;
+
+        const httpHeaders = {
+            method: "DELETE",
+          };
+
+          fetch(`${BASE_URL}${currentId}`, httpHeaders)
+            .then(() => load())
+            .catch((err) => {
+              concole.error(err);
+            });
     }
 
     function createElement(type, parentNode, content, classes, id, attributes, useInnerHtml) {
@@ -160,7 +178,7 @@ function add(e){
         }
       
         return htmlElement;
-      }
+    }
 }
 
 solve();
