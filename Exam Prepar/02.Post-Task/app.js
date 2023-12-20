@@ -42,8 +42,6 @@ function solve() {
     const postBtn = createElement('button', li, 'POST', ['action-btn']);
     postBtn.classList.add('post');
 
-
-
     Object.values(inputFields).forEach((input) => input.value = '');
 
     publishBtn.disabled = true; 
@@ -72,8 +70,6 @@ function solve() {
     
     e.currentTarget.parentNode.remove()
   }
-
-
 
   function createElement(type, parentNode, content, classes, id, attributes, useInnerHtml) {
     const htmlElement = document.createElement(type);
