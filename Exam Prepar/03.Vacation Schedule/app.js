@@ -94,7 +94,8 @@ function solve(){
             body: JSON.stringify({
                 name: name.value,
                 days: days.value,
-                date: date.value
+                date: date.value,
+                _id: currentId,
             }),
         })
           .then(() => {
