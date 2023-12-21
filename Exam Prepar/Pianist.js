@@ -15,13 +15,12 @@ function solve(input) {
   while(command !== 'Stop'){
     let currentPiece = inputLine[1];
     
+    const piceObj = findByName(currentPiece) ; 
 
     switch(command){
       case 'Add':
         let addComposer = inputLine[2];
         let addkey = inputLine[3];
-
-        const piceObj = findByName(currentPiece) ; 
 
         if(!piceObj){
           piecesArr.push({ currentPiece, addComposer, addkey });
@@ -31,9 +30,18 @@ function solve(input) {
           console.log(`${currentPiece} is already in the collection!`);
         }
 
-
         break;
       case 'Remove':
+        if(piceObj){
+          let index = arr.indexOf(piceObj);
+	        piecesArr.splice(index, 1);
+
+          console.log(`Successfully removed ${currentPiece}!`);
+        }else {
+          console.log(`Invalid operation! ${currentPiece} does not exist in the collection.`);
+        }
+
+
         break;
       case 'ChangeKey':
         break;
