@@ -1,69 +1,57 @@
 function solve(input) {
-  let n = input.shift();
-  let pieceObj = {};
+
+  const n = input.shift();
+
+  let piecesArr = [];
 
   for (let i = 0; i < n; i++) {
-    const [piece, composer, key] = input.shift().split("|");
-    pieceObj[piece] = { composer, key };
+    const [piece, composer, key] = input.shift().split("|");                    //сплитване входните данни от всеки ред в масив
+    piecesArr.push({ piece: piece, composer: composer, key: key});  //всеки масива от реда се добавя, като нов обект в масива
   }
 
-  let lineInput = input.shift().split("|");
-  let command = lineInput[0];
+  let inputLine = input.shift().split('|');
+  let command = inputLine[0];
 
   while(command !== 'Stop'){
-    let piece =lineInput[1];
-
-    if (command === 'Add'){
-        let composer = lineInput[2];
-        let key = lineInput[3];
-        addPiece(piece, composer, key)
-    }else if (command === 'ChangeKey'){
-        let newKey = lineInput[2];
-
-        changeKey(piece, newKey)
-    }else if (command === 'Remove'){
-        removePiece(piece);
-    }
-
-    lineInput = input.shift().split("|");
-    command = lineInput[0];
-  }
-
-  function addPiece(piece, composer, key) {
-    if (!pieceObj.hasOwnProperty(piece)) {
-        pieceObj[piece] = {composer, key };
-      console.log(`${piece} by ${composer} in ${key} added to the collection!`);
-    } else {
-      console.log(`${piece} is already in the collection!`);
-    }
-  }
-
-  function changeKey(piece, newKey) {
-    if (pieceObj.hasOwnProperty(piece)) {
+    let currentPiece = inputLine[1];
     
-      pieceObj[piece].key = newKey;
-      console.log(`Changed the key of ${piece} to ${newKey}!`);
-    } else {
-      console.log(
-        `Invalid operation! ${piece} does not exist in the collection.`
-      );
+
+    switch(command){
+      case 'Add':
+        let addComposer = inputLine[2];
+        let addkey = inputLine[3];
+
+        const piceObj = findByName(currentPiece) ; 
+
+        if(!piceObj){
+          piecesArr.push({ currentPiece, addComposer, addkey });
+
+          console.log(`${currentPiece} by ${addComposer} in ${addkey} added to the collection!`)
+        }else {
+          console.log(`${currentPiece} is already in the collection!`);
+        }
+
+
+        break;
+      case 'Remove':
+        break;
+      case 'ChangeKey':
+        break;
+    }
+
+    inputLine = input.shift().split('|');
+    command = inputLine[0];
+  }
+
+  function findByName(name){
+    for (const obj of piecesArr) {
+      if(obj.piece === name){
+		    return obj;
+	    }
     }
   }
 
-  function removePiece(piece) {
-    if (pieceObj.hasOwnProperty(piece)) {
-      delete pieceObj[piece];
-      console.log(`Successfully removed ${piece}!`);
-    } else {
-      console.log(
-        `Invalid operation! ${piece} does not exist in the collection.`
-      );
-    }
-  }
 
-  for (const [key, value] of Object.entries(pieceObj)) {
-    console.log(`${key} -> Composer: ${value.composer}, Key: ${value.key}`);
-  }
 }
 
 solve([
