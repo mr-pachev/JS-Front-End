@@ -1,3 +1,4 @@
+![Certificate](https://softuni.bg/certificates/certificates/converttoimage/199081?code=6756b6e7)
 # JS-Front-End
 JS Front-End
 
