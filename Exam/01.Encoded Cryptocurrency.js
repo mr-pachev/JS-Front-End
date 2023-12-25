@@ -9,7 +9,6 @@ function solve(input){
 
       switch(command){
         case 'TakeEven':
-            inputStr = inputStr.split('');
 
             for (let i = 0; i < inputStr.length; i++){
                 if(i % 2 === 0){
@@ -17,10 +16,16 @@ function solve(input){
                 }
             }
 
+            inputStr = decoded.split('');
             console.log(decoded);
           break;
         case 'ChangeAll':
+            let oldText = inputLine[1];
+            let newText = inputLine[2];
             
+            decoded = decoded.replace(new RegExp(oldText, 'g'), newText);
+            inputStr = decoded.split('')
+            console.log(decoded);
           break;
         case 'Reverse':
           
@@ -36,7 +41,7 @@ function solve(input){
 solve(["z2tdsfndoctsB6z7tjc8ojzdngzhtjsyVjek!snfzsafhscs", 
 "TakeEven",
 "Reverse?!nzahc",
-"ChangeAll?m?g",
+"ChangeAll?z?i",
 "Reverse?adshk",
 "ChangeAll?z?i",
 "Buy"])
