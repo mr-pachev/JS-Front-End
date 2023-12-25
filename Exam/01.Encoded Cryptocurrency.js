@@ -16,7 +16,11 @@ function solve(input){
             }
 
             chartersArr.length = 0;
-            chartersArr = bufferArr;
+
+            for(let i = 0; i < bufferArr.length; i++){
+                chartersArr[i] = bufferArr[i];
+            }
+            // chartersArr = bufferArr;
 
             console.log(chartersArr.join(''));
           break;
