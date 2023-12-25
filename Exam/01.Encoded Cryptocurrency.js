@@ -25,13 +25,13 @@ function solve(input){
             console.log(chartersArr.join(''));
           break;
         case 'ChangeAll':
-            let substringg = inputLine[1];
-            let indexSubstring = chartersArr.indexOf(substringg);
+            let substring = inputLine[1];
+            let indexSubstring = chartersArr.indexOf(substring);
 
             let replacement = inputLine[2];
             
             for (let i = 0; i < chartersArr.length; i++){
-                if (chartersArr[i] === substringg){
+                if (chartersArr[i] === substring){
                     chartersArr[i] = replacement;
                 }
             }
@@ -75,30 +75,27 @@ function solve(input){
             // }
             // console.log(chartersArr.join(''));
 
-            // chartersArr = chartersArr.join('');
-        //     let reverseeKey = inputLine[1];
-        //     let startIndex =  chartersArr.indexOf(reverseeKey);
-        //     let endIndex = startIndex + reverseeKey.length;
+            chartersArr = chartersArr.join('');
+            let reverseeKey = inputLine[1];
+            let startIndex =  chartersArr.indexOf(reverseeKey);
+            let endIndex = startIndex + reverseeKey.length;
 
-        //     let sub = chartersArr.substring(startIndex, startIndex + endIndex );
+            let sub = chartersArr.substring(startIndex, startIndex + endIndex );
 
-        //     if(isExist(reverseeKey, startIndex)){
-        //         let firstPart = chartersArr.substring(0, startIndex);
-        //         sub = sub.split('').reverse();
-        //         sub = sub.join('');
-        //         chartersArr = '';
-        //         chartersArr += firstPart;
-        //         chartersArr += sub;
-        //         console.log(chartersArr)
-        //     }else {
-        //         console.log('error');
-        //     }
-        //     chartersArr = chartersArr.split('');
-        //   break;
-        case 'Reverse':
-            reverseSubstring(substring);
-            break;
-        default:
+            if(isExist(reverseeKey, startIndex)){
+                let firstPart = chartersArr.substring(0, startIndex);
+                sub = sub.split('').reverse();
+                sub = sub.join('');
+                chartersArr = '';
+                chartersArr += firstPart;
+                chartersArr += sub;
+                console.log(chartersArr)
+            }else {
+                console.log('error');
+            }
+            chartersArr = chartersArr.split('');
+          break;
+          default:
             console.log('error');
             break;
       }
@@ -108,18 +105,6 @@ function solve(input){
     }
 
     console.log(`The cryptocurrency is: ${chartersArr.join('')}`);
-
-    function reverseSubstring(sub) {
-        const index = message.indexOf(sub);
-
-        if (index !== -1) {
-            const reversedSubstring = sub.split('').reverse().join('');
-            message = message.substring(0, index) + message.substring(index + sub.length) + reversedSubstring;
-            console.log(message);
-        } else {
-            console.log('error');
-        }
-    }
 
     function isExist(substring, index){
         let arrSub = substring.split('');
