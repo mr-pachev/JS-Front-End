@@ -37,6 +37,7 @@ function solve(input){
           }else {
             subText = subText.split('').reverse().join('');
             decoded = findSub + subText;
+            inputStr = decoded.split('');
             console.log(decoded);
           }
       }
@@ -48,13 +49,15 @@ function solve(input){
     console.log(`The cryptocurrency is: ${decoded}`);
 }
 
-solve(["z2tdsfndoctsB6z7tjc8ojzdngzhtjsyVjek!snfzsafhscs", 
+solve(["PZDfA2PkAsakhnefZ7aZ", 
 "TakeEven",
-"Reverse?!nzahc",
-"ChangeAll?m?g",
-"Reverse?adshk",
-"ChangeAll?z?i",
+"TakeEven",
+"TakeEven",
+"ChangeAll?Z?X",
+"ChangeAll?A?R",
+"Reverse?PRX",
 "Buy"])
+
 
 
 
