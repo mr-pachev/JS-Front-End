@@ -30,11 +30,9 @@ function solve(input){
 
             let replacement = inputLine[2];
             
-           if(isExist(substring, indexSubstring)){
-                for (let i = 0; i < chartersArr.length; i++){
-                    if (chartersArr[i] === substring){
-                        chartersArr[i] = replacement;
-                    }
+            for (let i = 0; i < chartersArr.length; i++){
+                if (chartersArr[i] === substring){
+                    chartersArr[i] = replacement;
                 }
             }
 
