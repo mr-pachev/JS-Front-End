@@ -23,14 +23,17 @@ function solve(input){
         case 'ChangeAll':
             let oldText = inputLine[1];
             let startIndex = inputStr.indexOf(oldText[0]);
-            let take = inputStr.splice(startIndex, oldText.length);
 
             let newText = inputLine[2];
-            
-            inputStr.splice(startIndex, 0, newText);
 
-            inputStr = inputStr.join('');
-            inputStr = decoded.split('')
+            while (startIndex !== -1){
+                let take = inputStr.splice(startIndex, oldText.length); //взима подниз
+    
+                inputStr.splice(startIndex, 0, newText); //вмъква подниза на определен индекс
+                startIndex = inputStr.indexOf(oldText[0]);
+            }
+
+            decoded = inputStr.join('');
             console.log(decoded);
           break;
         case 'Reverse':
@@ -58,10 +61,12 @@ function solve(input){
 solve(["PZDfA2PkAsakhnefZ7aZ", 
 "TakeEven",
 "TakeEven",
-"ChangeAll?AAh?XXX",
+"TakeEven",
+"ChangeAll?Z?X",
 "ChangeAll?A?R",
 "Reverse?PRX",
 "Buy"])
+
 
 
 
