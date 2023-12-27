@@ -23,11 +23,12 @@ function solve(input){
         case 'ChangeAll':
             let oldText = inputLine[1];
             let startIndex = inputStr.indexOf(oldText[0]);
-            let endIndex = inputLine.indexOf(oldText[oldText.length]);
+            let endIndex = inputStr.indexOf(oldText[oldText.length-1]);
+            let take = decoded.substring(startIndex, endIndex+1);
 
             let newText = inputLine[2];
             
-            for (let i = 0; i < )
+            
 
 
             inputStr = decoded.split('')
@@ -58,8 +59,7 @@ function solve(input){
 solve(["PZDfA2PkAsakhnefZ7aZ", 
 "TakeEven",
 "TakeEven",
-"TakeEven",
-"ChangeAll?Z?X",
+"ChangeAll?AAh?XXX",
 "ChangeAll?A?R",
 "Reverse?PRX",
 "Buy"])
