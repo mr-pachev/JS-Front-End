@@ -27,7 +27,7 @@ function solve(input){
             let newText = inputLine[2];
 
             while (startIndex !== -1){
-                let 
+                let take = inputStr.splice(startIndex, oldText.length); //взима подниз
     
                 inputStr.splice(startIndex, 0, newText); //вмъква подниза на определен индекс
                 startIndex = inputStr.indexOf(oldText[0]);
@@ -38,15 +38,18 @@ function solve(input){
         case 'Reverse':
           let subText = inputLine[1];
           let take = '';
+          let firstIndex = null;
 
           if(subText.length > 0){
             take = inputStr.join('').includes(subText);
+            firstIndex = inputStr.join('').indexOf(subText);
           }else {
             take = take.includes(subText);
+            firstIndex = inputStr.indexOf(subText[0]);
           }
           
           if (take){
-            let firstIndex = inputStr.indexOf(subText[0]);
+            
             take = inputStr.splice(firstIndex, subText.length); //взима подниз
             take = take.reverse().join('');
 
@@ -76,7 +79,7 @@ function solve(input){
       command = inputLine[0];
     }
 
-    console.log(`The cryptocurrency is: ${decoded}`);
+    console.log(`The cryptocurrency is: ${inputStr.join('')}`);
 }
 
 solve(["z2tdsfndoctsB6z7tjc8ojzdngzhtjsyVjek!snfzsafhscs", 
