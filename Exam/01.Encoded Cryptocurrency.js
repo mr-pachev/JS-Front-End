@@ -9,7 +9,7 @@ function solve(input){
 
       switch(command){
         case 'TakeEven':
-
+            decoded = '';
             for (let i = 0; i < inputStr.length; i++){
                 if(i % 2 === 0){
                     decoded += inputStr[i]
