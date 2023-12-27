@@ -33,38 +33,58 @@ function solve(input){
                 startIndex = inputStr.indexOf(oldText[0]);
             }
 
-            decoded = inputStr.join('');
-            console.log(decoded);
+            console.log(inputStr.join(''));
           break;
         case 'Reverse':
           let subText = inputLine[1];
+          let take = '';
 
-          let findSub = decoded.replace(new RegExp(subText), '');
-
-          if(findSub === decoded){
-            console.log('error')
+          if(subText.length > 0){
+            take = inputStr.join('').includes(subText);
           }else {
-            subText = subText.split('').reverse().join('');
-            decoded = findSub + subText;
-            inputStr = decoded.split('');
-            console.log(decoded);
+            take = take.includes(subText);
           }
+          
+          if (take){
+            let firstIndex = inputStr.indexOf(subText[0]);
+            take = inputStr.splice(firstIndex, subText.length); //взима подниз
+            take = take.reverse().join('');
+
+            inputStr.push(take);
+            inputStr = inputStr.join('');
+            console.log(inputStr);
+            inputStr = inputStr.split('');
+          }else {
+            console.log('error');
+          }
+
+          
+                
+        //   let findSub = decoded.replace(new RegExp(subText), '');
+
+        //   if(findSub === decoded){
+        //     console.log('error')
+        //   }else {
+        //     subText = subText.split('').reverse().join('');
+        //     decoded = findSub + subText;
+        //     inputStr = decoded.split('');
+        //     console.log(decoded);
+        //   }
       }
 
       inputLine = input.shift().split('?');
       command = inputLine[0];
     }
 
-    console.log(`The cryptocurrency is: ${decoded}`);
+    console.log(`The cryptocurrency is: ${inputStr.join('')}`);
 }
 
-solve(["PZDfA2PkAsakhnefZ7aZ", 
+solve(["z2tdsfndoctsB6z7tjc8ojzdngzhtjsyVjek!snfzsafhscs", 
 "TakeEven",
-"TakeEven",
-"TakeEven",
-"ChangeAll?Z?X",
-"ChangeAll?A?R",
-"Reverse?PRX",
+"Reverse?!nzahc",
+"ChangeAll?m?g",
+"Reverse?adshk",
+"ChangeAll?z?i",
 "Buy"])
 
 
