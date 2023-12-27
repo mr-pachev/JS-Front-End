@@ -1,6 +1,5 @@
 function solve(input){
     let inputStr = input.shift().split('');
-    let decoded = '';
 
     let inputLine = input.shift().split('?');
     let command = inputLine[0];
@@ -9,7 +8,7 @@ function solve(input){
 
       switch(command){
         case 'TakeEven':
-            decoded = '';
+            let decoded = '';
 
             for (let i = 0; i < inputStr.length; i++){
                 if(i % 2 === 0){
@@ -60,19 +59,6 @@ function solve(input){
           }else {
             console.log('error');
           }
-
-          
-                
-        //   let findSub = decoded.replace(new RegExp(subText), '');
-
-        //   if(findSub === decoded){
-        //     console.log('error')
-        //   }else {
-        //     subText = subText.split('').reverse().join('');
-        //     decoded = findSub + subText;
-        //     inputStr = decoded.split('');
-        //     console.log(decoded);
-        //   }
       }
 
       inputLine = input.shift().split('?');
