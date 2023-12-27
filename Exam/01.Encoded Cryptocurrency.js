@@ -10,6 +10,7 @@ function solve(input){
       switch(command){
         case 'TakeEven':
             decoded = '';
+
             for (let i = 0; i < inputStr.length; i++){
                 if(i % 2 === 0){
                     decoded += inputStr[i]
@@ -21,9 +22,14 @@ function solve(input){
           break;
         case 'ChangeAll':
             let oldText = inputLine[1];
+            let startIndex = inputStr.indexOf(oldText[0]);
+            let endIndex = inputLine.indexOf(oldText[oldText.length]);
+
             let newText = inputLine[2];
             
-            decoded = decoded.replace(new RegExp(oldText, 'g'), newText);
+            for (let i = 0; i < )
+
+
             inputStr = decoded.split('')
             console.log(decoded);
           break;
