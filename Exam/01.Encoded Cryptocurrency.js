@@ -23,14 +23,13 @@ function solve(input){
         case 'ChangeAll':
             let oldText = inputLine[1];
             let startIndex = inputStr.indexOf(oldText[0]);
-            let endIndex = inputStr.indexOf(oldText[oldText.length-1]);
-            let take = decoded.substring(startIndex, endIndex+1);
+            let take = inputStr.splice(startIndex, oldText.length);
 
             let newText = inputLine[2];
             
-            
+            inputStr.splice(startIndex, 0, newText);
 
-
+            inputStr = inputStr.join('');
             inputStr = decoded.split('')
             console.log(decoded);
           break;
